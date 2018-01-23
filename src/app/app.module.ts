@@ -4,6 +4,9 @@ import { SharedModule } from './shared/shared.module';
 import { GeneratorModule } from './generator/generator.module';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { HomeModule } from './home/home.module';
+import { RunnerModule } from './runner/runner.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +15,10 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     SharedModule,
-    GeneratorModule
+    GeneratorModule,
+    AppRoutingModule,
+    HomeModule,
+    RunnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
