@@ -1,0 +1,10 @@
+div {
+    border: 1px solid grey;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 15px;
+}
+
+label {
+    font-weight: bold;
+}

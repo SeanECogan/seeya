@@ -1,6 +1,6 @@
-export class Link {
+export class LinkModel {
   /**
-   * Generates a new Link object, to connect two Scenes together.
+   * Generates a new LinkModel object, to connect two Scenes together.
    */
   constructor(
     fromSceneId: number,

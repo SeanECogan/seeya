@@ -1,14 +1,14 @@
-import { Link } from "./link";
+import { LinkModel } from "./link-model";
 
-export class Scene {
+export class SceneModel {
   /**
-   * Generates a new Scene object, which represents a scene of the adventure.
+   * Generates a new SceneModel object, which represents a scene of the adventure.
    */
   constructor(
     id: number,
     header: string,
     description: string,
-    link: Link
+    link: LinkModel
   ) {
     this.id = id;
     this.header = header;
@@ -19,5 +19,5 @@ export class Scene {
   id: number;
   header: string;
   description: string;
-  link: Link;
+  link: LinkModel;
 }
