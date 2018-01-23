@@ -1,18 +1,11 @@
+div {
+    margin-top: 15px;
+}
+
+.full-width {
+    width: 100%;
+}
+
 .align-right {
-    margin-top: 15px;
     text-align: right;
-}
-
-.input-row {
-    width: 100%;
-    display: block;
-    margin-top: 15px;
-}
-
-.input {
-    margin-top: 15px;
-}
-
-.input input {
-    width: 100%;
 }

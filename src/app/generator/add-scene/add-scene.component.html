@@ -1,18 +1,12 @@
-<div class="input-row">
-  <div class="input">
-    <label>
-      Header:
-      <input type="text" [(ngModel)]="newSceneHeader" />
-    </label>
-  </div>
-  <div class="input">
-    <label>
-      Description:
-      <input type="text" [(ngModel)]="newSceneDescription" />
-    </label>
-  </div>
-</div>
+<div>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Header" [(ngModel)]="newSceneHeader">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <textarea matInput placeholder="Description" [(ngModel)]="newSceneDescription"></textarea>
+  </mat-form-field>
 
-<div class="align-right">
-  <button (click)="addScene()" [disabled]="newSceneHeader === '' || newSceneDescription === ''">Add Scene</button>
+  <div class="align-right">
+      <button mat-raised-button color="accent" (click)="addScene()" [disabled]="newSceneHeader === '' || newSceneDescription === ''">Add Scene</button>
+    </div>
 </div>

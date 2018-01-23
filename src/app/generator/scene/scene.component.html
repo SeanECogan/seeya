@@ -1,6 +1,16 @@
-<div>
-  <p><label>ID</label>: {{scene.id}}</p>
-  <p><label>Header</label>: {{scene.header}}</p>
-  <p><label>Description</label>: {{scene.description}}</p>
-  <p><label>Linked To</label>: {{scene.link == null ? "N/A" : scene.link.toSceneId}}</p>
-</div>
+<mat-card>
+  <mat-card-title-group>
+  <mat-card-title>
+    Scene #{{scene.id}}: {{scene.header}}
+  </mat-card-title>
+  <mat-card-subtitle *ngIf="scene.link != null">
+      Linked to Scene #{{scene.link.toSceneId}}
+  </mat-card-subtitle>
+</mat-card-title-group>
+  <mat-card-content>
+    {{scene.description}}
+  </mat-card-content>
+  <mat-card-actions>
+    <p class="mat-caption"></p>
+  </mat-card-actions>
+</mat-card>

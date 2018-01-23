@@ -1,8 +1,13 @@
 <div class="container">
-    <nav>
-        <a routerLink="/">Home</a>
-        <a routerLink="/generator">Generator</a>
-        <a routerLink="/runner">Runner</a>
+    <nav mat-tab-nav-bar>
+        <a mat-tab-link
+            *ngFor="let route of routes"
+            [routerLink]="route.path"
+            routerLinkActive #rla="routerLinkActive"
+            [routerLinkActiveOptions]="{exact: true}"
+            [active]="rla.isActive">
+           {{route.label}}
+         </a>
     </nav>
     <router-outlet></router-outlet>
 </div>

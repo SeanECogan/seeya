@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AppRoutingModule } from './/app-routing.module';
+
 import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './home/home.module';
 import { GeneratorModule } from './generator/generator.module';
+import { RunnerModule } from './runner/runner.module';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './/app-routing.module';
-import { HomeModule } from './home/home.module';
-import { RunnerModule } from './runner/runner.module';
+
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -14,11 +19,13 @@ import { RunnerModule } from './runner/runner.module';
   ],
   imports: [
     BrowserModule,
-    SharedModule,
-    GeneratorModule,
+    NoopAnimationsModule,
     AppRoutingModule,
+    SharedModule,
     HomeModule,
-    RunnerModule
+    GeneratorModule,
+    RunnerModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

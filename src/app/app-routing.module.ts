@@ -6,7 +6,7 @@ import { GeneratorComponent } from './generator/generator.component';
 import { RunnerComponent } from './runner/runner.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: '', component: HomeComponent },
   { path: 'generator', component: GeneratorComponent },
   { path: 'runner', component: RunnerComponent }
 ]
