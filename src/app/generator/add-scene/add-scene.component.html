@@ -1,12 +1,15 @@
-<div>
+<div class="form">
   <mat-form-field class="full-width">
     <input matInput placeholder="Header" [(ngModel)]="newSceneHeader">
   </mat-form-field>
   <mat-form-field class="full-width">
-    <textarea matInput placeholder="Description" [(ngModel)]="newSceneDescription"></textarea>
+    <textarea 
+      matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8" 
+      placeholder="Description" [(ngModel)]="newSceneDescription"></textarea>
   </mat-form-field>
 
   <div class="align-right">
-      <button mat-raised-button color="accent" (click)="addScene()" [disabled]="newSceneHeader === '' || newSceneDescription === ''">Add Scene</button>
-    </div>
+    <button mat-raised-button color="accent" 
+      (click)="addScene()" [disabled]="!inputIsValid()">Add Scene</button>
+  </div>
 </div>

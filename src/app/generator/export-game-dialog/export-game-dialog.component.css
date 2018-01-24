@@ -1,0 +1,24 @@
+.align-right {
+    text-align: right;
+}
+
+.export-container {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.exported-game {
+    word-break: break-all;
+    font-family: Courier New, Courier, monospace;
+    background-color: #F0F0F0;
+    padding: 15px;
+    max-height: 240px;
+    overflow-y: auto;
+    resize: none;
+    width: calc(100% - 30px);
+}
+
+.copy-success {
+    background-color: #1B5E20;
+    color: #FAFAFA;
+}

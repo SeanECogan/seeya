@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SceneFactory } from './shared/factories/scene-factory';
 
 @Component({
   selector: 'app-root',

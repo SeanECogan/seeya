@@ -25,6 +25,10 @@ export class AddSceneComponent implements OnInit {
     this.resetInputValues();
   }
 
+  inputIsValid(): boolean {
+    return this.newSceneHeader != '' && this.newSceneDescription != '';
+  }
+
   private resetInputValues(): void {
     this.newSceneHeader = '';
     this.newSceneDescription = '';

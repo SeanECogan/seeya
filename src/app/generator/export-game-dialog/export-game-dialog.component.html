@@ -1,0 +1,17 @@
+<h2 class="mat-title">Game Exported Successfully</h2>
+
+<p class="mat-body-1">Please copy this text <strong>exactly</strong> and save it somewhere to import into the Runner.</p>
+
+<div class="align-right">
+  <button mat-raised-button color="accent" type="button" 
+    [ngxClipboard]="exportedGame" 
+    (cbOnSuccess)="copySuccessful = true" [class.copy-success]= "copySuccessful">
+    {{copySuccessful ? "Copy Successful!" : "Copy to Clipboard"}}
+  </button>
+</div>
+
+<div class="export-container">
+  <textarea class="exported-game" readonly #exportedGame>{{data.exportedGame}}</textarea>
+</div>
+
+<p class="mat-caption">Click anywhere outside this dialog to close.</p>

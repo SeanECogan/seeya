@@ -2,6 +2,10 @@ mat-card {
     margin-top: 15px;
 }
 
+mat-card-content {
+    word-break: break-all;
+}
+
 .mat-caption {
     text-align: center;
 }

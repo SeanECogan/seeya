@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { GameFactory } from '../../shared/factories/game-factory';
 import { SceneFactory } from '../../shared/factories/scene-factory';
 import { LinkFactory } from '../../shared/factories/link-factory';
 
@@ -9,6 +10,7 @@ import { SceneModel } from '../../shared/models/scene-model';
 export class SceneService {
 
   constructor() {
+    this.gf = new GameFactory();
     this.sf = new SceneFactory();
     this.lf = new LinkFactory();
 
@@ -17,6 +19,10 @@ export class SceneService {
 
   getScenes(): SceneModel[] {
     return this.scenes;
+  }
+
+  getNumberOfScenes(): number {
+    return this.scenes.length;
   }
 
   addScene(
@@ -63,7 +69,17 @@ export class SceneService {
     }
   }
 
-  sf: SceneFactory;
-  scenes: SceneModel[]
-  lf: LinkFactory;
+  exportGame(): string {
+    let game = this.gf.createGame(this.scenes);
+
+    let gameJsonString = JSON.stringify(game);
+
+    return btoa(gameJsonString);
+  }
+
+  private gf: GameFactory;
+  private sf: SceneFactory;
+  private lf: LinkFactory;
+
+  private scenes: SceneModel[]
 }
