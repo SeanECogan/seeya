@@ -1,0 +1,18 @@
+<div *ngIf="currentScene != null">
+    <seeya-scene [scene]="currentScene"></seeya-scene>
+
+    <div class="align-right spacing">
+        <button 
+            *ngIf="currentScene.link != null" 
+            mat-raised-button 
+            (click)="loadNextScene(currentScene.link.toSceneId)">
+            To Scene: {{currentScene.link.toSceneId}}
+        </button>
+        <button 
+            *ngIf="currentScene.link === null" 
+            mat-raised-button color="accent"
+            (click)="restartGame()">
+            Play Again
+        </button>
+    </div>
+</div>
