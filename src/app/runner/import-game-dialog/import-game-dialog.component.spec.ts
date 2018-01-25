@@ -1,4 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+import { RunnerModule } from '../runner.module';
 
 import { ImportGameDialogComponent } from './import-game-dialog.component';
 
@@ -8,7 +11,12 @@ describe('ImportGameDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImportGameDialogComponent ]
+      imports: [ RunnerModule ],
+      declarations: [ ],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} }
+      ]
     })
     .compileComponents();
   }));
@@ -16,7 +24,6 @@ describe('ImportGameDialogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ImportGameDialogComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

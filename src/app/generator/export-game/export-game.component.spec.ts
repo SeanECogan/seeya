@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { GeneratorModule } from '../generator.module';
+
 import { ExportGameComponent } from './export-game.component';
 
 describe('ExportGameComponent', () => {
@@ -8,7 +10,8 @@ describe('ExportGameComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExportGameComponent ]
+      imports: [ GeneratorModule ],
+      declarations: [ ]
     })
     .compileComponents();
   }));
@@ -16,7 +19,6 @@ describe('ExportGameComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ExportGameComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { RunnerModule } from '../runner.module';
+
 import { ImportGameComponent } from './import-game.component';
 
 describe('ImportGameComponent', () => {
@@ -8,7 +10,8 @@ describe('ImportGameComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImportGameComponent ]
+      imports: [ RunnerModule ],
+      declarations: [ ]
     })
     .compileComponents();
   }));
@@ -16,7 +19,6 @@ describe('ImportGameComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ImportGameComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SceneService } from './scene/scene.service';
 
@@ -20,6 +21,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 @NgModule({
   imports: [
     SharedModule,
+    NoopAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,

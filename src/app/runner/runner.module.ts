@@ -28,9 +28,10 @@ import { GameRunnerComponent } from './game-runner/game-runner.component';
   ],
   declarations: [
     RunnerComponent, 
-    SceneComponent, 
+    GameRunnerComponent,
     ImportGameComponent, 
-    ImportGameDialogComponent, GameRunnerComponent
+    ImportGameDialogComponent,
+    SceneComponent
   ],
   entryComponents: [
     ImportGameDialogComponent

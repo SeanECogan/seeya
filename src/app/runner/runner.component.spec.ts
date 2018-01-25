@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { RunnerModule } from './runner.module';
+
 import { RunnerComponent } from './runner.component';
 
 describe('RunnerComponent', () => {
@@ -8,7 +10,8 @@ describe('RunnerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RunnerComponent ]
+      imports: [ RunnerModule ],
+      declarations: [ ]
     })
     .compileComponents();
   }));
@@ -16,7 +19,6 @@ describe('RunnerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RunnerComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

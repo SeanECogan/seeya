@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { GeneratorModule } from '../generator.module';
+
 import { SceneComponent } from './scene.component';
 
 describe('SceneComponent', () => {
@@ -8,7 +10,8 @@ describe('SceneComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SceneComponent ]
+      imports: [ GeneratorModule ],
+      declarations: [ ]
     })
     .compileComponents();
   }));
@@ -16,7 +19,6 @@ describe('SceneComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SceneComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

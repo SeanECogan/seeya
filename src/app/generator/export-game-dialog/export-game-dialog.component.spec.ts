@@ -1,4 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+import { GeneratorModule } from '../generator.module';
 
 import { ExportGameDialogComponent } from './export-game-dialog.component';
 
@@ -8,7 +11,12 @@ describe('ExportGameDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExportGameDialogComponent ]
+      imports: [ GeneratorModule ],
+      declarations: [ ],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} }
+      ]
     })
     .compileComponents();
   }));
@@ -16,7 +24,6 @@ describe('ExportGameDialogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ExportGameDialogComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
