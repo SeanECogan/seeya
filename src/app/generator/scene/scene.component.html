@@ -1,16 +1,13 @@
 <mat-card>
   <mat-card-title-group>
-  <mat-card-title>
-    Scene #{{scene.id}}: {{scene.header}}
-  </mat-card-title>
-  <mat-card-subtitle *ngIf="scene.link != null">
+    <mat-card-title id="card-title">
+      Scene #{{scene.id}}: {{scene.header}}
+    </mat-card-title>
+    <mat-card-subtitle id="card-subtitle" *ngIf="scene.link != null">
       Linked to Scene #{{scene.link.toSceneId}}
-  </mat-card-subtitle>
-</mat-card-title-group>
-  <mat-card-content>
+    </mat-card-subtitle>
+  </mat-card-title-group>
+  <mat-card-content id="card-content">
     {{scene.description}}
   </mat-card-content>
-  <mat-card-actions>
-    <p class="mat-caption"></p>
-  </mat-card-actions>
 </mat-card>

@@ -33,6 +33,15 @@ describe('GeneratorComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should not show any scenes if no scenes are returned by the service', () => {
+    // Setup mock SceneService.
+    fakeSceneService.getScenes = () => [];
+
+    component.getScenes();
+
+    expect(component.scenes.length).toBe(0);
+  });
+
   it('should set scenes to the scenes returned from the service', () => {
     // Setup mock SceneService.
     fakeSceneService.getScenes = () => {

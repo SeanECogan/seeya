@@ -4,6 +4,7 @@
 
 <div class="align-right">
   <button mat-raised-button color="accent" type="button" 
+    id="copy-button"
     [ngxClipboard]="exportedGame" 
     (cbOnSuccess)="copySuccessful = true" [class.copy-success]= "copySuccessful">
     {{copySuccessful ? "Copy Successful!" : "Copy to Clipboard"}}
@@ -11,7 +12,9 @@
 </div>
 
 <div class="export-container">
-  <textarea class="exported-game" readonly #exportedGame>{{data.exportedGame}}</textarea>
+  <textarea
+    id="exported-game-textarea"
+    class="exported-game" readonly #exportedGame>{{data.exportedGame}}</textarea>
 </div>
 
 <p class="mat-caption">Click anywhere outside this dialog to close.</p>
