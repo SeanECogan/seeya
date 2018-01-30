@@ -9,12 +9,14 @@ import { SceneService } from '../scene/scene.service';
   styleUrls: ['./import-game-dialog.component.css']
 })
 export class ImportGameDialogComponent implements OnInit {
+  gameImportString: string;
+  gameImportSuccessful: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<ImportGameDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private sceneService: SceneService) { 
-    this.gameImportString = "";
+    private sceneService: SceneService) {
+    this.gameImportString = '';
     this.gameImportSuccessful = true;
   }
 
@@ -23,7 +25,7 @@ export class ImportGameDialogComponent implements OnInit {
 
   importGame() {
     this.gameImportSuccessful = true;
-    
+
     try {
       this.sceneService.importGame(this.gameImportString);
       this.dialogRef.close();
@@ -35,7 +37,4 @@ export class ImportGameDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-  gameImportString: string;
-  gameImportSuccessful: boolean;
 }

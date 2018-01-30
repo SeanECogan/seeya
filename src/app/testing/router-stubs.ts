@@ -1,4 +1,5 @@
-import { Directive, Input } from "@angular/core";
+/* tslint:disable:all */
+import { Directive, Input } from '@angular/core';
 
 @Directive({
     selector: '[routerLink]',
@@ -7,10 +8,11 @@ import { Directive, Input } from "@angular/core";
     }
 })
 export class RouterLinkStubDirective {
-    @Input('routerLink') linkParams: any;
-    navigatedTo: any = null;
+    @Input('routerLink') linkParams: string;
+    navigatedTo: string = null;
 
     onClick() {
         this.navigatedTo = this.linkParams;
     }
 }
+/* tslint:enable:all */

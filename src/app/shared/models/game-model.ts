@@ -1,4 +1,4 @@
-import { SceneModel } from "./scene-model";
+import { SceneModel } from './scene-model';
 
 export class GameModel {
   /**

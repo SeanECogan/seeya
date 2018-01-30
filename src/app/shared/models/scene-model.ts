@@ -1,4 +1,4 @@
-import { LinkModel } from "./link-model";
+import { LinkModel } from './link-model';
 
 export class SceneModel {
   /**

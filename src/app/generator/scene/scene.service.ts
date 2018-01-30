@@ -8,6 +8,11 @@ import { SceneModel } from '../../shared/models/scene-model';
 
 @Injectable()
 export class SceneService {
+  private gf: GameFactory;
+  private sf: SceneFactory;
+  private lf: LinkFactory;
+
+  private scenes: SceneModel[];
 
   constructor() {
     this.gf = new GameFactory();
@@ -51,12 +56,12 @@ export class SceneService {
     // Only check this if it is not the first scene.
     if (this.scenes.length > 1) {
       // Get the index of the new latest scene.
-      let newLatestIndex = this.scenes.length - 1;
+      const newLatestIndex = this.scenes.length - 1;
 
-      let toSceneId = this.scenes[newLatestIndex].id;
+      const toSceneId = this.scenes[newLatestIndex].id;
 
       // Create new Link between these scenes.
-      let link = this.lf.createLink(
+      const link = this.lf.createLink(
         fromSceneId,
         toSceneId
       );
@@ -70,16 +75,10 @@ export class SceneService {
   }
 
   exportGame(): string {
-    let game = this.gf.createGame(this.scenes);
+    const game = this.gf.createGame(this.scenes);
 
-    let gameJsonString = JSON.stringify(game);
+    const gameJsonString = JSON.stringify(game);
 
     return btoa(gameJsonString);
   }
-
-  private gf: GameFactory;
-  private sf: SceneFactory;
-  private lf: LinkFactory;
-
-  private scenes: SceneModel[]
 }

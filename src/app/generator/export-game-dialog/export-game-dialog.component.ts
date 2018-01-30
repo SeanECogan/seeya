@@ -7,17 +7,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./export-game-dialog.component.css']
 })
 export class ExportGameDialogComponent {
+  copySuccessful: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<ExportGameDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { 
+  ) {
     this.copySuccessful = false;
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-  copySuccessful: boolean;
 }

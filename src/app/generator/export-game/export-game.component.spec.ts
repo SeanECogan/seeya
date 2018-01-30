@@ -34,7 +34,7 @@ describe('ExportGameComponent', () => {
 
     fixture.detectChanges();
 
-    exportButton = fixture.debugElement.query(By.css("#export-button"));
+    exportButton = fixture.debugElement.query(By.css('#export-button'));
   });
 
   it('should create', () => {
@@ -46,7 +46,7 @@ describe('ExportGameComponent', () => {
 
     fixture.detectChanges();
 
-    expect(exportButton.attributes["ng-reflect-disabled"]).toBe('true');
+    expect(exportButton.attributes['ng-reflect-disabled']).toBe('true');
   });
 
   it('should have the Export button enabled if there is at least one scene', () => {
@@ -54,6 +54,6 @@ describe('ExportGameComponent', () => {
 
     fixture.detectChanges();
 
-    expect(exportButton.attributes["ng-reflect-disabled"]).toBe('false');
+    expect(exportButton.attributes['ng-reflect-disabled']).toBe('false');
   });
 });

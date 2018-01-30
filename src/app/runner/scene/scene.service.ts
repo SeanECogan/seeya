@@ -4,8 +4,11 @@ import { GameModel } from '../../shared/models/game-model';
 
 @Injectable()
 export class SceneService {
+  private initialSceneId: number;
+  private scenes: SceneModel[];
+  private currentScene: SceneModel;
 
-  constructor() { 
+  constructor() {
     this.initialSceneId = -1;
     this.scenes = new Array<SceneModel>();
     this.currentScene = null;
@@ -14,9 +17,9 @@ export class SceneService {
   importGame(
     gameImportString: string
   ): void {
-    let gameString = atob(gameImportString);
+    const gameString = atob(gameImportString);
 
-    let game = JSON.parse(gameString) as GameModel;
+    const game = JSON.parse(gameString) as GameModel;
 
     this.initialSceneId = game.initialSceneId;
     this.scenes = game.scenes;
@@ -24,8 +27,8 @@ export class SceneService {
 
   startGame(): void {
     if (this.scenes.length > 0) {
-      this.currentScene = 
-        this.scenes.filter(scene => scene.id == this.initialSceneId)[0];
+      this.currentScene =
+        this.scenes.filter(scene => scene.id === this.initialSceneId)[0];
     }
   }
 
@@ -39,16 +42,12 @@ export class SceneService {
 
   loadNextScene(toSceneId: number): void {
     if (this.scenes.length > 0) {
-      this.currentScene = 
-        this.scenes.filter(scene => scene.id == toSceneId)[0];
+      this.currentScene =
+        this.scenes.filter(scene => scene.id === toSceneId)[0];
     }
   }
 
   gameIsFinished(): boolean {
-    return this.currentScene != null && this.currentScene.link === null;
+    return this.currentScene !== null && this.currentScene.link === null;
   }
-
-  private initialSceneId: number;
-  private scenes: SceneModel[];
-  private currentScene: SceneModel;
 }

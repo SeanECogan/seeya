@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'generator', component: GeneratorComponent },
   { path: 'runner', component: RunnerComponent }
-]
+];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes)],

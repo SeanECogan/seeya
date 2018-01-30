@@ -37,9 +37,9 @@ describe('SceneComponent', () => {
 
     fixture.detectChanges();
 
-    cardTitle = fixture.debugElement.query(By.css("#card-title"));
-    cardSubtitle = fixture.debugElement.query(By.css("#card-subtitle"));
-    cardContent = fixture.debugElement.query(By.css("#card-content"));
+    cardTitle = fixture.debugElement.query(By.css('#card-title'));
+    cardSubtitle = fixture.debugElement.query(By.css('#card-subtitle'));
+    cardContent = fixture.debugElement.query(By.css('#card-content'));
   });
 
   it('should create', () => {

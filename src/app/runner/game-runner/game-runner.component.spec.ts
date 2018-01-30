@@ -99,7 +99,7 @@ describe('GameRunnerComponent', () => {
   it('should have a play again button if the scene has no linked scene', () => {
     fakeSceneService.getCurrentScene = () => {
       return new SceneModel(1, 'Test', 'Test', null);
-    };    
+    };
 
     fixture.detectChanges();
 
@@ -112,7 +112,7 @@ describe('GameRunnerComponent', () => {
   it('should have a next scene button if the scene has a linked scene', () => {
     fakeSceneService.getCurrentScene = () => {
       return new SceneModel(1, 'Test', 'Test', new LinkModel(1, 2));
-    };    
+    };
 
     fixture.detectChanges();
 
@@ -122,23 +122,25 @@ describe('GameRunnerComponent', () => {
     expect(nextSceneButton).toBeTruthy();
   });
 
-  it('should load the next scene if the next scene button is clicked', () => {    
+  it('should load the next scene if the next scene button is clicked', () => {
     // We actually want this to work like the real scene service now.
-    let tempSceneService = new SceneService();
+    const tempSceneService = new SceneService();
 
     fakeSceneService.importGame = tempSceneService.importGame;
     fakeSceneService.startGame = tempSceneService.startGame;
-    fakeSceneService.getCurrentScene = tempSceneService.getCurrentScene; 
+    fakeSceneService.getCurrentScene = tempSceneService.getCurrentScene;
     fakeSceneService.loadNextScene = tempSceneService.loadNextScene;
-    
+
     // Import the test export from the Generator test.
+    /* tslint:disable:max-line-length */
     fakeSceneService.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6Nn19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0=');
+    /* tslint:enable:max-line-length */
 
     // Start the game.
     fakeSceneService.startGame();
 
     // First scene should be 5/Header/Description/Link to 6.
-    let firstScene = component.currentScene;
+    const firstScene = component.currentScene;
 
     expect(firstScene.id).toBe(5);
     expect(firstScene.header).toBe('Header');
@@ -151,10 +153,10 @@ describe('GameRunnerComponent', () => {
     // Must re-query for the nextSceneButton because it didn't exist by default.
     nextSceneButton = fixture.debugElement.query(By.css('#next-scene-button'));
 
-    nextSceneButton.triggerEventHandler('click', null);    
+    nextSceneButton.triggerEventHandler('click', null);
 
     // Next scene should be 6/Header2/Description2/null.
-    let nextScene = component.currentScene;
+    const nextScene = component.currentScene;
 
     expect(nextScene.id).toBe(6);
     expect(nextScene.header).toBe('Header2');
@@ -162,17 +164,19 @@ describe('GameRunnerComponent', () => {
     expect(nextScene.link).toBeNull();
   });
 
-  it('should re-load the first scene if the next scene button is clicked', () => {    
+  it('should re-load the first scene if the next scene button is clicked', () => {
     // We actually want this to work like the real scene service now.
-    let tempSceneService = new SceneService();
+    const tempSceneService = new SceneService();
 
     fakeSceneService.importGame = tempSceneService.importGame;
     fakeSceneService.startGame = tempSceneService.startGame;
-    fakeSceneService.getCurrentScene = tempSceneService.getCurrentScene; 
+    fakeSceneService.getCurrentScene = tempSceneService.getCurrentScene;
     fakeSceneService.loadNextScene = tempSceneService.loadNextScene;
-    
+
     // Import the test export from the Generator test.
+    /* tslint:disable:max-line-length */
     fakeSceneService.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6Nn19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0=');
+    /* tslint:enable:max-line-length */
 
     // Start the game.
     fakeSceneService.startGame();
@@ -182,8 +186,8 @@ describe('GameRunnerComponent', () => {
     // Must re-query for the nextSceneButton because it didn't exist by default.
     nextSceneButton = fixture.debugElement.query(By.css('#next-scene-button'));
 
-    nextSceneButton.triggerEventHandler('click', null);   
-    
+    nextSceneButton.triggerEventHandler('click', null);
+
     fixture.detectChanges();
 
     // Now we can get the Play Again button.
@@ -192,7 +196,7 @@ describe('GameRunnerComponent', () => {
     playAgainButton.triggerEventHandler('click', null);
 
     // This should be the first scene now: 5/Header/Description/Link to 6.
-    let currentScene = component.currentScene;
+    const currentScene = component.currentScene;
 
     expect(currentScene.id).toBe(5);
     expect(currentScene.header).toBe('Header');

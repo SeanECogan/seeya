@@ -1,5 +1,5 @@
-import { SceneModel } from "../models/scene-model";
-import { LinkModel } from "../models/link-model";
+import { SceneModel } from '../models/scene-model';
+import { LinkModel } from '../models/link-model';
 
 // Static sceneId value for all instance of SceneFactory.
 let sceneId = 1;
@@ -16,7 +16,7 @@ export class SceneFactory {
             description,
             null
         );
-    };
+    }
 
     createSceneWithLink(
         existingScene: SceneModel,

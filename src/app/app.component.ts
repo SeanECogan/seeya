@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'seeya-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   // Not thrilled about maintaining routes in two places...
   routes = [
-    { path: './', label: "Home" },
-    { path: 'generator', label: "Generator" },
-    { path: 'runner', label: "Runner" }
-  ]
+    { path: './', label: 'Home' },
+    { path: 'generator', label: 'Generator' },
+    { path: 'runner', label: 'Runner' }
+  ];
 }

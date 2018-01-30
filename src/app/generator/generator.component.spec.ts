@@ -48,7 +48,7 @@ describe('GeneratorComponent', () => {
       return [
         new SceneModel(1, 'Test', 'Test', null)
       ];
-    }
+    };
 
     component.getScenes();
 

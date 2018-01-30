@@ -29,9 +29,9 @@ import { GameRunnerComponent } from './game-runner/game-runner.component';
     CommonModule
   ],
   declarations: [
-    RunnerComponent, 
+    RunnerComponent,
     GameRunnerComponent,
-    ImportGameComponent, 
+    ImportGameComponent,
     ImportGameDialogComponent,
     SceneComponent
   ],

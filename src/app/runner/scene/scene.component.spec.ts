@@ -37,7 +37,7 @@ describe('SceneComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display the scene header in the headline', () => {  
+  it('should display the scene header in the headline', () => {
     expect(headline.nativeElement.innerText).toBe('Header');
   });
 

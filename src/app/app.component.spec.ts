@@ -37,7 +37,7 @@ describe('AppComponent', () => {
 
     fixture.detectChanges();
 
-    tabDes = fixture.debugElement.queryAll(By.directive(MatTabLink))
+    tabDes = fixture.debugElement.queryAll(By.directive(MatTabLink));
     tabs = tabDes.map(de => de.injector.get(RouterLinkStubDirective) as RouterLinkStubDirective);
   });
 

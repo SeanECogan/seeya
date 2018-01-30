@@ -42,7 +42,7 @@ describe('ImportGameDialogComponent', () => {
   });
 
   it('should have the Import button disabled if there is no text in the textbox', () => {
-    expect(importButton.attributes["ng-reflect-disabled"]).toBe('true');
+    expect(importButton.attributes['ng-reflect-disabled']).toBe('true');
   });
 
   it('should have the Import button enabled if there is text in the textbox', () => {
@@ -50,7 +50,7 @@ describe('ImportGameDialogComponent', () => {
 
     fixture.detectChanges();
 
-    expect(importButton.attributes["ng-reflect-disabled"]).toBe('false');
+    expect(importButton.attributes['ng-reflect-disabled']).toBe('false');
   });
 
   it('should display an error message if the string fails to import', () => {
@@ -66,7 +66,9 @@ describe('ImportGameDialogComponent', () => {
   });
 
   it('should not display any error messages if the string imports successfully', () => {
+    /* tslint:disable:max-line-length */
     component.gameImportString = 'eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6Nn19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0=';
+    /* tslint:enable:max-line-length */
 
     component.importGame();
 

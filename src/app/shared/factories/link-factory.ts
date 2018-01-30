@@ -1,4 +1,4 @@
-import { LinkModel } from "../models/link-model";
+import { LinkModel } from '../models/link-model';
 
 export class LinkFactory {
     /**

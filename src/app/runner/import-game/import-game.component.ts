@@ -21,11 +21,11 @@ export class ImportGameComponent implements OnInit {
   }
 
   importGame(): void {
-    let dialogRef = this.dialog.open(ImportGameDialogComponent, {
+    const dialogRef = this.dialog.open(ImportGameDialogComponent, {
       width: '440px'
     });
 
-    dialogRef.afterClosed().subscribe(() => {      
+    dialogRef.afterClosed().subscribe(() => {
       if (this.sceneService.getNumberOfScenes() > 0) {
         this.sceneService.startGame();
       }

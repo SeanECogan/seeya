@@ -27,14 +27,14 @@ describe('AddSceneComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AddSceneComponent);
     component = fixture.componentInstance;
-    
+
     fakeSceneService = TestBed.get(SceneService);
 
     fixture.detectChanges();
 
-    addButton = fixture.debugElement.query(By.css("#add-scene-button"));
-    headerInput = fixture.debugElement.query(By.css("#header-input"));
-    descriptionTextarea = fixture.debugElement.query(By.css("#description-textarea"));
+    addButton = fixture.debugElement.query(By.css('#add-scene-button'));
+    headerInput = fixture.debugElement.query(By.css('#header-input'));
+    descriptionTextarea = fixture.debugElement.query(By.css('#description-textarea'));
   });
 
   it('should create', () => {
@@ -51,7 +51,7 @@ describe('AddSceneComponent', () => {
 
     fixture.detectChanges();
 
-    expect(addButton.attributes["ng-reflect-disabled"]).toBe('true');
+    expect(addButton.attributes['ng-reflect-disabled']).toBe('true');
   });
 
   it ('should have the add button disabled when header is invalid', () => {
@@ -60,7 +60,7 @@ describe('AddSceneComponent', () => {
 
     fixture.detectChanges();
 
-    expect(addButton.attributes["ng-reflect-disabled"]).toBe('true');
+    expect(addButton.attributes['ng-reflect-disabled']).toBe('true');
   });
 
   it ('should have the add button disabled when description is invalid', () => {
@@ -69,16 +69,16 @@ describe('AddSceneComponent', () => {
 
     fixture.detectChanges();
 
-    expect(addButton.attributes["ng-reflect-disabled"]).toBe('true');
+    expect(addButton.attributes['ng-reflect-disabled']).toBe('true');
   });
 
   it ('should have the add button enabled when input is valid', () => {
     component.newSceneHeader = 'Test';
-    component.newSceneDescription = 'Test';    
+    component.newSceneDescription = 'Test';
 
     fixture.detectChanges();
 
-    expect(addButton.attributes["ng-reflect-disabled"]).toBe('false');
+    expect(addButton.attributes['ng-reflect-disabled']).toBe('false');
   });
 
   it ('should have a header input', () => {

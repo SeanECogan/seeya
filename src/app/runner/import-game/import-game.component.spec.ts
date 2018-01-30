@@ -53,7 +53,7 @@ describe('ImportGameComponent', () => {
     expect(importGameButton).toBeTruthy();
   });
 
-  it('should show the import button while the game is finished and not loaded', () => {    
+  it('should show the import button while the game is finished and not loaded', () => {
     fakeSceneService.gameIsFinished = () => true;
     fakeSceneService.getCurrentScene = () => null;
 
@@ -64,7 +64,7 @@ describe('ImportGameComponent', () => {
     expect(importGameButton).toBeTruthy();
   });
 
-  it('should show the import button while the game is not finished and not loaded', () => {    
+  it('should show the import button while the game is not finished and not loaded', () => {
     fakeSceneService.gameIsFinished = () => false;
     fakeSceneService.getCurrentScene = () => null;
 

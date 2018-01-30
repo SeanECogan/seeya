@@ -8,6 +8,8 @@ import { SceneService } from '../scene/scene.service';
   styleUrls: ['./add-scene.component.css']
 })
 export class AddSceneComponent implements OnInit {
+  newSceneHeader: string;
+  newSceneDescription: string;
 
   constructor(private sceneService: SceneService) {
     this.resetInputValues();
@@ -26,14 +28,11 @@ export class AddSceneComponent implements OnInit {
   }
 
   inputIsValid(): boolean {
-    return this.newSceneHeader != '' && this.newSceneDescription != '';
+    return this.newSceneHeader !== '' && this.newSceneDescription !== '';
   }
 
   private resetInputValues(): void {
     this.newSceneHeader = '';
     this.newSceneDescription = '';
   }
-
-  newSceneHeader: string;
-  newSceneDescription: string;
 }
