@@ -9,7 +9,7 @@
             *ngIf="currentScene.link != null" 
             mat-raised-button 
             (click)="loadNextScene(currentScene.link.toSceneId)">
-            To Scene: {{currentScene.link.toSceneId}}
+            {{currentScene.link.displayText}}
         </button>
         <button 
             id="play-again-button"

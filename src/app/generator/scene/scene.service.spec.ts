@@ -5,11 +5,17 @@ import { SceneService } from './scene.service';
 import { SceneModel } from '../../shared/models/scene-model';
 import { LinkModel } from '../../shared/models/link-model';
 import { GameModel } from '../../shared/models/game-model';
+import { MatDialog } from '@angular/material';
 
 describe('SceneService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SceneService]
+      providers: [
+        SceneService,
+        { provide: MatDialog, useValue: {
+          open: () => {}
+        } }
+      ]
     });
   });
 
@@ -54,7 +60,7 @@ describe('SceneService', () => {
 
     // Scenes get IDs of 3 and 4.
     service.addScene('Header', 'Description');
-    service.addScene('Header2', 'Description2');
+    service.addSceneWithLink('Header2', 'Description2', 'Display');
 
     expect(service.getScenes().length).toBe(2, 'Length of scenes array');
     expect(service.getScenes()[0].id).toBe(3, 'First scene ID');
@@ -69,10 +75,10 @@ describe('SceneService', () => {
 
     // Scenes get IDs of 5 and 6.
     service.addScene('Header', 'Description');
-    service.addScene('Header2', 'Description2');
+    service.addSceneWithLink('Header2', 'Description2', 'Display');
 
     /* tslint:disable:max-line-length */
-    expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6Nn19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0=');
+    expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6NiwiZGlzcGxheVRleHQiOiJEaXNwbGF5In19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0=');
     /* tslint:enable:max-line-length */
   }));
 });

@@ -17,6 +17,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { ClipboardModule } from 'ngx-clipboard';
+import { AddLinkDialogComponent } from './add-link-dialog/add-link-dialog.component';
 
 @NgModule({
   imports: [
@@ -34,10 +35,12 @@ import { ClipboardModule } from 'ngx-clipboard';
     SceneComponent,
     AddSceneComponent,
     ExportGameComponent,
-    ExportGameDialogComponent
+    ExportGameDialogComponent,
+    AddLinkDialogComponent
   ],
   entryComponents: [
-    ExportGameDialogComponent
+    ExportGameDialogComponent,
+    AddLinkDialogComponent
   ],
   providers: [
     SceneService

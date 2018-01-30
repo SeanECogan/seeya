@@ -1,0 +1,12 @@
+<div mat-dialog-content>
+  <p class="mat-body-1">Please enter the text that the Link to this Scene should display:</p>
+  <mat-form-field class="full-width">
+    <input matInput [(ngModel)]="linkDisplayText" cdkFocusInitial>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="align-right">
+  <button 
+    id="ok-button"
+    mat-button [mat-dialog-close]="linkDisplayText"
+    [disabled]="linkDisplayText === ''">Ok</button>
+</div>

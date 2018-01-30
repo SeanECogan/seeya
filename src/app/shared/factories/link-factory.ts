@@ -6,11 +6,13 @@ export class LinkFactory {
      */
     createLink(
         fromSceneId: number,
-        toSceneId: number
+        toSceneId: number,
+        displayText: string
     ): LinkModel {
         return new LinkModel(
             fromSceneId,
-            toSceneId
+            toSceneId,
+            displayText
         );
     }
 }

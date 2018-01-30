@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 import { GameFactory } from '../../shared/factories/game-factory';
 import { SceneFactory } from '../../shared/factories/scene-factory';
 import { LinkFactory } from '../../shared/factories/link-factory';
 
 import { SceneModel } from '../../shared/models/scene-model';
+import { AddLinkDialogComponent } from '../add-link-dialog/add-link-dialog.component';
 
 @Injectable()
 export class SceneService {
@@ -34,44 +36,38 @@ export class SceneService {
     header: string,
     description: string
   ): void {
-    let currentLatestIndex = -1;
-    let fromSceneId = -1;
+    this.addNewScene(header, description);
+  }
 
-    // Only check this if it is not the first scene.
-    if (this.scenes.length > 0) {
-      // Get the index of the latest scene.
-      currentLatestIndex = this.scenes.length - 1;
+  addSceneWithLink(
+    header: string,
+    description: string,
+    linkDisplayText: string
+  ) {
+    // Get the index of the latest scene.
+    const currentLatestIndex = this.scenes.length - 1;
 
-      fromSceneId = this.scenes[currentLatestIndex].id;
-    }
+    const fromSceneId = this.scenes[currentLatestIndex].id;
 
-    // Add new scene.
-    this.scenes.push(
-      this.sf.createSceneWithoutLink(
-        header,
-        description
-      )
+    this.addNewScene(header, description);
+
+    // Get the index of the new latest scene.
+    const newLatestIndex = this.scenes.length - 1;
+
+    const toSceneId = this.scenes[newLatestIndex].id;
+
+    // Create new Link between these scenes.
+    const link = this.lf.createLink(
+      fromSceneId,
+      toSceneId,
+      linkDisplayText
     );
 
-    // Only check this if it is not the first scene.
-    if (this.scenes.length > 1) {
-      // Get the index of the new latest scene.
-      const newLatestIndex = this.scenes.length - 1;
-
-      const toSceneId = this.scenes[newLatestIndex].id;
-
-      // Create new Link between these scenes.
-      const link = this.lf.createLink(
-        fromSceneId,
-        toSceneId
-      );
-
-      // Update previously last scene with link to new last scene.
-      this.scenes[currentLatestIndex] = this.sf.createSceneWithLink(
-        this.scenes[currentLatestIndex],
-        link
-      );
-    }
+    // Update previously last scene with link to new last scene.
+    this.scenes[currentLatestIndex] = this.sf.createSceneWithLink(
+      this.scenes[currentLatestIndex],
+      link
+    );
   }
 
   exportGame(): string {
@@ -80,5 +76,17 @@ export class SceneService {
     const gameJsonString = JSON.stringify(game);
 
     return btoa(gameJsonString);
+  }
+
+  private addNewScene(
+    header: string,
+    description: string
+  ): void {
+    this.scenes.push(
+      this.sf.createSceneWithoutLink(
+        header,
+        description
+      )
+    );
   }
 }

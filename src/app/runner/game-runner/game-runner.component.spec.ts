@@ -111,15 +111,15 @@ describe('GameRunnerComponent', () => {
 
   it('should have a next scene button if the scene has a linked scene', () => {
     fakeSceneService.getCurrentScene = () => {
-      return new SceneModel(1, 'Test', 'Test', new LinkModel(1, 2));
+      return new SceneModel(1, 'Test', 'Test', new LinkModel(1, 2, 'Display'));
     };
 
     fixture.detectChanges();
 
-    // Must re-query for the nextSceneButton because it didn't exist by default.
     nextSceneButton = fixture.debugElement.query(By.css('#next-scene-button'));
 
     expect(nextSceneButton).toBeTruthy();
+    expect(nextSceneButton.nativeElement.innerText).toBe('Display');
   });
 
   it('should load the next scene if the next scene button is clicked', () => {
@@ -133,7 +133,7 @@ describe('GameRunnerComponent', () => {
 
     // Import the test export from the Generator test.
     /* tslint:disable:max-line-length */
-    fakeSceneService.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6Nn19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0=');
+    fakeSceneService.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6NiwiZGlzcGxheVRleHQiOiJEaXNwbGF5In19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0=');
     /* tslint:enable:max-line-length */
 
     // Start the game.
@@ -175,7 +175,7 @@ describe('GameRunnerComponent', () => {
 
     // Import the test export from the Generator test.
     /* tslint:disable:max-line-length */
-    fakeSceneService.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6Nn19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0=');
+    fakeSceneService.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6NiwiZGlzcGxheVRleHQiOiJEaXNwbGF5In19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0=');
     /* tslint:enable:max-line-length */
 
     // Start the game.

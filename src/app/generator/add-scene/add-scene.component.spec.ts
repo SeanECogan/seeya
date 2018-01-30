@@ -1,16 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core/src/debug/debug_node';
 import { By } from '@angular/platform-browser';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { GeneratorModule } from '../generator.module';
 
-import { AddSceneComponent } from './add-scene.component';
 import { SceneService } from '../scene/scene.service';
+
+import { AddSceneComponent } from './add-scene.component';
+import { AddLinkDialogComponent } from '../add-link-dialog/add-link-dialog.component';
+import { Observable } from 'rxjs/Observable';
 
 describe('AddSceneComponent', () => {
   let component: AddSceneComponent;
   let fixture: ComponentFixture<AddSceneComponent>;
   let fakeSceneService: SceneService;
+  let fakeMatDialog: MatDialog;
   let addButton: DebugElement;
   let headerInput: DebugElement;
   let descriptionTextarea: DebugElement;
@@ -18,7 +23,12 @@ describe('AddSceneComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ GeneratorModule ],
-      providers: [{ provide: SceneService, useValue: {} }],
+      providers: [
+        { provide: SceneService, useValue: {} },
+        { provide: MatDialog, useValue: {
+          open: (a, b) => {}
+        }}
+      ],
       declarations: [ ]
     })
     .compileComponents();
@@ -29,6 +39,7 @@ describe('AddSceneComponent', () => {
     component = fixture.componentInstance;
 
     fakeSceneService = TestBed.get(SceneService);
+    fakeMatDialog = TestBed.get(MatDialog);
 
     fixture.detectChanges();
 
@@ -91,6 +102,7 @@ describe('AddSceneComponent', () => {
 
   it ('should reset the header and description inputs when a scene is added', () => {
     fakeSceneService.addScene = () => {};
+    fakeSceneService.getNumberOfScenes = () => 0;
 
     component.newSceneHeader = 'Test';
     component.newSceneDescription = 'Test';
@@ -105,13 +117,36 @@ describe('AddSceneComponent', () => {
     expect(component.newSceneDescription).toBeFalsy();
   });
 
-  it ('should call the SceneService add method when a scene is added', () => {
+  it ('should call the SceneService AddScene method when the first scene is added', () => {
     fakeSceneService.addScene = () => {};
+    fakeSceneService.getNumberOfScenes = () => 0;
 
     spyOn(fakeSceneService, 'addScene');
 
     component.addScene();
 
     expect(fakeSceneService.addScene).toHaveBeenCalled();
+  });
+
+  it ('should call the SceneService AddSceneWithLink method when scenes after the first are added', () => {
+    fakeSceneService.addSceneWithLink = () => {};
+    fakeSceneService.getNumberOfScenes = () => 1;
+
+    spyOn(fakeSceneService, 'addSceneWithLink');
+
+    spyOn(fakeMatDialog, 'open').and.returnValue({
+      afterClosed: function() {
+        // This feels gross. Come back to this when you have a better
+        // understanding of how to test things with MatDialog. I guess this
+        // works well enough for now.
+        return new Observable<any>(() => {
+          fakeSceneService.addSceneWithLink('', '', '');
+        });
+      }
+    });
+
+    component.addScene();
+
+    expect(fakeSceneService.addSceneWithLink).toHaveBeenCalled();
   });
 });

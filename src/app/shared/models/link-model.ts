@@ -4,12 +4,15 @@ export class LinkModel {
    */
   constructor(
     fromSceneId: number,
-    toSceneId: number
+    toSceneId: number,
+    displayText: string
   ) {
     this.fromSceneId = fromSceneId;
     this.toSceneId = toSceneId;
+    this.displayText = displayText;
   }
 
   fromSceneId: number;
   toSceneId: number;
+  displayText: string;
 }
