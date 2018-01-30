@@ -23,8 +23,10 @@ export class SceneService {
   }
 
   startGame(): void {
-    this.currentScene = 
-      this.scenes.filter(scene => scene.id == this.initialSceneId)[0];
+    if (this.scenes.length > 0) {
+      this.currentScene = 
+        this.scenes.filter(scene => scene.id == this.initialSceneId)[0];
+    }
   }
 
   getCurrentScene(): SceneModel {
@@ -36,8 +38,10 @@ export class SceneService {
   }
 
   loadNextScene(toSceneId: number): void {
-    this.currentScene = 
-      this.scenes.filter(scene => scene.id == toSceneId)[0];
+    if (this.scenes.length > 0) {
+      this.currentScene = 
+        this.scenes.filter(scene => scene.id == toSceneId)[0];
+    }
   }
 
   gameIsFinished(): boolean {

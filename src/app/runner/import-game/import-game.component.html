@@ -1,6 +1,8 @@
 <div 
   *ngIf="gameIsFinished() || !gameIsLoaded()"
   class="align-right">
-  <button mat-raised-button color="accent" 
+  <button 
+    id="import-game-button"
+    mat-raised-button color="accent" 
     (click)="importGame()">Import Game</button>
 </div>

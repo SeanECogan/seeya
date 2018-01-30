@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SceneService } from './scene/scene.service';
 
-import { SharedModule } from '../shared/shared.module';
 import { RunnerComponent } from './runner.component';
 import { SceneComponent } from './scene/scene.component';
 import { ImportGameComponent } from './import-game/import-game.component';
@@ -19,6 +20,7 @@ import { GameRunnerComponent } from './game-runner/game-runner.component';
 @NgModule({
   imports: [
     SharedModule,
+    NoopAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,

@@ -11,7 +11,9 @@
 </div>
 
 <div class="align-right">
-  <button mat-raised-button color="accent" type="button" 
+  <button 
+    id="import-button"
+    mat-raised-button color="accent" type="button" 
     (click)="importGame()" [disabled]="gameImportString === ''">
     Import
   </button>

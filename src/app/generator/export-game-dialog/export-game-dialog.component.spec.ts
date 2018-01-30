@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import { GeneratorModule } from '../generator.module';
 
 import { ExportGameDialogComponent } from './export-game-dialog.component';
-import { By } from '@angular/platform-browser';
 
 describe('ExportGameDialogComponent', () => {
   let component: ExportGameDialogComponent;
