@@ -9,3 +9,19 @@ mat-card-content {
 .mat-caption {
     text-align: center;
 }
+
+.top-right {
+    float: right;
+    margin-top: -10px;
+}
+
+.interactive {
+    position: relative;
+    width:24px; height:24px;
+    transition: color 0.25s;
+}
+
+.interactive:hover {
+    cursor: pointer;
+    color: #AAAAAA;
+}

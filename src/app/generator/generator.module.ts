@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material';
 
 import { ClipboardModule } from 'ngx-clipboard';
 
@@ -29,6 +30,7 @@ import { AddLinkDialogComponent } from './add-link-dialog/add-link-dialog.compon
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
+    MatIconModule,
     ClipboardModule
   ],
   declarations: [

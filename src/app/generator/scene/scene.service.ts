@@ -70,6 +70,36 @@ export class SceneService {
     );
   }
 
+  deleteScene(sceneId: number): void {
+    const sceneToDelete = this.scenes.filter(scene => scene.id === sceneId)[0];
+
+    if (sceneToDelete) {
+      // Check to see if we must update the previous Scene that was connected to
+      // this one.
+      const sceneToUpdate = this.scenes.filter(scene => {
+        return scene.link !== null &&
+          scene.link.toSceneId === sceneToDelete.id;
+      })[0];
+
+      if (sceneToUpdate) {
+        if (sceneToDelete.link !== null) {
+          // If this Scene was linked to another Scene, the Scene that is linked to
+          // this Scene should now be linked to that one.
+          sceneToUpdate.link.toSceneId = sceneToDelete.link.toSceneId;
+          sceneToUpdate.link.displayText = sceneToDelete.link.displayText;
+        } else {
+          // Otherwise, the Scene that was linked to this Scene should no longer be
+          // linked to any Scene.
+          sceneToUpdate.link = null;
+        }
+      }
+
+      const sceneToDeleteIndex = this.scenes.indexOf(sceneToDelete);
+
+      this.scenes.splice(sceneToDeleteIndex, 1);
+    }
+  }
+
   exportGame(): string {
     const game = this.gf.createGame(this.scenes);
 

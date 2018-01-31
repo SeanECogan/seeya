@@ -6,6 +6,10 @@
     <mat-card-subtitle id="card-subtitle" *ngIf="scene.link != null">
       Linked to Scene #{{scene.link.toSceneId}}
     </mat-card-subtitle>
+    <div class="top-right interactive">
+      <mat-icon aria-label="Delete button"
+        (click)="deleteScene()">delete</mat-icon>
+    </div>
   </mat-card-title-group>
   <mat-card-content id="card-content">
     {{scene.description}}

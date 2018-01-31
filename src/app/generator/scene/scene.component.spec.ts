@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 
 import { GeneratorModule } from '../generator.module';
 
+import { SceneService } from './scene.service';
+
 import { SceneComponent } from './scene.component';
 
 import { SceneModel } from '../../shared/models/scene-model';
@@ -12,6 +14,7 @@ import { LinkModel } from '../../shared/models/link-model';
 describe('SceneComponent', () => {
   let component: SceneComponent;
   let fixture: ComponentFixture<SceneComponent>;
+  let fakeSceneService: SceneService;
   let cardTitle: DebugElement;
   let cardSubtitle: DebugElement;
   let cardContent: DebugElement;
@@ -19,6 +22,7 @@ describe('SceneComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ GeneratorModule ],
+      providers: [ { provide: SceneService, useValue: {} } ],
       declarations: [ ]
     })
     .compileComponents();
@@ -34,6 +38,8 @@ describe('SceneComponent', () => {
       'Description',
       null
     );
+
+    fakeSceneService = TestBed.get(SceneService);
 
     fixture.detectChanges();
 
@@ -68,5 +74,15 @@ describe('SceneComponent', () => {
 
   it('should display the scene description in the card content', () => {
     expect(cardContent.nativeElement.innerText).toBe('Description');
+  });
+
+  it('should call the scene service delete method when the delete icon button is clicked', () => {
+    fakeSceneService.deleteScene = () => {};
+
+    spyOn(fakeSceneService, 'deleteScene');
+
+    component.deleteScene();
+
+    expect(fakeSceneService.deleteScene).toHaveBeenCalled();
   });
 });
