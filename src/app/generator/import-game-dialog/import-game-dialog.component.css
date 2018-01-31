@@ -1,0 +1,23 @@
+.align-right {
+    text-align: right;
+}
+
+.import-container {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.errors {
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.error {
+    color: #B71C1C;
+    font-weight: bold;
+    margin: 0px;
+}

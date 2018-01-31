@@ -4,13 +4,14 @@ import { MatDialog } from '@angular/material';
 
 import { SceneService } from '../scene/scene.service';
 import { ExportGameDialogComponent } from '../export-game-dialog/export-game-dialog.component';
+import { ImportGameDialogComponent } from '../import-game-dialog/import-game-dialog.component';
 
 @Component({
-  selector: 'seeya-export-game',
-  templateUrl: './export-game.component.html',
-  styleUrls: ['./export-game.component.css']
+  selector: 'seeya-import-export-game',
+  templateUrl: './import-export-game.component.html',
+  styleUrls: ['./import-export-game.component.css']
 })
-export class ExportGameComponent implements OnInit {
+export class ImportExportGameComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
@@ -21,6 +22,12 @@ export class ExportGameComponent implements OnInit {
 
   gameHasAnyScenes(): boolean {
     return this.sceneService.getNumberOfScenes() > 0;
+  }
+
+  importGame(): void {
+    this.dialog.open(ImportGameDialogComponent, {
+      width: '440px'
+    });
   }
 
   exportGame(): void {

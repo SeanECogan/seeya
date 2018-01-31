@@ -81,4 +81,18 @@ describe('SceneService', () => {
     expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6NiwiZGlzcGxheVRleHQiOiJEaXNwbGF5In19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0=');
     /* tslint:enable:max-line-length */
   }));
+
+  it('should throw an error when importing an invalid game string',
+    inject([SceneService], (service: SceneService) => {
+    expect(() => service.importGame('Test')).toThrowError();
+  }));
+
+  it('should not throw an error when importing a valid game string',
+    inject([SceneService], (service: SceneService) => {
+
+    /* tslint:disable:max-line-length */
+    expect(() => service.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6Nn19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0'))
+      .not.toThrowError();
+    /* tsline:enable:max-line-length */
+  }));
 });

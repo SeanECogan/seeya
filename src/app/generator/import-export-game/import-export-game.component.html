@@ -1,5 +1,8 @@
 <div class="align-right">
   <button mat-raised-button color="accent" 
+    id="import-button"
+    (click)="importGame()">Import Existing Game</button>
+  <button mat-raised-button color="accent" 
     id="export-button"
     (click)="exportGame()" [disabled]="!gameHasAnyScenes()">Export Game</button>
 </div>

@@ -57,7 +57,8 @@ describe('SceneComponent', () => {
   it('should have a subtitle if there is a linked scene', () => {
     component.scene.link = new LinkModel(
       1,
-      2
+      2,
+      'Test'
     );
 
     fixture.detectChanges();

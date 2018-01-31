@@ -1,7 +1,7 @@
-<seeya-export-game></seeya-export-game>
+<seeya-import-export-game></seeya-import-export-game>
 
 <seeya-add-scene></seeya-add-scene>
 
-<div *ngFor="let scene of scenes">
+<div *ngFor="let scene of getScenes()">
   <seeya-scene class="scene" [scene]="scene"></seeya-scene>
 </div>

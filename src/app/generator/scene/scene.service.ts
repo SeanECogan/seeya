@@ -6,7 +6,7 @@ import { SceneFactory } from '../../shared/factories/scene-factory';
 import { LinkFactory } from '../../shared/factories/link-factory';
 
 import { SceneModel } from '../../shared/models/scene-model';
-import { AddLinkDialogComponent } from '../add-link-dialog/add-link-dialog.component';
+import { GameModel } from '../../shared/models/game-model';
 
 @Injectable()
 export class SceneService {
@@ -76,6 +76,16 @@ export class SceneService {
     const gameJsonString = JSON.stringify(game);
 
     return btoa(gameJsonString);
+  }
+
+  importGame(
+    gameImportString: string
+  ): void {
+    const gameString = atob(gameImportString);
+
+    const game = JSON.parse(gameString) as GameModel;
+
+    this.scenes = game.scenes;
   }
 
   private addNewScene(

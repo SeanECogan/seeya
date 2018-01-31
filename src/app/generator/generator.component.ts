@@ -10,8 +10,6 @@ import { SceneModel } from '../shared/models/scene-model';
   styleUrls: ['./generator.component.css']
 })
 export class GeneratorComponent implements OnInit {
-  scenes: SceneModel[];
-
   constructor(private sceneService: SceneService) {
   }
 
@@ -19,7 +17,7 @@ export class GeneratorComponent implements OnInit {
     this.getScenes();
   }
 
-  getScenes(): void {
-    this.scenes = this.sceneService.getScenes();
+  getScenes(): SceneModel[] {
+    return this.sceneService.getScenes();
   }
 }

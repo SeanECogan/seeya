@@ -6,12 +6,13 @@ import { GeneratorModule } from '../generator.module';
 
 import { SceneService } from '../scene/scene.service';
 
-import { ExportGameComponent } from './export-game.component';
+import { ImportExportGameComponent } from './import-export-game.component';
 
-describe('ExportGameComponent', () => {
-  let component: ExportGameComponent;
-  let fixture: ComponentFixture<ExportGameComponent>;
+describe('ImportExportGameComponent', () => {
+  let component: ImportExportGameComponent;
+  let fixture: ComponentFixture<ImportExportGameComponent>;
   let fakeSceneService: SceneService;
+  let importButton: DebugElement;
   let exportButton: DebugElement;
 
   beforeEach(async(() => {
@@ -27,18 +28,23 @@ describe('ExportGameComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExportGameComponent);
+    fixture = TestBed.createComponent(ImportExportGameComponent);
     component = fixture.componentInstance;
 
     fakeSceneService = TestBed.get(SceneService);
 
     fixture.detectChanges();
 
+    importButton = fixture.debugElement.query(By.css('#import-button'));
     exportButton = fixture.debugElement.query(By.css('#export-button'));
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have the Import button', () => {
+    expect(importButton).toBeTruthy();
   });
 
   it('should have the Export button disabled if there are no scenes', () => {

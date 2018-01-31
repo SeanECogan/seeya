@@ -37,12 +37,12 @@ describe('GeneratorComponent', () => {
     // Setup mock SceneService.
     fakeSceneService.getScenes = () => [];
 
-    component.getScenes();
+    const scenes = component.getScenes();
 
-    expect(component.scenes.length).toBe(0);
+    expect(scenes.length).toBe(0);
   });
 
-  it('should set scenes to the scenes returned from the service', () => {
+  it('should use the scenes returned from the service', () => {
     // Setup mock SceneService.
     fakeSceneService.getScenes = () => {
       return [
@@ -50,12 +50,12 @@ describe('GeneratorComponent', () => {
       ];
     };
 
-    component.getScenes();
+    const scenes = component.getScenes();
 
-    expect(component.scenes.length).toBe(1);
-    expect(component.scenes[0].id).toBe(1);
-    expect(component.scenes[0].header).toBe('Test');
-    expect(component.scenes[0].description).toBe('Test');
-    expect(component.scenes[0].link).toBe(null);
+    expect(scenes.length).toBe(1);
+    expect(scenes[0].id).toBe(1);
+    expect(scenes[0].header).toBe('Test');
+    expect(scenes[0].description).toBe('Test');
+    expect(scenes[0].link).toBe(null);
   });
 });

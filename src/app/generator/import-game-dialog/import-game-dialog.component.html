@@ -1,0 +1,29 @@
+<h2 class="mat-title">Import Existing Game</h2>
+
+<p class="mat-body-1">Please copy your text exported by the Generator into this textbox, and click Import to load your existing Game. Please note that this will overwrite whatever Scenes you currently have configured.</p>
+
+<div class="import-container">
+  <mat-form-field class="full-width">
+    <textarea 
+      matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8" 
+      [(ngModel)]="gameImportString"></textarea>
+  </mat-form-field>
+</div>
+
+<div class="align-right">
+  <button 
+    id="import-button"
+    mat-raised-button color="accent" type="button" 
+    (click)="importGame()" [disabled]="gameImportString === ''">
+    Import
+  </button>
+</div>
+
+<div
+  *ngIf="!gameImportSuccessful"
+  class="align-right errors">
+  <p class="mat-caption error">The text entered could not be successfully imported.</p>
+  <p class="mat-caption error">Please check to make sure it is the exact output from the Generator.</p>
+</div>
+
+<p class="mat-caption">Click anywhere outside this dialog to close.</p>
