@@ -1,5 +1,8 @@
 mat-card {
-    margin-top: 15px;
+    height: calc(100% - 50px);
+    width: calc(100% - 50px);
+    margin: auto;
+    overflow-y: auto;
 }
 
 mat-card-content {
@@ -11,7 +14,7 @@ mat-card-content {
 }
 
 .top-right {
-    float: right;
+    text-align: right;
     margin-top: -10px;
 }
 

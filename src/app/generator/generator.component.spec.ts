@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { ObservableMedia, MediaService } from '@angular/flex-layout';
 
 import { GeneratorModule } from './generator.module';
 
@@ -7,7 +9,6 @@ import { SceneService } from '../generator/scene/scene.service';
 import { GeneratorComponent } from './generator.component';
 
 import { SceneModel } from '../shared/models/scene-model';
-import { By } from '@angular/platform-browser';
 
 describe('GeneratorComponent', () => {
   let component: GeneratorComponent;
@@ -17,7 +18,13 @@ describe('GeneratorComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ GeneratorModule ],
-      providers: [{ provide: SceneService, useValue: {} }]
+      providers: [
+        { provide: SceneService, useValue: {} },
+        { provide: ObservableMedia, useValue: {
+          subscribe: () => {}
+        } },
+        { provide: MediaService, useValue: {} }
+      ]
     })
     .compileComponents();
   }));

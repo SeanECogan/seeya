@@ -2,6 +2,9 @@
 
 <seeya-add-scene></seeya-add-scene>
 
-<div *ngFor="let scene of getScenes()">
-  <seeya-scene class="scene" [scene]="scene"></seeya-scene>
-</div>
+<mat-grid-list cols="{{columns}}" rowHeight="300px" gutterSize="1em">
+  <mat-grid-tile
+      *ngFor="let scene of getScenes()">
+      <seeya-scene class="scene" [scene]="scene"></seeya-scene>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -5,12 +5,12 @@
 
 @media (min-width: 480px) {
     .container {
-        width: 75%;
+        width: 80%;
     }
 }
 
 @media (min-width: 1080px) {
     .container {
-        width: 50%;
+        width: 60%;
     }
 }

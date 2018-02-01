@@ -1,12 +1,7 @@
-.form {
-    margin-top: 15px;
-}
-
-.full-width {
-    width: 100%;
-}
-
 .align-right {
     text-align: right;
-    margin-top: 0px;
+}
+
+.spacer {
+    margin-top: 25px;
 }

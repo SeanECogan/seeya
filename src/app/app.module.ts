@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule, MediaService } from '@angular/flex-layout';
+
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppRoutingModule } from './/app-routing.module';
 
@@ -11,7 +14,6 @@ import { RunnerModule } from './runner/runner.module';
 
 import { AppComponent } from './app.component';
 
-import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     HomeModule,
     GeneratorModule,
     RunnerModule,
-    MatTabsModule
+    MatTabsModule,
+    FlexLayoutModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ MediaService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

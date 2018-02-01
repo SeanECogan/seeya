@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material';
+import { MatIconModule, MatGridListModule } from '@angular/material';
 
 import { ClipboardModule } from 'ngx-clipboard';
 
@@ -20,6 +20,7 @@ import { ImportExportGameComponent } from './import-export-game/import-export-ga
 import { ExportGameDialogComponent } from './export-game-dialog/export-game-dialog.component';
 import { ImportGameDialogComponent } from './import-game-dialog/import-game-dialog.component';
 import { AddLinkDialogComponent } from './add-link-dialog/add-link-dialog.component';
+import { AddEditSceneDialogComponent } from './add-edit-scene-dialog/add-edit-scene-dialog.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { AddLinkDialogComponent } from './add-link-dialog/add-link-dialog.compon
     MatCardModule,
     MatDialogModule,
     MatIconModule,
+    MatGridListModule,
     ClipboardModule
   ],
   declarations: [
@@ -40,11 +42,13 @@ import { AddLinkDialogComponent } from './add-link-dialog/add-link-dialog.compon
     ImportExportGameComponent,
     ExportGameDialogComponent,
     ImportGameDialogComponent,
-    AddLinkDialogComponent
+    AddLinkDialogComponent,
+    AddEditSceneDialogComponent
   ],
   entryComponents: [
     ExportGameDialogComponent,
     ImportGameDialogComponent,
+    AddEditSceneDialogComponent,
     AddLinkDialogComponent
   ],
   providers: [

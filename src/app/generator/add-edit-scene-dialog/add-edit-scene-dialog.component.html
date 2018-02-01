@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Add Scene</h2>
+<div mat-dialog-content>
+  <mat-form-field class="full-width">
+    <input
+      id="header-input"
+      matInput placeholder="Header" [(ngModel)]="newSceneHeader">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <textarea 
+      id="description-textarea"
+      matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8" 
+      placeholder="Description" [(ngModel)]="newSceneDescription"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="align-right">
+  <button 
+      id="cancel-button"
+      mat-raised-button
+      (click)="cancel()">Cancel</button>
+  <button 
+      id="add-scene-button"
+      mat-raised-button color="accent" 
+      (click)="addScene()" [disabled]="!inputIsValid()">Add Scene</button>
+</div>
