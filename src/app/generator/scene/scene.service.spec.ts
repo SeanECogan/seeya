@@ -70,6 +70,22 @@ describe('SceneService', () => {
     expect(service.getScenes()[0].link.toSceneId).toBe(4, 'First scene link to scene ID');
   }));
 
+  it('should update the scene when it is edited',
+    inject([SceneService], (service: SceneService) => {
+
+    service['scenes'] = [
+      new SceneModel(1, 'Test1', 'Test1', null)
+    ];
+
+    service.editScene(1, 'Test2', 'Test2');
+
+    expect(service.getScenes().length).toBe(1);
+    expect(service.getScenes()[0].id).toBe(1);
+    expect(service.getScenes()[0].header).toBe('Test2');
+    expect(service.getScenes()[0].description).toBe('Test2');
+    expect(service.getScenes()[0].link).toBeNull();
+  }));
+
   it('should just remove the scene if the first scene is deleted',
     inject([SceneService], (service: SceneService) => {
 

@@ -70,6 +70,19 @@ export class SceneService {
     );
   }
 
+  editScene(
+    sceneId: number,
+    header: string,
+    description: string
+  ) {
+    const sceneToEdit = this.scenes.filter(scene => scene.id === sceneId)[0];
+
+    if (sceneToEdit) {
+      sceneToEdit.header = header;
+      sceneToEdit.description = description;
+    }
+  }
+
   deleteScene(sceneId: number): void {
     const sceneToDelete = this.scenes.filter(scene => scene.id === sceneId)[0];
 

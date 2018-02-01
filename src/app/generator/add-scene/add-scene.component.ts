@@ -9,8 +9,7 @@ import { AddEditSceneDialogComponent } from '../add-edit-scene-dialog/add-edit-s
   styleUrls: ['./add-scene.component.css']
 })
 export class AddSceneComponent implements OnInit {
-  constructor(
-    public dialog: MatDialog) {
+  constructor(public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -19,7 +18,10 @@ export class AddSceneComponent implements OnInit {
   openDialog(): void {
     this.dialog.open(AddEditSceneDialogComponent, {
       width: '600px',
-      disableClose: true
+      disableClose: true,
+      data: {
+        editMode: false
+      }
     });
   }
 }

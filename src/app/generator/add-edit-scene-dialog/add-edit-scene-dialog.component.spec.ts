@@ -15,7 +15,9 @@ describe('AddEditSceneDialogComponent', () => {
   let fixture: ComponentFixture<AddEditSceneDialogComponent>;
   let fakeSceneService: SceneService;
   let fakeMatDialog: MatDialog;
+  let header: DebugElement;
   let addButton: DebugElement;
+  let editButton: DebugElement;
   let cancelButton: DebugElement;
   let headerInput: DebugElement;
   let descriptionTextarea: DebugElement;
@@ -46,8 +48,10 @@ describe('AddEditSceneDialogComponent', () => {
     fakeMatDialog = TestBed.get(MatDialog);
 
     fixture.detectChanges();
-    
+
+    header = fixture.debugElement.query(By.css('h2'));
     addButton = fixture.debugElement.query(By.css('#add-scene-button'));
+    editButton = fixture.debugElement.query(By.css('#edit-scene-button'));
     cancelButton = fixture.debugElement.query(By.css('#cancel-button'));
     headerInput = fixture.debugElement.query(By.css('#header-input'));
     descriptionTextarea = fixture.debugElement.query(By.css('#description-textarea'));
@@ -57,7 +61,24 @@ describe('AddEditSceneDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should say Add Scene when not in Edit Mode', () => {
+    component.editMode = false;
+
+    fixture.detectChanges();
+
+    expect(header.nativeElement.innerText).toBe('Add Scene');
+  });
+
+  it('should say Edit Scene when in Edit Mode', () => {
+    component.editMode = true;
+
+    fixture.detectChanges();
+
+    expect(header.nativeElement.innerText).toBe('Edit Scene');
+  });
+
   it ('should have the add button disabled when input is header and description are invalid', () => {
+    component.editMode = false;
     component.newSceneHeader = '';
     component.newSceneDescription = '';
 
@@ -67,6 +88,7 @@ describe('AddEditSceneDialogComponent', () => {
   });
 
   it ('should have the add button disabled when header is invalid', () => {
+    component.editMode = false;
     component.newSceneHeader = '';
     component.newSceneDescription = 'Test';
 
@@ -76,6 +98,7 @@ describe('AddEditSceneDialogComponent', () => {
   });
 
   it ('should have the add button disabled when description is invalid', () => {
+    component.editMode = false;
     component.newSceneHeader = 'Test';
     component.newSceneDescription = '';
 
@@ -85,12 +108,61 @@ describe('AddEditSceneDialogComponent', () => {
   });
 
   it ('should have the add button enabled when input is valid', () => {
+    component.editMode = false;
     component.newSceneHeader = 'Test';
     component.newSceneDescription = 'Test';
 
     fixture.detectChanges();
 
     expect(addButton.attributes['ng-reflect-disabled']).toBe('false');
+  });
+
+  it ('should have the edit button disabled when input is header and description are invalid', () => {
+    component.editMode = true;
+    component.newSceneHeader = '';
+    component.newSceneDescription = '';
+
+    fixture.detectChanges();
+
+    editButton = fixture.debugElement.query(By.css('#edit-scene-button'));
+
+    expect(editButton.attributes['ng-reflect-disabled']).toBe('true');
+  });
+
+  it ('should have the edit button disabled when header is invalid', () => {
+    component.editMode = true;
+    component.newSceneHeader = '';
+    component.newSceneDescription = 'Test';
+
+    fixture.detectChanges();
+
+    editButton = fixture.debugElement.query(By.css('#edit-scene-button'));
+
+    expect(editButton.attributes['ng-reflect-disabled']).toBe('true');
+  });
+
+  it ('should have the edit button disabled when description is invalid', () => {
+    component.editMode = true;
+    component.newSceneHeader = 'Test';
+    component.newSceneDescription = '';
+
+    fixture.detectChanges();
+
+    editButton = fixture.debugElement.query(By.css('#edit-scene-button'));
+
+    expect(editButton.attributes['ng-reflect-disabled']).toBe('true');
+  });
+
+  it ('should have the edit button enabled when input is valid', () => {
+    component.editMode = true;
+    component.newSceneHeader = 'Test';
+    component.newSceneDescription = 'Test';
+
+    fixture.detectChanges();
+
+    editButton = fixture.debugElement.query(By.css('#edit-scene-button'));
+
+    expect(editButton.attributes['ng-reflect-disabled']).toBe('false');
   });
 
   it ('should have a cancel button', () => {
@@ -136,5 +208,15 @@ describe('AddEditSceneDialogComponent', () => {
     component.addScene();
 
     expect(fakeSceneService.addSceneWithLink).toHaveBeenCalled();
+  });
+
+  it ('should call the SceneService EditScene method when a scene is edited', () => {
+    fakeSceneService.editScene = () => {};
+
+    spyOn(fakeSceneService, 'editScene');
+
+    component.editScene();
+
+    expect(fakeSceneService.editScene).toHaveBeenCalled();
   });
 });

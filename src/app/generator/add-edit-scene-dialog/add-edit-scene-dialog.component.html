@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Add Scene</h2>
+<h2 mat-dialog-title>{{editMode ? 'Edit Scene' : 'Add Scene'}}</h2>
 <div mat-dialog-content>
   <mat-form-field class="full-width">
     <input
@@ -19,6 +19,12 @@
       (click)="cancel()">Cancel</button>
   <button 
       id="add-scene-button"
+      *ngIf="!editMode"
       mat-raised-button color="accent" 
       (click)="addScene()" [disabled]="!inputIsValid()">Add Scene</button>
+  <button 
+      id="edit-scene-button"
+      *ngIf="editMode"
+      mat-raised-button color="accent" 
+      (click)="editScene()" [disabled]="!inputIsValid()">Edit Scene</button>
 </div>

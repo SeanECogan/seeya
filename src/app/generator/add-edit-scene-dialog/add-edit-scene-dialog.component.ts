@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SceneService } from '../scene/scene.service';
 
 import { AddLinkDialogComponent } from '../add-link-dialog/add-link-dialog.component';
+import { SceneModel } from '../../shared/models/scene-model';
 
 @Component({
   selector: 'seeya-add-edit-scene-dialog',
@@ -11,6 +12,10 @@ import { AddLinkDialogComponent } from '../add-link-dialog/add-link-dialog.compo
   styleUrls: ['./add-edit-scene-dialog.component.css']
 })
 export class AddEditSceneDialogComponent implements OnInit {
+  editMode: boolean;
+  editSceneId: number;
+  editedScene: SceneModel;
+
   newSceneHeader: string;
   newSceneDescription: string;
 
@@ -19,8 +24,16 @@ export class AddEditSceneDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
     private sceneService: SceneService) {
-      this.newSceneHeader = '';
-      this.newSceneDescription = '';
+      this.editMode = data.editMode;
+
+      if (this.editMode) {
+        this.editSceneId = data.sceneId;
+        this.newSceneHeader = data.sceneHeader;
+        this.newSceneDescription = data.sceneDescription;
+      } else {
+        this.newSceneHeader = '';
+        this.newSceneDescription = '';
+      }
   }
 
   ngOnInit() {
@@ -50,6 +63,11 @@ export class AddEditSceneDialogComponent implements OnInit {
         this.dialogRef.close();
       });
     }
+  }
+
+  editScene(): void {
+    this.sceneService.editScene(this.editSceneId, this.newSceneHeader, this.newSceneDescription);
+    this.dialogRef.close();
   }
 
   inputIsValid(): boolean {
