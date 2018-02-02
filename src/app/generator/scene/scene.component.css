@@ -6,7 +6,7 @@ mat-card {
 }
 
 mat-card-content {
-    word-break: break-all;
+    overflow-x: auto;
 }
 
 .mat-caption {
