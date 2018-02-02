@@ -6,14 +6,14 @@
     <div class="align-right spacing">
         <button 
             id="next-scene-button"
-            *ngIf="currentScene.link != null" 
+            *ngIf="currentScene.links.length > 0" 
             mat-raised-button 
-            (click)="loadNextScene(currentScene.link.toSceneId)">
-            {{currentScene.link.displayText}}
+            (click)="loadNextScene(currentScene.links[0].toSceneId)">
+            {{currentScene.links[0].displayText}}
         </button>
         <button 
             id="play-again-button"
-            *ngIf="currentScene.link === null" 
+            *ngIf="currentScene.links.length === 0" 
             mat-raised-button color="accent"
             (click)="restartGame()">
             Play Again

@@ -3,14 +3,33 @@
   <mat-form-field class="full-width">
     <input
       id="header-input"
-      matInput placeholder="Header" [(ngModel)]="newSceneHeader">
+      matInput placeholder="Header" [(ngModel)]="sceneHeader">
   </mat-form-field>
   <mat-form-field class="full-width">
     <textarea 
       id="description-textarea"
       matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8" 
-      placeholder="Description" [(ngModel)]="newSceneDescription"></textarea>
+      placeholder="Description" [(ngModel)]="sceneDescription"></textarea>
   </mat-form-field>
+  <div 
+    *ngIf="editMode"
+    id="links-section">
+    <h3 mat-dialog-title *ngIf="sceneLinks.length > 0">Links</h3>
+    <mat-list *ngIf="sceneLinks.length > 0">
+      <mat-list-item *ngFor="let link of sceneLinks">
+        <seeya-link
+          class="full-width link" [link]="link" 
+          (linkEditedEvent)="editLink($event)" 
+          (linkRemovedEvent)="removeLink($event)"></seeya-link>
+      </mat-list-item>
+    </mat-list>
+    <div class="align-right">
+      <button 
+        id="add-link-button"
+        mat-raised-button color="accent" 
+        (click)="addLink()">Add Link</button>
+    </div>
+  </div>
 </div>
 <div mat-dialog-actions class="align-right">
   <button 
@@ -26,5 +45,5 @@
       id="edit-scene-button"
       *ngIf="editMode"
       mat-raised-button color="accent" 
-      (click)="editScene()" [disabled]="!inputIsValid()">Edit Scene</button>
+      (click)="editScene()" [disabled]="!inputIsValid()">Save</button>
 </div>

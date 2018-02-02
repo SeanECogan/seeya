@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
 
 import { GeneratorModule } from '../generator.module';
 
@@ -15,14 +17,22 @@ describe('SceneComponent', () => {
   let component: SceneComponent;
   let fixture: ComponentFixture<SceneComponent>;
   let fakeSceneService: SceneService;
+  let fakeMatDialog: MatDialog;
   let cardTitle: DebugElement;
   let cardSubtitle: DebugElement;
   let cardContent: DebugElement;
+  let editButton: DebugElement;
+  let deleteButton: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ GeneratorModule ],
-      providers: [ { provide: SceneService, useValue: {} } ],
+      providers: [
+        { provide: SceneService, useValue: {} },
+        { provide: MatDialog, useValue: {
+          open: (a, b) => {}
+        }}
+      ],
       declarations: [ ]
     })
     .compileComponents();
@@ -36,16 +46,19 @@ describe('SceneComponent', () => {
       1,
       'Header',
       'Description',
-      null
+      new Array<LinkModel>()
     );
 
     fakeSceneService = TestBed.get(SceneService);
+    fakeMatDialog = TestBed.get(MatDialog);
 
     fixture.detectChanges();
 
     cardTitle = fixture.debugElement.query(By.css('#card-title'));
     cardSubtitle = fixture.debugElement.query(By.css('#card-subtitle'));
     cardContent = fixture.debugElement.query(By.css('#card-content'));
+    editButton = fixture.debugElement.query(By.css('#edit-button'));
+    deleteButton = fixture.debugElement.query(By.css('#delete-button'));
   });
 
   it('should create', () => {
@@ -60,12 +73,12 @@ describe('SceneComponent', () => {
     expect(cardSubtitle).toBeFalsy();
   });
 
-  it('should have a subtitle if there is a linked scene', () => {
-    component.scene.link = new LinkModel(
+  it('should have a subtitle if there is at least one linked scene', () => {
+    component.scene.links = [new LinkModel(
       1,
       2,
       'Test'
-    );
+    )];
 
     fixture.detectChanges();
 
@@ -76,12 +89,24 @@ describe('SceneComponent', () => {
     expect(cardContent.nativeElement.innerText).toBe('Description');
   });
 
+  it('should open the Add/Edit Scene Dialog when the Edit button is clicked', () => {
+    spyOn(fakeMatDialog, 'open').and.returnValue({
+      afterClosed: () => {
+        return new Observable<any>(() => {});
+      }
+    });
+
+    editButton.triggerEventHandler('click', null);
+
+    expect(fakeMatDialog.open).toHaveBeenCalled();
+  });
+
   it('should call the scene service delete method when the delete icon button is clicked', () => {
     fakeSceneService.deleteScene = () => {};
 
     spyOn(fakeSceneService, 'deleteScene');
 
-    component.deleteScene();
+    deleteButton.triggerEventHandler('click', null);
 
     expect(fakeSceneService.deleteScene).toHaveBeenCalled();
   });

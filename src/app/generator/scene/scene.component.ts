@@ -6,6 +6,7 @@ import { SceneService } from './scene.service';
 import { AddEditSceneDialogComponent } from '../add-edit-scene-dialog/add-edit-scene-dialog.component';
 
 import { SceneModel } from '../../shared/models/scene-model';
+import { LinkModel } from '../../shared/models/link-model';
 
 @Component({
   selector: 'seeya-scene',
@@ -23,20 +24,34 @@ export class SceneComponent implements OnInit {
   ngOnInit() {
   }
 
-  editScene() {
+  getLinkedSceneIds(): string {
+    return this.scene.links.map(link => link.toSceneId).join(', ');
+  }
+
+  editScene(): void {
     this.dialog.open(AddEditSceneDialogComponent, {
       width: '600px',
       disableClose: true,
       data: {
         editMode: true,
-        sceneId: this.scene.id,
-        sceneHeader: this.scene.header,
-        sceneDescription: this.scene.description
+        // Dirty manual deep copy.
+        scene: new SceneModel(
+          this.scene.id,
+          this.scene.header,
+          this.scene.description,
+          this.scene.links.map(link => {
+            return new LinkModel(
+              link.fromSceneId,
+              link.toSceneId,
+              link.displayText
+            );
+          })
+        )
       }
     });
   }
 
-  deleteScene() {
+  deleteScene(): void {
     this.sceneService.deleteScene(this.scene.id);
   }
 }

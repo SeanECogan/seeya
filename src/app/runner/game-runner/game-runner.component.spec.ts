@@ -76,7 +76,7 @@ describe('GameRunnerComponent', () => {
 
   it('should display the game container if the current scene is not null', () => {
     fakeSceneService.getCurrentScene = () => {
-      return new SceneModel(1, 'Test', 'Test', null);
+      return new SceneModel(1, 'Test', 'Test', new Array<LinkModel>());
     };
 
     fixture.detectChanges();
@@ -88,7 +88,7 @@ describe('GameRunnerComponent', () => {
 
   it('should have a current scene if the service returns a current scene', () => {
     fakeSceneService.getCurrentScene = () => {
-      return new SceneModel(1, 'Test', 'Test', null);
+      return new SceneModel(1, 'Test', 'Test', new Array<LinkModel>());
     };
 
     fixture.detectChanges();
@@ -98,7 +98,7 @@ describe('GameRunnerComponent', () => {
 
   it('should have a play again button if the scene has no linked scene', () => {
     fakeSceneService.getCurrentScene = () => {
-      return new SceneModel(1, 'Test', 'Test', null);
+      return new SceneModel(1, 'Test', 'Test', new Array<LinkModel>());
     };
 
     fixture.detectChanges();
@@ -111,7 +111,11 @@ describe('GameRunnerComponent', () => {
 
   it('should have a next scene button if the scene has a linked scene', () => {
     fakeSceneService.getCurrentScene = () => {
-      return new SceneModel(1, 'Test', 'Test', new LinkModel(1, 2, 'Display'));
+      return new SceneModel(
+        1,
+        'Test',
+        'Test',
+        [ new LinkModel(1, 2, 'Display') ]);
     };
 
     fixture.detectChanges();
@@ -131,22 +135,29 @@ describe('GameRunnerComponent', () => {
     fakeSceneService.getCurrentScene = tempSceneService.getCurrentScene;
     fakeSceneService.loadNextScene = tempSceneService.loadNextScene;
 
-    // Import the test export from the Generator test.
-    /* tslint:disable:max-line-length */
-    fakeSceneService.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6NiwiZGlzcGxheVRleHQiOiJEaXNwbGF5In19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0=');
-    /* tslint:enable:max-line-length */
+    fakeSceneService['initialSceneId'] = 5;
+    fakeSceneService['scenes'] = [
+      new SceneModel(
+        5,
+        'Header',
+        'Description',
+        [
+          new LinkModel(5, 6, 'Test')
+        ]
+      ),
+      new SceneModel(
+        6,
+        'Header2',
+        'Description2',
+        new Array<LinkModel>()
+      )
+    ];
 
     // Start the game.
     fakeSceneService.startGame();
 
     // First scene should be 5/Header/Description/Link to 6.
     const firstScene = component.currentScene;
-
-    expect(firstScene.id).toBe(5);
-    expect(firstScene.header).toBe('Header');
-    expect(firstScene.description).toBe('Description');
-    expect(firstScene.link.fromSceneId).toBe(5);
-    expect(firstScene.link.toSceneId).toBe(6);
 
     fixture.detectChanges();
 
@@ -161,7 +172,6 @@ describe('GameRunnerComponent', () => {
     expect(nextScene.id).toBe(6);
     expect(nextScene.header).toBe('Header2');
     expect(nextScene.description).toBe('Description2');
-    expect(nextScene.link).toBeNull();
   });
 
   it('should re-load the first scene if the next scene button is clicked', () => {
@@ -173,10 +183,23 @@ describe('GameRunnerComponent', () => {
     fakeSceneService.getCurrentScene = tempSceneService.getCurrentScene;
     fakeSceneService.loadNextScene = tempSceneService.loadNextScene;
 
-    // Import the test export from the Generator test.
-    /* tslint:disable:max-line-length */
-    fakeSceneService.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6NiwiZGlzcGxheVRleHQiOiJEaXNwbGF5In19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0=');
-    /* tslint:enable:max-line-length */
+    fakeSceneService['initialSceneId'] = 5;
+    fakeSceneService['scenes'] = [
+      new SceneModel(
+        5,
+        'Header',
+        'Description',
+        [
+          new LinkModel(5, 6, 'Test')
+        ]
+      ),
+      new SceneModel(
+        6,
+        'Header2',
+        'Description2',
+        new Array<LinkModel>()
+      )
+    ];
 
     // Start the game.
     fakeSceneService.startGame();
@@ -201,7 +224,5 @@ describe('GameRunnerComponent', () => {
     expect(currentScene.id).toBe(5);
     expect(currentScene.header).toBe('Header');
     expect(currentScene.description).toBe('Description');
-    expect(currentScene.link.fromSceneId).toBe(5);
-    expect(currentScene.link.toSceneId).toBe(6);
   });
 });

@@ -48,6 +48,6 @@ export class SceneService {
   }
 
   gameIsFinished(): boolean {
-    return this.currentScene !== null && this.currentScene.link === null;
+    return this.currentScene !== null && this.currentScene.links.length === 0;
   }
 }

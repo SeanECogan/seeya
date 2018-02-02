@@ -9,6 +9,7 @@ import { SceneService } from '../generator/scene/scene.service';
 import { GeneratorComponent } from './generator.component';
 
 import { SceneModel } from '../shared/models/scene-model';
+import { LinkModel } from '../shared/models/link-model';
 
 describe('GeneratorComponent', () => {
   let component: GeneratorComponent;
@@ -41,7 +42,6 @@ describe('GeneratorComponent', () => {
   });
 
   it('should not show any scenes if no scenes are returned by the service', () => {
-    // Setup mock SceneService.
     fakeSceneService.getScenes = () => [];
 
     const scenes = component.getScenes();
@@ -53,7 +53,7 @@ describe('GeneratorComponent', () => {
     // Setup mock SceneService.
     fakeSceneService.getScenes = () => {
       return [
-        new SceneModel(1, 'Test', 'Test', null)
+        new SceneModel(1, 'Test', 'Test', new Array<LinkModel>())
       ];
     };
 
@@ -63,6 +63,6 @@ describe('GeneratorComponent', () => {
     expect(scenes[0].id).toBe(1);
     expect(scenes[0].header).toBe('Test');
     expect(scenes[0].description).toBe('Test');
-    expect(scenes[0].link).toBe(null);
+    expect(scenes[0].links.length).toBe(0);
   });
 });

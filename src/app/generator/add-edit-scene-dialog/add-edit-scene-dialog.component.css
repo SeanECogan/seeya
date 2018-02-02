@@ -1,3 +1,15 @@
+h3 {
+    margin-bottom: 0px;
+}
+
+mat-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 0px;
+    border: 1px solid #DADADA;
+    margin-bottom: 15px;
+}
+
 .form {
     margin-top: 15px;
 }

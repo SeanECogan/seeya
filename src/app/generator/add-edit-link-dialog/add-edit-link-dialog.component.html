@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{editMode ? "Edit Link" : "Add Link"}}</h2>
+<div mat-dialog-content>
+  <mat-form-field 
+    *ngIf="!editMode"
+    id="scene-select">
+    <mat-select placeholder="Scene to Link to" [(ngModel)]="toSceneId" name="scene" cdkFocusInitial>
+      <mat-option *ngFor="let scene of getUnlinkedScenes()" [value]="scene.id">
+        {{scene.header}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput [(ngModel)]="displayText" placeholder="Display Text">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="align-right">
+  <button 
+    id="cancel-button"
+    mat-raised-button
+    (click)="cancel()">Cancel</button>
+  <button 
+    id="save-button" color="accent" 
+    mat-raised-button [mat-dialog-close]="lf.createLink(fromSceneId, toSceneId, displayText)" 
+    [disabled]="!inputIsValid()">{{editMode ? "Save" : "Add Link"}}</button>
+</div>

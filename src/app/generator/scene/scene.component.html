@@ -3,13 +3,17 @@
     <mat-card-title id="card-title">
       Scene #{{scene.id}}: {{scene.header}}
     </mat-card-title>
-    <mat-card-subtitle id="card-subtitle" *ngIf="scene.link != null">
-      Linked to Scene #{{scene.link.toSceneId}}
+    <mat-card-subtitle id="card-subtitle" *ngIf="scene.links.length > 0">
+      Linked to Scene(s) {{getLinkedSceneIds()}}
     </mat-card-subtitle>
     <div class="top-right">
-      <mat-icon class="interactive" aria-label="Edit button"
+      <mat-icon 
+        id="edit-button"
+        class="interactive" aria-label="Edit button"
         (click)="editScene()">edit</mat-icon>
-      <mat-icon class="interactive" aria-label="Delete button"
+      <mat-icon 
+        id="delete-button"
+        class="interactive" aria-label="Delete button"
         (click)="deleteScene()">delete</mat-icon>
     </div>
   </mat-card-title-group>

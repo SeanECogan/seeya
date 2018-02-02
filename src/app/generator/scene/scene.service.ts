@@ -5,8 +5,9 @@ import { GameFactory } from '../../shared/factories/game-factory';
 import { SceneFactory } from '../../shared/factories/scene-factory';
 import { LinkFactory } from '../../shared/factories/link-factory';
 
-import { SceneModel } from '../../shared/models/scene-model';
 import { GameModel } from '../../shared/models/game-model';
+import { SceneModel } from '../../shared/models/scene-model';
+import { LinkModel } from '../../shared/models/link-model';
 
 @Injectable()
 export class SceneService {
@@ -34,52 +35,27 @@ export class SceneService {
 
   addScene(
     header: string,
-    description: string
-  ): void {
-    this.addNewScene(header, description);
-  }
-
-  addSceneWithLink(
-    header: string,
     description: string,
-    linkDisplayText: string
-  ) {
-    // Get the index of the latest scene.
-    const currentLatestIndex = this.scenes.length - 1;
-
-    const fromSceneId = this.scenes[currentLatestIndex].id;
-
-    this.addNewScene(header, description);
-
-    // Get the index of the new latest scene.
-    const newLatestIndex = this.scenes.length - 1;
-
-    const toSceneId = this.scenes[newLatestIndex].id;
-
-    // Create new Link between these scenes.
-    const link = this.lf.createLink(
-      fromSceneId,
-      toSceneId,
-      linkDisplayText
-    );
-
-    // Update previously last scene with link to new last scene.
-    this.scenes[currentLatestIndex] = this.sf.createSceneWithLink(
-      this.scenes[currentLatestIndex],
-      link
-    );
+    links: LinkModel[]
+  ): void {
+    this.addNewScene(
+      header,
+      description,
+      links);
   }
 
   editScene(
     sceneId: number,
     header: string,
-    description: string
-  ) {
+    description: string,
+    links: LinkModel[]
+  ): void {
     const sceneToEdit = this.scenes.filter(scene => scene.id === sceneId)[0];
 
     if (sceneToEdit) {
       sceneToEdit.header = header;
       sceneToEdit.description = description;
+      sceneToEdit.links = links;
     }
   }
 
@@ -87,24 +63,17 @@ export class SceneService {
     const sceneToDelete = this.scenes.filter(scene => scene.id === sceneId)[0];
 
     if (sceneToDelete) {
-      // Check to see if we must update the previous Scene that was connected to
-      // this one.
-      const sceneToUpdate = this.scenes.filter(scene => {
-        return scene.link !== null &&
-          scene.link.toSceneId === sceneToDelete.id;
-      })[0];
+      // Remove any Links that previously linked to this scene.
+      const scenesToUpdate = this.scenes.filter(scene => {
+        return scene.links.some(link => {
+          return link.toSceneId === sceneToDelete.id;
+        });
+      });
 
-      if (sceneToUpdate) {
-        if (sceneToDelete.link !== null) {
-          // If this Scene was linked to another Scene, the Scene that is linked to
-          // this Scene should now be linked to that one.
-          sceneToUpdate.link.toSceneId = sceneToDelete.link.toSceneId;
-          sceneToUpdate.link.displayText = sceneToDelete.link.displayText;
-        } else {
-          // Otherwise, the Scene that was linked to this Scene should no longer be
-          // linked to any Scene.
-          sceneToUpdate.link = null;
-        }
+      for (const sceneToUpdate of scenesToUpdate) {
+        sceneToUpdate.links = sceneToUpdate.links.filter(link => {
+          return link.toSceneId !== sceneToDelete.id;
+        });
       }
 
       const sceneToDeleteIndex = this.scenes.indexOf(sceneToDelete);
@@ -133,12 +102,22 @@ export class SceneService {
 
   private addNewScene(
     header: string,
-    description: string
+    description: string,
+    links: LinkModel[]
   ): void {
+    // Find next Scene ID.
+    let currentMax = 0;
+
+    if (this.scenes.length > 0) {
+      currentMax = Math.max(...(this.scenes.map(scene => scene.id)));
+    }
+
     this.scenes.push(
-      this.sf.createSceneWithoutLink(
+      this.sf.createScene(
+        currentMax + 1,
         header,
-        description
+        description,
+        links
       )
     );
   }

@@ -6,16 +6,21 @@ import { MatDialog } from '@angular/material';
 import { GeneratorModule } from '../generator.module';
 
 import { AddSceneComponent } from './add-scene.component';
+import { Observable } from 'rxjs/Observable';
 
 describe('AddSceneComponent', () => {
   let component: AddSceneComponent;
   let fixture: ComponentFixture<AddSceneComponent>;
+  let fakeMatDialog: MatDialog;
   let addButton: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ GeneratorModule ],
-      declarations: [ ]
+      declarations: [ ],
+      providers: [ { provide: MatDialog, useValue: {
+        open: (a, b) => {}
+      }}]
     })
     .compileComponents();
   }));
@@ -23,6 +28,8 @@ describe('AddSceneComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AddSceneComponent);
     component = fixture.componentInstance;
+
+    fakeMatDialog = TestBed.get(MatDialog);
 
     fixture.detectChanges();
 
@@ -35,5 +42,17 @@ describe('AddSceneComponent', () => {
 
   it ('should have an add button', () => {
     expect(addButton).toBeTruthy();
+  });
+
+  it ('should open the Add/Edit Scene dialog after the Add Scene button is clicked', () => {
+    spyOn(fakeMatDialog, 'open').and.returnValue({
+      afterClosed: () => {
+        return new Observable<any>(() => {});
+      }
+    });
+
+    addButton.triggerEventHandler('click', null);
+
+    expect(fakeMatDialog.open).toHaveBeenCalled();
   });
 });
