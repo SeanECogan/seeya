@@ -1,22 +1,23 @@
-<div
-    id="game-container"
-    *ngIf="currentScene != null">
-    <seeya-scene [scene]="currentScene"></seeya-scene>
+<div id="game-container" *ngIf="currentScene != null">
+  <seeya-scene [scene]="currentScene"></seeya-scene>
 
-    <div class="align-right spacing">
-        <button 
-            id="next-scene-button"
-            *ngIf="currentScene.links.length > 0" 
-            mat-raised-button 
-            (click)="loadNextScene(currentScene.links[0].toSceneId)">
-            {{currentScene.links[0].displayText}}
-        </button>
-        <button 
-            id="play-again-button"
-            *ngIf="currentScene.links.length === 0" 
-            mat-raised-button color="accent"
-            (click)="restartGame()">
-            Play Again
-        </button>
-    </div>
+  <div class="align-right spacing">
+    <span
+      *ngIf="currentScene.links.length > 0">
+      <button
+        *ngFor="let link of currentScene.links"
+        class="next-scene-button"
+        mat-raised-button
+        (click)="loadNextScene(link.toSceneId)">
+        {{link.displayText}}
+      </button>
+    </span>
+    <button
+      id="play-again-button"
+      *ngIf="currentScene.links.length === 0"
+      mat-raised-button color="accent"
+      (click)="restartGame()">
+      Play Again
+    </button>
+  </div>
 </div>

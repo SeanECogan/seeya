@@ -16,7 +16,7 @@ describe('GameRunnerComponent', () => {
   let fixture: ComponentFixture<GameRunnerComponent>;
   let fakeSceneService: SceneService;
   let gameContainer: DebugElement;
-  let nextSceneButton: DebugElement;
+  let nextSceneButtons: DebugElement[];
   let playAgainButton: DebugElement;
 
   beforeEach(async(() => {
@@ -39,7 +39,7 @@ describe('GameRunnerComponent', () => {
     fixture.detectChanges();
 
     gameContainer = fixture.debugElement.query(By.css('#game-container'));
-    nextSceneButton = fixture.debugElement.query(By.css('#next-scene-button'));
+    nextSceneButtons = fixture.debugElement.queryAll(By.css('.next-scene-button'));
     playAgainButton = fixture.debugElement.query(By.css('#play-again-button'));
   });
 
@@ -70,7 +70,7 @@ describe('GameRunnerComponent', () => {
 
     fixture.detectChanges();
 
-    expect(nextSceneButton).toBeNull();
+    expect(nextSceneButtons.length).toBe(0);
     expect(playAgainButton).toBeNull();
   });
 
@@ -120,10 +120,10 @@ describe('GameRunnerComponent', () => {
 
     fixture.detectChanges();
 
-    nextSceneButton = fixture.debugElement.query(By.css('#next-scene-button'));
+    nextSceneButtons = fixture.debugElement.queryAll(By.css('.next-scene-button'));
 
-    expect(nextSceneButton).toBeTruthy();
-    expect(nextSceneButton.nativeElement.innerText).toBe('Display');
+    expect(nextSceneButtons.length).toBe(1);
+    expect(nextSceneButtons[0].nativeElement.innerText).toBe('Display');
   });
 
   it('should load the next scene if the next scene button is clicked', () => {
@@ -162,9 +162,9 @@ describe('GameRunnerComponent', () => {
     fixture.detectChanges();
 
     // Must re-query for the nextSceneButton because it didn't exist by default.
-    nextSceneButton = fixture.debugElement.query(By.css('#next-scene-button'));
+    nextSceneButtons = fixture.debugElement.queryAll(By.css('.next-scene-button'));
 
-    nextSceneButton.triggerEventHandler('click', null);
+    nextSceneButtons[0].triggerEventHandler('click', null);
 
     // Next scene should be 6/Header2/Description2/null.
     const nextScene = component.currentScene;
@@ -207,9 +207,9 @@ describe('GameRunnerComponent', () => {
     fixture.detectChanges();
 
     // Must re-query for the nextSceneButton because it didn't exist by default.
-    nextSceneButton = fixture.debugElement.query(By.css('#next-scene-button'));
+    nextSceneButtons = fixture.debugElement.queryAll(By.css('.next-scene-button'));
 
-    nextSceneButton.triggerEventHandler('click', null);
+    nextSceneButtons[0].triggerEventHandler('click', null);
 
     fixture.detectChanges();
 

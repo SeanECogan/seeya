@@ -5,3 +5,11 @@
 .spacing {
     margin-top: 50px;
 }
+
+.next-scene-button {
+  margin-top: 15px;
+}
+
+.next-scene-button:not(:first-child) {
+  margin-left: 15px;
+}
