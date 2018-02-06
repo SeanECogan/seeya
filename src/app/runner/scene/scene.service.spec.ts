@@ -29,6 +29,15 @@ describe('SceneService', () => {
       /* tsline:enable:max-line-length */
     }));
 
+  it('should not throw an error when importing a valid game string, even if the string translates to Unicode',
+    inject([SceneService], (service: SceneService) => {
+
+      /* tslint:disable:max-line-length */
+      expect(() => service.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImRlc2NyaXB0aW9uIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6NSwidG9TY2VuZUlkIjo2LCJkaXNwbGF5VGV4dCI6IkRpc3BsYXkifV19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmtzIjpudWxsfV19'))
+        .not.toThrowError();
+      /* tsline:enable:max-line-length */
+    }));
+
   it('should return null for current scene before game is started',
     inject([SceneService], (service: SceneService) => {
       expect(service.getCurrentScene()).toBeNull();
