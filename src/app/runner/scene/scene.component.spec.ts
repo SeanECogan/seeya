@@ -42,6 +42,6 @@ describe('SceneComponent', () => {
   });
 
   it('should display the scene description in the body', () => {
-    expect(body.nativeElement.innerText).toBeTruthy('Description');
+    expect(body.nativeElement.innerText).toBe('Description');
   });
 });

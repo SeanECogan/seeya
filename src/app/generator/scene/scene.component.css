@@ -9,6 +9,10 @@ mat-card-content {
     overflow-x: auto;
 }
 
+#card-content p {
+    white-space: pre-line;
+}
+
 .mat-caption {
     text-align: center;
 }
