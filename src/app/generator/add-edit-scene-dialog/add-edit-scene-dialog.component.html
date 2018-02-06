@@ -1,4 +1,16 @@
-<h2 mat-dialog-title>{{editMode ? 'Edit Scene' : 'Add Scene'}}</h2>
+<div>
+  <h2 mat-dialog-title style="float: left;">
+  {{editMode ? 'Edit Scene' : 'Add Scene'}}
+  </h2>
+  <h2 mat-dialog-title style="float: right;">
+    <button 
+      id="set-as-start-scene-button"
+      *ngIf="editMode"
+      mat-raised-button color="accent" 
+      (click)="setAsStartScene()" [disabled]="!inputIsValid() || isCurrentStartScene()">Set as Start Scene</button>
+  </h2>
+  <br style="clear: both;" />
+</div>
 <div mat-dialog-content>
   <mat-form-field class="full-width">
     <input
@@ -23,7 +35,7 @@
           (linkRemovedEvent)="removeLink($event)"></seeya-link>
       </mat-list-item>
     </mat-list>
-    <div class="align-right">
+    <div class="align-right small-spacing">
       <button 
         id="add-link-button"
         mat-raised-button color="accent" 
@@ -33,17 +45,17 @@
 </div>
 <div mat-dialog-actions class="align-right">
   <button 
-      id="cancel-button"
-      mat-raised-button
-      (click)="cancel()">Cancel</button>
+    id="cancel-button"
+    mat-raised-button
+    (click)="cancel()">Cancel</button>
   <button 
-      id="add-scene-button"
-      *ngIf="!editMode"
-      mat-raised-button color="accent" 
-      (click)="addScene()" [disabled]="!inputIsValid()">Add Scene</button>
+    id="add-scene-button"
+    *ngIf="!editMode"
+    mat-raised-button color="accent" 
+    (click)="addScene()" [disabled]="!inputIsValid()">Add Scene</button>
   <button 
-      id="edit-scene-button"
-      *ngIf="editMode"
-      mat-raised-button color="accent" 
-      (click)="editScene()" [disabled]="!inputIsValid()">Save</button>
+    id="edit-scene-button"
+    *ngIf="editMode"
+    mat-raised-button color="accent" 
+    (click)="editScene()" [disabled]="!inputIsValid()">Save</button>
 </div>

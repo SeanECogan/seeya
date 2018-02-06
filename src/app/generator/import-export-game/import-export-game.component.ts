@@ -24,6 +24,12 @@ export class ImportExportGameComponent implements OnInit {
     return this.sceneService.getNumberOfScenes() > 0;
   }
 
+  gameHasStartScene(): boolean {
+    const scenes = this.sceneService.getScenes();
+
+    return scenes.some(s => s.id === this.sceneService.getInitialSceneId());
+  }
+
   importGame(): void {
     this.dialog.open(ImportGameDialogComponent, {
       width: '440px'

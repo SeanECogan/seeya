@@ -4,5 +4,5 @@
     (click)="importGame()">Import Existing Game</button>
   <button mat-raised-button color="accent" 
     id="export-button"
-    (click)="exportGame()" [disabled]="!gameHasAnyScenes()">Export Game</button>
+    (click)="exportGame()" [disabled]="!gameHasAnyScenes() || !gameHasStartScene()">Export Game</button>
 </div>

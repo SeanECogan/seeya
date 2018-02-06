@@ -15,6 +15,7 @@ export class SceneService {
   private sf: SceneFactory;
   private lf: LinkFactory;
 
+  private initialSceneId: number;
   private scenes: SceneModel[];
 
   constructor() {
@@ -22,7 +23,16 @@ export class SceneService {
     this.sf = new SceneFactory();
     this.lf = new LinkFactory();
 
+    this.initialSceneId = -1;
     this.scenes = new Array<SceneModel>();
+  }
+
+  getInitialSceneId(): number {
+    return this.initialSceneId;
+  }
+
+  setInitialSceneId(newInitialSceneId: number): void {
+    this.initialSceneId = newInitialSceneId;
   }
 
   getScenes(): SceneModel[] {
@@ -42,6 +52,11 @@ export class SceneService {
       header,
       description,
       links);
+
+    // Initialize the Initial Scene ID if one isn't set yet.
+    if (this.initialSceneId < 0) {
+      this.initialSceneId = Math.min(...this.scenes.map(s => s.id));
+    }
   }
 
   editScene(
@@ -83,7 +98,9 @@ export class SceneService {
   }
 
   exportGame(): string {
-    const game = this.gf.createGame(this.scenes);
+    const game = this.gf.createGame(
+      this.initialSceneId,
+      this.scenes);
 
     const gameJsonString = JSON.stringify(game);
 

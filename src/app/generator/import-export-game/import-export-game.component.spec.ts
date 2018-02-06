@@ -8,6 +8,9 @@ import { SceneService } from '../scene/scene.service';
 
 import { ImportExportGameComponent } from './import-export-game.component';
 
+import { SceneModel } from '../../shared/models/scene-model';
+import { LinkModel } from '../../shared/models/link-model';
+
 describe('ImportExportGameComponent', () => {
   let component: ImportExportGameComponent;
   let fixture: ComponentFixture<ImportExportGameComponent>;
@@ -47,16 +50,44 @@ describe('ImportExportGameComponent', () => {
     expect(importButton).toBeTruthy();
   });
 
-  it('should have the Export button disabled if there are no scenes', () => {
+  it('should have the Export button disabled if there are no scenes and the game does not have a start scene', () => {
     fakeSceneService.getNumberOfScenes = () => 0;
+    fakeSceneService.getInitialSceneId = () => -1;
+    fakeSceneService.getScenes = () => [];
 
     fixture.detectChanges();
 
     expect(exportButton.attributes['ng-reflect-disabled']).toBe('true');
   });
 
-  it('should have the Export button enabled if there is at least one scene', () => {
+  it('should have the Export button disabled if there are no scenes and the game does have a start scene', () => {
+    fakeSceneService.getNumberOfScenes = () => 0;
+    fakeSceneService.getInitialSceneId = () => 1;
+    fakeSceneService.getScenes = () => [];
+
+    fixture.detectChanges();
+
+    expect(exportButton.attributes['ng-reflect-disabled']).toBe('true');
+  });
+
+  it('should have the Export button disabled if there are scenes and the game does not have a start scene', () => {
     fakeSceneService.getNumberOfScenes = () => 1;
+    fakeSceneService.getInitialSceneId = () => -1;
+    fakeSceneService.getScenes = () => [
+      new SceneModel(1, 'Test', 'Test', new Array<LinkModel>())
+    ];
+
+    fixture.detectChanges();
+
+    expect(exportButton.attributes['ng-reflect-disabled']).toBe('true');
+  });
+
+  it('should have the Export button enabled if there is at least one scene and the game has a start scene', () => {
+    fakeSceneService.getNumberOfScenes = () => 1;
+    fakeSceneService.getInitialSceneId = () => 1;
+    fakeSceneService.getScenes = () => [
+      new SceneModel(1, 'Test', 'Test', new Array<LinkModel>())
+    ];
 
     fixture.detectChanges();
 

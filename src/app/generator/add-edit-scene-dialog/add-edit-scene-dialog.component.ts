@@ -69,6 +69,14 @@ export class AddEditSceneDialogComponent implements OnInit {
     return this.sceneHeader !== '' && this.sceneDescription !== '';
   }
 
+  setAsStartScene(): void {
+    this.sceneService.setInitialSceneId(this.editSceneId);
+  }
+
+  isCurrentStartScene(): boolean {
+    return this.editSceneId === this.sceneService.getInitialSceneId();
+  }
+
   addLink(): void {
     const dialogRef = this.dialog.open(AddEditLinkDialogComponent, {
       width: '440px',

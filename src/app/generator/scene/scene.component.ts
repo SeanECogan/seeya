@@ -24,6 +24,10 @@ export class SceneComponent implements OnInit {
   ngOnInit() {
   }
 
+  isStartScene(): boolean {
+    return this.scene.id === this.sceneService.getInitialSceneId();
+  }
+
   getLinkedSceneIds(): string {
     return this.scene.links.map(link => link.toSceneId).join(', ');
   }

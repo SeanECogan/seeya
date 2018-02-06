@@ -13,6 +13,10 @@ mat-card-content {
     white-space: pre-line;
 }
 
+.start-scene {
+    background-color: #DDF0DE;
+}
+
 .mat-caption {
     text-align: center;
 }

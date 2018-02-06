@@ -22,3 +22,17 @@ mat-list {
     text-align: right;
     display: block;
 }
+
+.small-spacing {
+    padding-bottom: 5px;
+}
+
+.half-width-left {
+    width: 50%;
+    text-align: left;
+}
+
+.half-width-right {
+    width: 50%;
+    text-align: right;
+}
