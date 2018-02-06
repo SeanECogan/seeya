@@ -1,12 +1,19 @@
-<mat-card>
+<mat-card
+  id="card"
+  [ngClass]="{'start-scene': isStartScene()}">
   <mat-card-title-group>
     <mat-card-title id="card-title">
       Scene #{{scene.id}}: {{scene.header}}
     </mat-card-title>
     <mat-card-subtitle id="card-subtitle" *ngIf="scene.links.length > 0">
+      <p></p>
       Linked to Scene(s) {{getLinkedSceneIds()}}
     </mat-card-subtitle>
     <div class="top-right">
+      <mat-icon 
+        id="star-icon" 
+        *ngIf="isStartScene()"
+        aria-label="Start icon" title="Start Scene">star</mat-icon>
       <mat-icon 
         id="edit-button"
         class="interactive" aria-label="Edit button"

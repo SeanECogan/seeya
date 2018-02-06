@@ -15,9 +15,26 @@ describe('SceneService', () => {
     });
   });
 
-  it('should be created', inject([SceneService], (service: SceneService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created',
+    inject([SceneService], (service: SceneService) => {
+      expect(service).toBeTruthy();
+    }));
+
+  it('should return the initialSceneId from getInitialSceneId',
+    inject([SceneService], (service: SceneService) => {
+      service['initialSceneId'] = 1;
+
+      expect(service.getInitialSceneId()).toBe(1);
+    }));
+
+  it('should set the initialSceneId from setInitialSceneId',
+    inject([SceneService], (service: SceneService) => {
+      service['initialSceneId'] = 1;
+
+      service.setInitialSceneId(2);
+
+      expect(service['initialSceneId']).toBe(2);
+    }));
 
   it('should return no scenes before any scenes are added',
     inject([SceneService], (service: SceneService) => {
@@ -165,13 +182,14 @@ describe('SceneService', () => {
           [new LinkModel(5, 6, 'Display')]),
         new SceneModel(6, 'Header2', 'Description2', null)
       ];
+      service['initialSceneId'] = 5;
 
       /* tslint:disable:max-line-length */
       expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6NSwidG9TY2VuZUlkIjo2LCJkaXNwbGF5VGV4dCI6IkRpc3BsYXkifV19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmtzIjpudWxsfV19');
       /* tslint:enable:max-line-length */
     }));
 
-    it('should export the scenes to a base64-encoded string, even if the Scenes contain Unicode',
+  it('should export the scenes to a base64-encoded string, even if the Scenes contain Unicode',
     inject([SceneService], (service: SceneService) => {
 
       service['scenes'] = [
@@ -182,6 +200,7 @@ describe('SceneService', () => {
           [new LinkModel(5, 6, 'Display')]),
         new SceneModel(6, 'Header2', 'Description2', null)
       ];
+      service['initialSceneId'] = 5;
 
       /* tslint:disable:max-line-length */
       expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImRlc2NyaXB0aW9uIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6NSwidG9TY2VuZUlkIjo2LCJkaXNwbGF5VGV4dCI6IkRpc3BsYXkifV19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmtzIjpudWxsfV19');
@@ -202,7 +221,7 @@ describe('SceneService', () => {
       /* tsline:enable:max-line-length */
     }));
 
-    it('should not throw an error when importing a valid game string, even if the string translates to Unicode',
+  it('should not throw an error when importing a valid game string, even if the string translates to Unicode',
     inject([SceneService], (service: SceneService) => {
 
       /* tslint:disable:max-line-length */

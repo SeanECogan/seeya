@@ -17,6 +17,7 @@ describe('AddEditSceneDialogComponent', () => {
   let fakeSceneService: SceneService;
   let fakeMatDialog: MatDialog;
   let header: DebugElement;
+  let setAsStartSceneButton: DebugElement;
   let addButton: DebugElement;
   let editButton: DebugElement;
   let cancelButton: DebugElement;
@@ -30,7 +31,9 @@ describe('AddEditSceneDialogComponent', () => {
       imports: [ GeneratorModule ],
       declarations: [ ],
       providers: [
-        { provide: SceneService, useValue: {} },
+        { provide: SceneService, useValue: {
+          getInitialSceneId: () => -1
+        } },
         { provide: MatDialog, useValue: {
           open: (a, b) => {}
         }},
@@ -53,6 +56,7 @@ describe('AddEditSceneDialogComponent', () => {
     fixture.detectChanges();
 
     header = fixture.debugElement.query(By.css('h2'));
+    setAsStartSceneButton = fixture.debugElement.query(By.css('#set-as-start-scene-button'));
     addButton = fixture.debugElement.query(By.css('#add-scene-button'));
     editButton = fixture.debugElement.query(By.css('#edit-scene-button'));
     cancelButton = fixture.debugElement.query(By.css('#cancel-button'));
@@ -80,6 +84,69 @@ describe('AddEditSceneDialogComponent', () => {
     fixture.detectChanges();
 
     expect(header.nativeElement.innerText).toBe('Edit Scene');
+  });
+
+  it ('should not have the Set as Start Scene button when not in Edit Mode', () => {
+    component.editMode = false;
+
+    fixture.detectChanges();
+
+    setAsStartSceneButton = fixture.debugElement.query(By.css('#set-as-start-scene-button'));
+
+    expect(setAsStartSceneButton).toBeFalsy();
+  });
+
+  it ('should have the Set as Start Scene button when in Edit Mode', () => {
+    component.editMode = true;
+
+    fixture.detectChanges();
+
+    setAsStartSceneButton = fixture.debugElement.query(By.css('#set-as-start-scene-button'));
+
+    expect(setAsStartSceneButton).toBeTruthy();
+  });
+
+  it ('should have the Set as Start Scene button disabled when the current Scene is the Start Scene', () => {
+    component.editMode = true;
+    component.editSceneId = 1;
+
+    fakeSceneService.getInitialSceneId = () => 1;
+
+    fixture.detectChanges();
+
+    setAsStartSceneButton = fixture.debugElement.query(By.css('#set-as-start-scene-button'));
+
+    expect(setAsStartSceneButton.attributes['ng-reflect-disabled']).toBe('true');
+  });
+
+  it ('should have the Set as Start Scene button enabled when the current Scene is not the Start Scene', () => {
+    component.editMode = true;
+    component.editSceneId = 1;
+
+    fakeSceneService.getInitialSceneId = () => 2;
+
+    fixture.detectChanges();
+
+    setAsStartSceneButton = fixture.debugElement.query(By.css('#set-as-start-scene-button'));
+
+    expect(setAsStartSceneButton.attributes['ng-reflect-disabled']).toBe('true');
+  });
+
+  it ('should call the Scene Service setInitialSceneId method when the Set as Start Scene button is clicked', () => {
+    component.editMode = true;
+    component.editSceneId = 1;
+
+    fakeSceneService.setInitialSceneId = () => {};
+
+    spyOn(fakeSceneService, 'setInitialSceneId');
+
+    fixture.detectChanges();
+
+    setAsStartSceneButton = fixture.debugElement.query(By.css('#set-as-start-scene-button'));
+
+    setAsStartSceneButton.triggerEventHandler('click', null);
+
+    expect(fakeSceneService.setInitialSceneId).toHaveBeenCalled();
   });
 
   it ('should have the add button disabled when input is header and description are invalid', () => {
