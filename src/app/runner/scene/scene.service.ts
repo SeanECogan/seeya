@@ -17,7 +17,7 @@ export class SceneService {
   importGame(
     gameImportString: string
   ): void {
-    const gameString = atob(gameImportString);
+    const gameString = this.b64DecodeWithUnicode(gameImportString);
 
     const game = JSON.parse(gameString) as GameModel;
 
@@ -49,5 +49,12 @@ export class SceneService {
 
   gameIsFinished(): boolean {
     return this.currentScene !== null && this.currentScene.links.length === 0;
+  }
+
+  // https://stackoverflow.com/questions/30106476/using-javascripts-atob-to-decode-base64-doesnt-properly-decode-utf-8-strings/30106551
+  private b64DecodeWithUnicode(str): string {
+    return decodeURIComponent(Array.prototype.map.call(atob(str), (c) => {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
   }
 }
