@@ -2,6 +2,10 @@ h1 {
     margin-top: 50px;
 }
 
+p {
+    white-space: pre-line;
+}
+
 .align-right {
     text-align: right;
 }
