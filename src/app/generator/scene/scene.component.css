@@ -36,3 +36,12 @@ mat-card-content {
     cursor: pointer;
     color: #AAAAAA;
 }
+
+.image-container {
+    margin-bottom: 25px;
+}
+
+.image-container img {
+    margin: auto;
+    display: block;
+}

@@ -23,6 +23,8 @@ describe('AddEditSceneDialogComponent', () => {
   let cancelButton: DebugElement;
   let headerInput: DebugElement;
   let descriptionTextarea: DebugElement;
+  let imageInput: DebugElement;
+  let imagePreview: DebugElement;
   let linksSection: DebugElement;
   let links: DebugElement[];
 
@@ -62,6 +64,8 @@ describe('AddEditSceneDialogComponent', () => {
     cancelButton = fixture.debugElement.query(By.css('#cancel-button'));
     headerInput = fixture.debugElement.query(By.css('#header-input'));
     descriptionTextarea = fixture.debugElement.query(By.css('#description-textarea'));
+    imageInput = fixture.debugElement.query(By.css('#image-input'));
+    imagePreview = fixture.debugElement.query(By.css('#image-preview'));
     linksSection = fixture.debugElement.query(By.css('#links-section'));
     links = fixture.debugElement.queryAll(By.css('.link'));
   });
@@ -281,6 +285,30 @@ describe('AddEditSceneDialogComponent', () => {
 
   it ('should have a description textarea', () => {
     expect(descriptionTextarea).toBeTruthy();
+  });
+
+  it ('should have an image input', () => {
+    expect(imageInput).toBeTruthy();
+  });
+
+  it ('should not have an image preview if there is no image', () => {
+    component.sceneImageData = '';
+
+    fixture.detectChanges();
+
+    imagePreview = fixture.debugElement.query(By.css('#image-preview'));
+
+    expect(imagePreview).toBeFalsy();
+  });
+
+  it ('should have an image preview if there is an image', () => {
+    component.sceneImageData = 'Test';
+
+    fixture.detectChanges();
+
+    imagePreview = fixture.debugElement.query(By.css('#image-preview'));
+
+    expect(imagePreview).toBeTruthy();
   });
 
   it ('should call the SceneService AddScene method when a scene is added', () => {

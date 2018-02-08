@@ -45,12 +45,12 @@ describe('SceneService', () => {
     inject([SceneService], (service: SceneService) => {
 
       service['scenes'] = [
-        new SceneModel(1, 'Test', 'Test', [
+        new SceneModel(1, 'Test', 'Test', '', [
           new LinkModel(1, 2, 'Test'),
           new LinkModel(1, 3, 'Test')
         ]),
-        new SceneModel(2, 'Test2', 'Test2', new Array<LinkModel>()),
-        new SceneModel(3, 'Test3', 'Test3', new Array<LinkModel>())
+        new SceneModel(2, 'Test2', 'Test2', '', new Array<LinkModel>()),
+        new SceneModel(3, 'Test3', 'Test3', '', new Array<LinkModel>())
       ];
 
       expect(service.getScenes().length).toBe(3);
@@ -65,12 +65,12 @@ describe('SceneService', () => {
     inject([SceneService], (service: SceneService) => {
 
       service['scenes'] = [
-        new SceneModel(1, 'Test', 'Test', [
+        new SceneModel(1, 'Test', 'Test', '', [
           new LinkModel(1, 2, 'Test'),
           new LinkModel(1, 3, 'Test')
         ]),
-        new SceneModel(2, 'Test2', 'Test2', new Array<LinkModel>()),
-        new SceneModel(3, 'Test3', 'Test3', new Array<LinkModel>())
+        new SceneModel(2, 'Test2', 'Test2', '', new Array<LinkModel>()),
+        new SceneModel(3, 'Test3', 'Test3', '', new Array<LinkModel>())
       ];
 
       expect(service.getNumberOfScenes()).toBe(3);
@@ -80,15 +80,15 @@ describe('SceneService', () => {
     inject([SceneService], (service: SceneService) => {
 
       service['scenes'] = [
-        new SceneModel(1, 'Test', 'Test', [
+        new SceneModel(1, 'Test', 'Test', '', [
           new LinkModel(1, 2, 'Test'),
           new LinkModel(1, 3, 'Test')
         ]),
-        new SceneModel(2, 'Test2', 'Test2', new Array<LinkModel>()),
-        new SceneModel(3, 'Test3', 'Test3', new Array<LinkModel>())
+        new SceneModel(2, 'Test2', 'Test2', '', new Array<LinkModel>()),
+        new SceneModel(3, 'Test3', 'Test3', '', new Array<LinkModel>())
       ];
 
-      service.addScene('Test4', 'Test4', new Array<LinkModel>());
+      service.addScene('Test4', 'Test4', '', new Array<LinkModel>());
 
       expect(service.getNumberOfScenes()).toBe(4);
       expect(service.getScenes()[3].id).toBe(4, 'New Scene Id');
@@ -101,15 +101,16 @@ describe('SceneService', () => {
     inject([SceneService], (service: SceneService) => {
 
       service['scenes'] = [
-        new SceneModel(1, 'Test1', 'Test1', new Array<LinkModel>())
+        new SceneModel(1, 'Test1', 'Test1', 'Test1', new Array<LinkModel>())
       ];
 
-      service.editScene(1, 'Test2', 'Test2', new Array<LinkModel>());
+      service.editScene(1, 'Test2', 'Test2', 'Test2', new Array<LinkModel>());
 
       expect(service.getScenes().length).toBe(1);
       expect(service.getScenes()[0].id).toBe(1);
       expect(service.getScenes()[0].header).toBe('Test2');
       expect(service.getScenes()[0].description).toBe('Test2');
+      expect(service.getScenes()[0].imageData).toBe('Test2');
       expect(service.getScenes()[0].links.length).toBe(0);
     }));
 
@@ -117,10 +118,10 @@ describe('SceneService', () => {
     inject([SceneService], (service: SceneService) => {
 
       service['scenes'] = [
-        new SceneModel(1, 'Test1', 'Test1', new Array<LinkModel>())
+        new SceneModel(1, 'Test1', 'Test1', '', new Array<LinkModel>())
       ];
 
-      service.editScene(2, 'Test2', 'Test2', new Array<LinkModel>());
+      service.editScene(2, 'Test2', 'Test2', '', new Array<LinkModel>());
 
       expect(service.getScenes().length).toBe(1);
       expect(service.getScenes()[0].id).toBe(1);
@@ -133,7 +134,7 @@ describe('SceneService', () => {
     inject([SceneService], (service: SceneService) => {
 
       service['scenes'] = [
-        new SceneModel(1, 'Test1', 'Test1', new Array<LinkModel>())
+        new SceneModel(1, 'Test1', 'Test1', '', new Array<LinkModel>())
       ];
 
       service.deleteScene(1);
@@ -145,7 +146,7 @@ describe('SceneService', () => {
     inject([SceneService], (service: SceneService) => {
 
       service['scenes'] = [
-        new SceneModel(1, 'Test1', 'Test1', new Array<LinkModel>())
+        new SceneModel(1, 'Test1', 'Test1', '', new Array<LinkModel>())
       ];
 
       service.deleteScene(2);
@@ -157,12 +158,12 @@ describe('SceneService', () => {
     inject([SceneService], (service: SceneService) => {
 
       service['scenes'] = [
-        new SceneModel(1, 'Test1', 'Test1', [
+        new SceneModel(1, 'Test1', 'Test1', '', [
           new LinkModel(1, 2, 'Test'),
           new LinkModel(1, 3, 'Test')
         ]),
-        new SceneModel(2, 'Test1', 'Test1', new Array<LinkModel>()),
-        new SceneModel(3, 'Test1', 'Test1', new Array<LinkModel>())
+        new SceneModel(2, 'Test1', 'Test1', '', new Array<LinkModel>()),
+        new SceneModel(3, 'Test1', 'Test1', '', new Array<LinkModel>())
       ];
 
       service.deleteScene(2);
@@ -179,13 +180,14 @@ describe('SceneService', () => {
           5,
           'Header',
           'Description',
+          '',
           [new LinkModel(5, 6, 'Display')]),
-        new SceneModel(6, 'Header2', 'Description2', null)
+        new SceneModel(6, 'Header2', 'Description2', '', new Array<LinkModel>())
       ];
       service['initialSceneId'] = 5;
 
       /* tslint:disable:max-line-length */
-      expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6NSwidG9TY2VuZUlkIjo2LCJkaXNwbGF5VGV4dCI6IkRpc3BsYXkifV19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmtzIjpudWxsfV19');
+      expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImltYWdlRGF0YSI6IiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6NSwidG9TY2VuZUlkIjo2LCJkaXNwbGF5VGV4dCI6IkRpc3BsYXkifV19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImltYWdlRGF0YSI6IiIsImxpbmtzIjpbXX1dfQ==');
       /* tslint:enable:max-line-length */
     }));
 
@@ -197,13 +199,14 @@ describe('SceneService', () => {
           5,
           'z̭͍̥͙͗ä͔͓́̐ͅḻ̩̘̜̗̫͆ͫg̔̅͆̓̾o͖̦',
           'z̭͍̥͙͗ä͔͓́̐ͅḻ̩̘̜̗̫͆ͫg̔̅͆̓̾o͖̦',
+          '',
           [new LinkModel(5, 6, 'Display')]),
-        new SceneModel(6, 'Header2', 'Description2', null)
+        new SceneModel(6, 'Header2', 'Description2', '', new Array<LinkModel>())
       ];
       service['initialSceneId'] = 5;
 
       /* tslint:disable:max-line-length */
-      expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImRlc2NyaXB0aW9uIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6NSwidG9TY2VuZUlkIjo2LCJkaXNwbGF5VGV4dCI6IkRpc3BsYXkifV19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmtzIjpudWxsfV19');
+      expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImRlc2NyaXB0aW9uIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImltYWdlRGF0YSI6IiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6NSwidG9TY2VuZUlkIjo2LCJkaXNwbGF5VGV4dCI6IkRpc3BsYXkifV19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImltYWdlRGF0YSI6IiIsImxpbmtzIjpbXX1dfQ==');
       /* tslint:enable:max-line-length */
     }));
 
@@ -216,17 +219,23 @@ describe('SceneService', () => {
     inject([SceneService], (service: SceneService) => {
 
       /* tslint:disable:max-line-length */
-      expect(() => service.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6Nn19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0'))
+      expect(() => service.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImltYWdlRGF0YSI6IiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6NSwidG9TY2VuZUlkIjo2LCJkaXNwbGF5VGV4dCI6IkRpc3BsYXkifV19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImltYWdlRGF0YSI6IiIsImxpbmtzIjpbXX1dfQ=='))
         .not.toThrowError();
       /* tsline:enable:max-line-length */
+
+      expect(service['initialSceneId']).toBe(5);
+      expect(service['scenes'].length).toBe(2);
     }));
 
   it('should not throw an error when importing a valid game string, even if the string translates to Unicode',
     inject([SceneService], (service: SceneService) => {
 
       /* tslint:disable:max-line-length */
-      expect(() => service.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImRlc2NyaXB0aW9uIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6NSwidG9TY2VuZUlkIjo2LCJkaXNwbGF5VGV4dCI6IkRpc3BsYXkifV19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmtzIjpudWxsfV19'))
+      expect(() => service.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImRlc2NyaXB0aW9uIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImltYWdlRGF0YSI6IiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6NSwidG9TY2VuZUlkIjo2LCJkaXNwbGF5VGV4dCI6IkRpc3BsYXkifV19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImltYWdlRGF0YSI6IiIsImxpbmtzIjpbXX1dfQ=='))
         .not.toThrowError();
       /* tsline:enable:max-line-length */
+
+      expect(service['initialSceneId']).toBe(5);
+      expect(service['scenes'].length).toBe(2);
     }));
 });

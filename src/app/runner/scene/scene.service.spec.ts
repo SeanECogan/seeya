@@ -101,6 +101,7 @@ describe('SceneService', () => {
           5,
           'Header',
           'Description',
+          '',
           [
             new LinkModel(5, 6, 'Test')
           ]
@@ -109,6 +110,7 @@ describe('SceneService', () => {
           6,
           'Header2',
           'Description2',
+          '',
           new Array<LinkModel>()
         )
       ];
@@ -126,6 +128,7 @@ describe('SceneService', () => {
           5,
           'Header',
           'Description',
+          '',
           [
             new LinkModel(5, 6, 'Test')
           ]
@@ -134,6 +137,7 @@ describe('SceneService', () => {
           6,
           'Header2',
           'Description2',
+          '',
           new Array<LinkModel>()
         )
       ];

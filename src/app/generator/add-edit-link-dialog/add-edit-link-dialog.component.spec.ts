@@ -137,13 +137,13 @@ describe('AddEditLinkDialogComponent', () => {
 
     fakeSceneService.getScenes = () => {
       return [
-        new SceneModel(1, 'Test1', 'Test1', [
+        new SceneModel(1, 'Test1', 'Test1', '', [
           new LinkModel(1, 2, 'Test'),
           new LinkModel(1, 3, 'Test')
         ]),
-        new SceneModel(2, 'Test2', 'Test2', new Array<LinkModel>()),
-        new SceneModel(3, 'Test3', 'Test3', new Array<LinkModel>()),
-        new SceneModel(4, 'Test4', 'Test4', new Array<LinkModel>())
+        new SceneModel(2, 'Test2', 'Test2', '', new Array<LinkModel>()),
+        new SceneModel(3, 'Test3', 'Test3', '', new Array<LinkModel>()),
+        new SceneModel(4, 'Test4', 'Test4', '', new Array<LinkModel>())
       ];
     };
 

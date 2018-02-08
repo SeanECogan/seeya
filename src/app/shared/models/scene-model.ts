@@ -8,16 +8,19 @@ export class SceneModel {
     id: number,
     header: string,
     description: string,
+    imageData: string,
     links: LinkModel[]
   ) {
     this.id = id;
     this.header = header;
     this.description = description;
+    this.imageData = imageData;
     this.links = links;
   }
 
   id: number;
   header: string;
   description: string;
+  imageData: string;
   links: LinkModel[];
 }

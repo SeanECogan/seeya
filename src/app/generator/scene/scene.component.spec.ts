@@ -22,6 +22,7 @@ describe('SceneComponent', () => {
   let cardTitle: DebugElement;
   let cardSubtitle: DebugElement;
   let starIcon: DebugElement;
+  let imageContainer: DebugElement;
   let cardContent: DebugElement;
   let editButton: DebugElement;
   let deleteButton: DebugElement;
@@ -50,6 +51,7 @@ describe('SceneComponent', () => {
       1,
       'Header',
       'Description',
+      '',
       new Array<LinkModel>()
     );
 
@@ -62,6 +64,7 @@ describe('SceneComponent', () => {
     cardTitle = fixture.debugElement.query(By.css('#card-title'));
     cardSubtitle = fixture.debugElement.query(By.css('#card-subtitle'));
     starIcon = fixture.debugElement.query(By.css('#star-icon'));
+    imageContainer = fixture.debugElement.query(By.css('.image-container'));
     cardContent = fixture.debugElement.query(By.css('#card-content'));
     editButton = fixture.debugElement.query(By.css('#edit-button'));
     deleteButton = fixture.debugElement.query(By.css('#delete-button'));
@@ -133,6 +136,26 @@ describe('SceneComponent', () => {
     starIcon = fixture.debugElement.query(By.css('#star-icon'));
 
     expect(starIcon).toBeTruthy();
+  });
+
+  it('should not have an image container if the scene has no image', () => {
+    component.scene.imageData = '';
+
+    fixture.detectChanges();
+
+    imageContainer = fixture.debugElement.query(By.css('.image-container'));
+
+    expect(imageContainer).toBeFalsy();
+  });
+
+  it('should have an image container if the scene has an image', () => {
+    component.scene.imageData = 'Test';
+
+    fixture.detectChanges();
+
+    imageContainer = fixture.debugElement.query(By.css('.image-container'));
+
+    expect(imageContainer).toBeTruthy();
   });
 
   it('should display the scene description in the card content', () => {

@@ -76,7 +76,7 @@ describe('GameRunnerComponent', () => {
 
   it('should display the game container if the current scene is not null', () => {
     fakeSceneService.getCurrentScene = () => {
-      return new SceneModel(1, 'Test', 'Test', new Array<LinkModel>());
+      return new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>());
     };
 
     fixture.detectChanges();
@@ -88,7 +88,7 @@ describe('GameRunnerComponent', () => {
 
   it('should have a current scene if the service returns a current scene', () => {
     fakeSceneService.getCurrentScene = () => {
-      return new SceneModel(1, 'Test', 'Test', new Array<LinkModel>());
+      return new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>());
     };
 
     fixture.detectChanges();
@@ -98,7 +98,7 @@ describe('GameRunnerComponent', () => {
 
   it('should have a play again button if the scene has no linked scene', () => {
     fakeSceneService.getCurrentScene = () => {
-      return new SceneModel(1, 'Test', 'Test', new Array<LinkModel>());
+      return new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>());
     };
 
     fixture.detectChanges();
@@ -115,6 +115,7 @@ describe('GameRunnerComponent', () => {
         1,
         'Test',
         'Test',
+        '',
         [ new LinkModel(1, 2, 'Display') ]);
     };
 
@@ -141,6 +142,7 @@ describe('GameRunnerComponent', () => {
         5,
         'Header',
         'Description',
+        '',
         [
           new LinkModel(5, 6, 'Test')
         ]
@@ -149,6 +151,7 @@ describe('GameRunnerComponent', () => {
         6,
         'Header2',
         'Description2',
+        '',
         new Array<LinkModel>()
       )
     ];
@@ -189,6 +192,7 @@ describe('GameRunnerComponent', () => {
         5,
         'Header',
         'Description',
+        '',
         [
           new LinkModel(5, 6, 'Test')
         ]
@@ -197,6 +201,7 @@ describe('GameRunnerComponent', () => {
         6,
         'Header2',
         'Description2',
+        '',
         new Array<LinkModel>()
       )
     ];

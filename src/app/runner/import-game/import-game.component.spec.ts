@@ -7,7 +7,9 @@ import { RunnerModule } from '../runner.module';
 import { SceneService } from '../scene/scene.service';
 
 import { ImportGameComponent } from './import-game.component';
+
 import { SceneModel } from '../../shared/models/scene-model';
+import { LinkModel } from '../../shared/models/link-model';
 
 describe('ImportGameComponent', () => {
   let component: ImportGameComponent;
@@ -20,7 +22,7 @@ describe('ImportGameComponent', () => {
       imports: [ RunnerModule ],
       providers: [ { provide: SceneService, useValue: {
         gameIsFinished: () => false,
-        getCurrentScene: () => new SceneModel(1, 'Test', 'Test', null)
+        getCurrentScene: () => new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>())
       } } ],
       declarations: [ ]
     })
@@ -44,7 +46,7 @@ describe('ImportGameComponent', () => {
 
   it('should show the import button while the game is finished and is loaded', () => {
     fakeSceneService.gameIsFinished = () => true;
-    fakeSceneService.getCurrentScene = () => new SceneModel(1, 'Test', 'Test', null);
+    fakeSceneService.getCurrentScene = () => new SceneModel(1, 'Test', 'Test',  '', new Array<LinkModel>());
 
     fixture.detectChanges();
 
@@ -77,7 +79,7 @@ describe('ImportGameComponent', () => {
 
   it('should not show the import button while the game is not finished and is loaded', () => {
     fakeSceneService.gameIsFinished = () => false;
-    fakeSceneService.getCurrentScene = () => new SceneModel(1, 'Test', 'Test', null);
+    fakeSceneService.getCurrentScene = () => new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>());
 
     fixture.detectChanges();
 
