@@ -25,9 +25,9 @@
     </div>
   </mat-card-title-group>
   <div 
-    *ngIf="scene.imageData !== '' && scene.imageData !== null && scene.imageData !== undefined"
+    *ngIf="scene.imageUrl !== '' && scene.imageUrl !== null && scene.imageUrl !== undefined"
     class="image-container">
-    <img src="{{scene.imageData}}" height="100" />
+    <img src="{{scene.imageUrl}}" height="100" />
   </div>
   <mat-card-content id="card-content">
     <p>{{scene.description}}</p>

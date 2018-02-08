@@ -139,7 +139,7 @@ describe('SceneComponent', () => {
   });
 
   it('should not have an image container if the scene has no image', () => {
-    component.scene.imageData = '';
+    component.scene.imageUrl = '';
 
     fixture.detectChanges();
 
@@ -149,7 +149,7 @@ describe('SceneComponent', () => {
   });
 
   it('should have an image container if the scene has an image', () => {
-    component.scene.imageData = 'Test';
+    component.scene.imageUrl = 'Test';
 
     fixture.detectChanges();
 
