@@ -53,7 +53,7 @@ describe('GeneratorComponent', () => {
     // Setup mock SceneService.
     fakeSceneService.getScenes = () => {
       return [
-        new SceneModel(1, 'Test', 'Test', new Array<LinkModel>())
+        new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>())
       ];
     };
 

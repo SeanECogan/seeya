@@ -2,10 +2,20 @@ h1 {
     margin-top: 50px;
 }
 
-p {
+span {
     white-space: pre-line;
 }
 
 .align-right {
     text-align: right;
+}
+
+.image-container {
+    margin-bottom: 25px;
+}
+
+.image-container img {
+    display: block;
+    margin: auto;
+    max-width: 80%;
 }

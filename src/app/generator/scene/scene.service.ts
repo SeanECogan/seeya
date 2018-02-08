@@ -46,11 +46,13 @@ export class SceneService {
   addScene(
     header: string,
     description: string,
+    imageData: string,
     links: LinkModel[]
   ): void {
     this.addNewScene(
       header,
       description,
+      imageData,
       links);
 
     // Initialize the Initial Scene ID if one isn't set yet.
@@ -63,6 +65,7 @@ export class SceneService {
     sceneId: number,
     header: string,
     description: string,
+    imageData: string,
     links: LinkModel[]
   ): void {
     const sceneToEdit = this.scenes.filter(scene => scene.id === sceneId)[0];
@@ -70,6 +73,7 @@ export class SceneService {
     if (sceneToEdit) {
       sceneToEdit.header = header;
       sceneToEdit.description = description;
+      sceneToEdit.imageData = imageData;
       sceneToEdit.links = links;
     }
   }
@@ -101,7 +105,6 @@ export class SceneService {
     const game = this.gf.createGame(
       this.initialSceneId,
       this.scenes);
-
     const gameJsonString = JSON.stringify(game);
 
     return this.b64EncodeWithUnicode(gameJsonString);
@@ -114,6 +117,7 @@ export class SceneService {
 
     const game = JSON.parse(gameString) as GameModel;
 
+    this.initialSceneId = game.initialSceneId;
     this.scenes = game.scenes;
   }
 
@@ -133,6 +137,7 @@ export class SceneService {
   private addNewScene(
     header: string,
     description: string,
+    imageData: string,
     links: LinkModel[]
   ): void {
     // Find next Scene ID.
@@ -147,6 +152,7 @@ export class SceneService {
         currentMax + 1,
         header,
         description,
+        imageData,
         links
       )
     );

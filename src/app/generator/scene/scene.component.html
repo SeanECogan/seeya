@@ -24,6 +24,11 @@
         (click)="deleteScene()">delete</mat-icon>
     </div>
   </mat-card-title-group>
+  <div 
+    *ngIf="scene.imageData !== '' && scene.imageData !== null && scene.imageData !== undefined"
+    class="image-container">
+    <img src="{{scene.imageData}}" height="100" />
+  </div>
   <mat-card-content id="card-content">
     <p>{{scene.description}}</p>
   </mat-card-content>

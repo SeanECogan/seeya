@@ -10,6 +10,10 @@ mat-list {
     margin-bottom: 15px;
 }
 
+#links-section {
+    margin-top: 25px;
+}
+
 .form {
     margin-top: 15px;
 }
@@ -35,4 +39,16 @@ mat-list {
 .half-width-right {
     width: 50%;
     text-align: right;
+}
+
+.image-label {
+    color: rgba(0,0,0,.54);
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: inherit;
+    font-weight: 400;
+    margin-top: 0px;
+}
+
+.image-input {
+    vertical-align: top;
 }

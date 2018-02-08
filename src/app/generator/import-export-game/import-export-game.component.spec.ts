@@ -74,7 +74,7 @@ describe('ImportExportGameComponent', () => {
     fakeSceneService.getNumberOfScenes = () => 1;
     fakeSceneService.getInitialSceneId = () => -1;
     fakeSceneService.getScenes = () => [
-      new SceneModel(1, 'Test', 'Test', new Array<LinkModel>())
+      new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>())
     ];
 
     fixture.detectChanges();
@@ -86,7 +86,7 @@ describe('ImportExportGameComponent', () => {
     fakeSceneService.getNumberOfScenes = () => 1;
     fakeSceneService.getInitialSceneId = () => 1;
     fakeSceneService.getScenes = () => [
-      new SceneModel(1, 'Test', 'Test', new Array<LinkModel>())
+      new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>())
     ];
 
     fixture.detectChanges();
