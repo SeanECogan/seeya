@@ -1,9 +1,9 @@
 <h1 class="mat-headline">{{scene.header}}</h1>
 
 <div 
-    *ngIf="scene.imageData !== '' && scene.imageData !== null && scene.imageData !== undefined" 
+    *ngIf="scene.imageUrl !== '' && scene.imageUrl !== null && scene.imageUrl !== undefined" 
     class="image-container">
-    <img src="{{scene.imageData}}" />
+    <img src="{{scene.imageUrl}}" />
 </div>
 
 <span class="mat-body-1">{{scene.description}}</span>

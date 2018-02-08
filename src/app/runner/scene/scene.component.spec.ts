@@ -45,20 +45,20 @@ describe('SceneComponent', () => {
   });
 
   it('should not display the image container if the scene has no image', () => {
-    component.scene.imageData = '';
+    component.scene.imageUrl = '';
 
     fixture.detectChanges();
-    
+
     imageContainer = fixture.debugElement.query(By.css('.image-container'));
 
     expect(imageContainer).toBeFalsy();
   });
 
   it('should display the image container if the scene has an image', () => {
-    component.scene.imageData = 'Test';
+    component.scene.imageUrl = 'Test';
 
     fixture.detectChanges();
-    
+
     imageContainer = fixture.debugElement.query(By.css('.image-container'));
 
     expect(imageContainer).toBeTruthy();

@@ -52,3 +52,12 @@ mat-list {
 .image-input {
     vertical-align: top;
 }
+
+.image-container {
+    margin-bottom: 25px;
+}
+
+.image-container img {
+    margin: auto;
+    display: block;
+}

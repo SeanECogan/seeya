@@ -43,7 +43,7 @@ export class SceneComponent implements OnInit {
           this.scene.id,
           this.scene.header,
           this.scene.description,
-          this.scene.imageData,
+          this.scene.imageUrl,
           this.scene.links.map(link => {
             return new LinkModel(
               link.fromSceneId,

@@ -110,7 +110,7 @@ describe('SceneService', () => {
       expect(service.getScenes()[0].id).toBe(1);
       expect(service.getScenes()[0].header).toBe('Test2');
       expect(service.getScenes()[0].description).toBe('Test2');
-      expect(service.getScenes()[0].imageData).toBe('Test2');
+      expect(service.getScenes()[0].imageUrl).toBe('Test2');
       expect(service.getScenes()[0].links.length).toBe(0);
     }));
 
@@ -187,7 +187,7 @@ describe('SceneService', () => {
       service['initialSceneId'] = 5;
 
       /* tslint:disable:max-line-length */
-      expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImltYWdlRGF0YSI6IiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6NSwidG9TY2VuZUlkIjo2LCJkaXNwbGF5VGV4dCI6IkRpc3BsYXkifV19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImltYWdlRGF0YSI6IiIsImxpbmtzIjpbXX1dfQ==');
+      expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImltYWdlVXJsIjoiIiwibGlua3MiOlt7ImZyb21TY2VuZUlkIjo1LCJ0b1NjZW5lSWQiOjYsImRpc3BsYXlUZXh0IjoiRGlzcGxheSJ9XX0seyJpZCI6NiwiaGVhZGVyIjoiSGVhZGVyMiIsImRlc2NyaXB0aW9uIjoiRGVzY3JpcHRpb24yIiwiaW1hZ2VVcmwiOiIiLCJsaW5rcyI6W119XX0=');
       /* tslint:enable:max-line-length */
     }));
 
@@ -206,7 +206,7 @@ describe('SceneService', () => {
       service['initialSceneId'] = 5;
 
       /* tslint:disable:max-line-length */
-      expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImRlc2NyaXB0aW9uIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImltYWdlRGF0YSI6IiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6NSwidG9TY2VuZUlkIjo2LCJkaXNwbGF5VGV4dCI6IkRpc3BsYXkifV19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImltYWdlRGF0YSI6IiIsImxpbmtzIjpbXX1dfQ==');
+      expect(service.exportGame()).toBe('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImRlc2NyaXB0aW9uIjoies2XzK3NjcylzZlhzYTMkM2UzZPNhWzNhs2rzLHMqcyYzJzMl8yrZ8yUzIXNhs2DzL5vzZbMpiIsImltYWdlVXJsIjoiIiwibGlua3MiOlt7ImZyb21TY2VuZUlkIjo1LCJ0b1NjZW5lSWQiOjYsImRpc3BsYXlUZXh0IjoiRGlzcGxheSJ9XX0seyJpZCI6NiwiaGVhZGVyIjoiSGVhZGVyMiIsImRlc2NyaXB0aW9uIjoiRGVzY3JpcHRpb24yIiwiaW1hZ2VVcmwiOiIiLCJsaW5rcyI6W119XX0=');
       /* tslint:enable:max-line-length */
     }));
 

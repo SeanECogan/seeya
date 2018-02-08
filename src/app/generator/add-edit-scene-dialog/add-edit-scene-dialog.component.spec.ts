@@ -292,7 +292,7 @@ describe('AddEditSceneDialogComponent', () => {
   });
 
   it ('should not have an image preview if there is no image', () => {
-    component.sceneImageData = '';
+    component.sceneImageUrl = '';
 
     fixture.detectChanges();
 
@@ -302,7 +302,7 @@ describe('AddEditSceneDialogComponent', () => {
   });
 
   it ('should have an image preview if there is an image', () => {
-    component.sceneImageData = 'Test';
+    component.sceneImageUrl = 'Test';
 
     fixture.detectChanges();
 

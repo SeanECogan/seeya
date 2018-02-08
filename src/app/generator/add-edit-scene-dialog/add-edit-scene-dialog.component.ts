@@ -20,10 +20,8 @@ export class AddEditSceneDialogComponent implements OnInit {
 
   sceneHeader: string;
   sceneDescription: string;
-  sceneImageData: string;
+  sceneImageUrl: string;
   sceneLinks: LinkModel[];
-
-  private fileReader: FileReader;
 
   constructor(
     public dialogRef: MatDialogRef<AddEditLinkDialogComponent>,
@@ -32,23 +30,17 @@ export class AddEditSceneDialogComponent implements OnInit {
     private sceneService: SceneService) {
       this.editMode = data.editMode;
 
-      this.fileReader = new FileReader();
-
-      this.fileReader.onload = (event: any) => {
-        this.sceneImageData = event.target.result;
-      };
-
       if (this.editMode) {
         this.editSceneId = data.scene.id;
         this.sceneHeader = data.scene.header;
         this.sceneDescription = data.scene.description;
+        this.sceneImageUrl = data.scene.imageUrl;
         this.sceneLinks = data.scene.links;
-        this.sceneImageData = data.scene.imageData;
       } else {
         this.sceneHeader = '';
         this.sceneDescription = '';
+        this.sceneImageUrl = '';
         this.sceneLinks = new Array<LinkModel>();
-        this.sceneImageData = '';
       }
   }
 
@@ -59,7 +51,7 @@ export class AddEditSceneDialogComponent implements OnInit {
     this.sceneService.addScene(
       this.sceneHeader,
       this.sceneDescription,
-      this.sceneImageData,
+      this.sceneImageUrl,
       new Array<LinkModel>()
     );
 
@@ -71,7 +63,7 @@ export class AddEditSceneDialogComponent implements OnInit {
       this.editSceneId,
       this.sceneHeader,
       this.sceneDescription,
-      this.sceneImageData,
+      this.sceneImageUrl,
       this.sceneLinks
     );
 
@@ -123,12 +115,6 @@ export class AddEditSceneDialogComponent implements OnInit {
     this.sceneLinks = this.sceneLinks.filter(link => {
       return link.toSceneId !== linkToId;
     });
-  }
-
-  fileChanged(event): void {
-    if (event.target.files.length > 0) {
-      this.fileReader.readAsDataURL(event.target.files[0]);
-    }
   }
 
   cancel(): void {

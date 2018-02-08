@@ -7,14 +7,14 @@ export class SceneFactory {
         sceneId: number,
         header: string,
         description: string,
-        imageData: string,
+        imageUrl: string,
         links: LinkModel[]
     ): SceneModel {
         return new SceneModel(
             sceneId,
             header,
             description,
-            imageData,
+            imageUrl,
             links
         );
     }

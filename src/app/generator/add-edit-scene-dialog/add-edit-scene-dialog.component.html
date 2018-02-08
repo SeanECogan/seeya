@@ -23,14 +23,16 @@
       matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8" 
       placeholder="Description" [(ngModel)]="sceneDescription"></textarea>
   </mat-form-field>
-  <div class="full-width">
-    <p class="image-label">Image</p>
+  <mat-form-field class="full-width">
     <input
-      id="image-input" 
-      type="file" (change)="fileChanged($event)" class="image-input" accept="image/*">
-    <img 
-      id="image-preview"
-      *ngIf="sceneImageData !== ''" src="{{sceneImageData}}" height="100" />
+      id="image-input"
+      matInput placeholder="Image URL" [(ngModel)]="sceneImageUrl">
+  </mat-form-field>
+  <div 
+    class="image-container"
+    *ngIf="sceneImageUrl !== '' && sceneImageUrl !== null && sceneImageUrl !== undefined">
+  <img 
+    id="image-preview" src="{{sceneImageUrl}}" height="100" />
   </div>
   <div 
     *ngIf="editMode"

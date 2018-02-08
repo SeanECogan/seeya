@@ -46,13 +46,13 @@ export class SceneService {
   addScene(
     header: string,
     description: string,
-    imageData: string,
+    imageUrl: string,
     links: LinkModel[]
   ): void {
     this.addNewScene(
       header,
       description,
-      imageData,
+      imageUrl,
       links);
 
     // Initialize the Initial Scene ID if one isn't set yet.
@@ -65,7 +65,7 @@ export class SceneService {
     sceneId: number,
     header: string,
     description: string,
-    imageData: string,
+    imageUrl: string,
     links: LinkModel[]
   ): void {
     const sceneToEdit = this.scenes.filter(scene => scene.id === sceneId)[0];
@@ -73,7 +73,7 @@ export class SceneService {
     if (sceneToEdit) {
       sceneToEdit.header = header;
       sceneToEdit.description = description;
-      sceneToEdit.imageData = imageData;
+      sceneToEdit.imageUrl = imageUrl;
       sceneToEdit.links = links;
     }
   }
@@ -137,7 +137,7 @@ export class SceneService {
   private addNewScene(
     header: string,
     description: string,
-    imageData: string,
+    imageUrl: string,
     links: LinkModel[]
   ): void {
     // Find next Scene ID.
@@ -152,7 +152,7 @@ export class SceneService {
         currentMax + 1,
         header,
         description,
-        imageData,
+        imageUrl,
         links
       )
     );
