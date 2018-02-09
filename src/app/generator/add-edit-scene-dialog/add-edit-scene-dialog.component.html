@@ -35,7 +35,7 @@
     id="image-preview" src="{{sceneImageUrl}}" height="100" />
   </div>
   <div 
-    *ngIf="editMode"
+    *ngIf="otherScenesExist()"
     id="links-section">
     <h3 mat-dialog-title *ngIf="sceneLinks.length > 0">Links</h3>
     <mat-list *ngIf="sceneLinks.length > 0">

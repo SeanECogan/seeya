@@ -9,6 +9,7 @@ import { GeneratorModule } from '../generator.module';
 import { SceneService } from '../scene/scene.service';
 
 import { AddEditSceneDialogComponent } from './add-edit-scene-dialog.component';
+
 import { LinkModel } from '../../shared/models/link-model';
 
 describe('AddEditSceneDialogComponent', () => {
@@ -34,7 +35,9 @@ describe('AddEditSceneDialogComponent', () => {
       declarations: [ ],
       providers: [
         { provide: SceneService, useValue: {
-          getInitialSceneId: () => -1
+          getInitialSceneId: () => -1,
+          getNextSceneId: () => 1,
+          getNumberOfScenes: () => 0
         } },
         { provide: MatDialog, useValue: {
           open: (a, b) => {}
@@ -112,7 +115,7 @@ describe('AddEditSceneDialogComponent', () => {
 
   it ('should have the Set as Start Scene button disabled when the current Scene is the Start Scene', () => {
     component.editMode = true;
-    component.editSceneId = 1;
+    component.sceneId = 1;
 
     fakeSceneService.getInitialSceneId = () => 1;
 
@@ -125,7 +128,7 @@ describe('AddEditSceneDialogComponent', () => {
 
   it ('should have the Set as Start Scene button enabled when the current Scene is not the Start Scene', () => {
     component.editMode = true;
-    component.editSceneId = 1;
+    component.sceneId = 1;
 
     fakeSceneService.getInitialSceneId = () => 2;
 
@@ -138,7 +141,7 @@ describe('AddEditSceneDialogComponent', () => {
 
   it ('should call the Scene Service setInitialSceneId method when the Set as Start Scene button is clicked', () => {
     component.editMode = true;
-    component.editSceneId = 1;
+    component.sceneId = 1;
 
     fakeSceneService.setInitialSceneId = () => {};
 
@@ -241,8 +244,8 @@ describe('AddEditSceneDialogComponent', () => {
     expect(editButton.attributes['ng-reflect-disabled']).toBe('false');
   });
 
-  it ('should not have the Links section when not in Edit Mode', () => {
-    component.editMode = false;
+  it ('should not display the Links section if this is the first scene', () => {
+    fakeSceneService.getNumberOfScenes = () => 0;
 
     fixture.detectChanges();
 
@@ -251,8 +254,8 @@ describe('AddEditSceneDialogComponent', () => {
     expect(linksSection).toBeFalsy();
   });
 
-  it ('should have the Links section when in Edit Mode', () => {
-    component.editMode = true;
+  it ('should display the Links section if there is at least one other scene', () => {
+    fakeSceneService.getNumberOfScenes = () => 1;
 
     fixture.detectChanges();
 
@@ -262,7 +265,9 @@ describe('AddEditSceneDialogComponent', () => {
   });
 
   it ('should display the Links for the Scene in the Links section', () => {
-    component.editMode = true;
+    fakeSceneService.getNumberOfScenes = () => 1;
+
+    component.sceneId = 1;
     component.sceneLinks = [
       new LinkModel(1, 2, 'Test'),
       new LinkModel(1, 3, 'Test2')
