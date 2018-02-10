@@ -88,7 +88,7 @@ describe('SceneService', () => {
         new SceneModel(3, 'Test3', 'Test3', '', new Array<LinkModel>())
       ];
 
-      service.addScene('Test4', 'Test4', '', new Array<LinkModel>());
+      service.addScene(4, 'Test4', 'Test4', '', new Array<LinkModel>());
 
       expect(service.getNumberOfScenes()).toBe(4);
       expect(service.getScenes()[3].id).toBe(4, 'New Scene Id');

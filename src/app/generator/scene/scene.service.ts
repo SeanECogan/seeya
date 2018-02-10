@@ -43,13 +43,26 @@ export class SceneService {
     return this.scenes.length;
   }
 
+  getNextSceneId(): number {
+    // Find next Scene ID.
+    let currentMax = 0;
+
+    if (this.scenes.length > 0) {
+      currentMax = Math.max(...(this.scenes.map(scene => scene.id)));
+    }
+
+    return currentMax + 1;
+  }
+
   addScene(
+    id: number,
     header: string,
     description: string,
     imageUrl: string,
     links: LinkModel[]
   ): void {
     this.addNewScene(
+      id,
       header,
       description,
       imageUrl,
@@ -135,21 +148,15 @@ export class SceneService {
   }
 
   private addNewScene(
+    id: number,
     header: string,
     description: string,
     imageUrl: string,
     links: LinkModel[]
   ): void {
-    // Find next Scene ID.
-    let currentMax = 0;
-
-    if (this.scenes.length > 0) {
-      currentMax = Math.max(...(this.scenes.map(scene => scene.id)));
-    }
-
     this.scenes.push(
       this.sf.createScene(
-        currentMax + 1,
+        id,
         header,
         description,
         imageUrl,

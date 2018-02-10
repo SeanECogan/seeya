@@ -15,9 +15,9 @@ import { LinkModel } from '../../shared/models/link-model';
 })
 export class AddEditSceneDialogComponent implements OnInit {
   editMode: boolean;
-  editSceneId: number;
   editedScene: SceneModel;
 
+  sceneId: number;
   sceneHeader: string;
   sceneDescription: string;
   sceneImageUrl: string;
@@ -31,12 +31,13 @@ export class AddEditSceneDialogComponent implements OnInit {
       this.editMode = data.editMode;
 
       if (this.editMode) {
-        this.editSceneId = data.scene.id;
+        this.sceneId = data.scene.id;
         this.sceneHeader = data.scene.header;
         this.sceneDescription = data.scene.description;
         this.sceneImageUrl = data.scene.imageUrl;
         this.sceneLinks = data.scene.links;
       } else {
+        this.sceneId = sceneService.getNextSceneId();
         this.sceneHeader = '';
         this.sceneDescription = '';
         this.sceneImageUrl = '';
@@ -49,10 +50,11 @@ export class AddEditSceneDialogComponent implements OnInit {
 
   addScene(): void {
     this.sceneService.addScene(
+      this.sceneId,
       this.sceneHeader,
       this.sceneDescription,
       this.sceneImageUrl,
-      new Array<LinkModel>()
+      this.sceneLinks
     );
 
     this.dialogRef.close();
@@ -60,7 +62,7 @@ export class AddEditSceneDialogComponent implements OnInit {
 
   editScene(): void {
     this.sceneService.editScene(
-      this.editSceneId,
+      this.sceneId,
       this.sceneHeader,
       this.sceneDescription,
       this.sceneImageUrl,
@@ -74,12 +76,16 @@ export class AddEditSceneDialogComponent implements OnInit {
     return this.sceneHeader !== '' && this.sceneDescription !== '';
   }
 
-  setAsStartScene(): void {
-    this.sceneService.setInitialSceneId(this.editSceneId);
+  isCurrentStartScene(): boolean {
+    return this.sceneId === this.sceneService.getInitialSceneId();
   }
 
-  isCurrentStartScene(): boolean {
-    return this.editSceneId === this.sceneService.getInitialSceneId();
+  otherScenesExist(): boolean {
+    return this.sceneService.getNumberOfScenes() > 0;
+  }
+
+  setAsStartScene(): void {
+    this.sceneService.setInitialSceneId(this.sceneId);
   }
 
   addLink(): void {
@@ -88,7 +94,7 @@ export class AddEditSceneDialogComponent implements OnInit {
       disableClose: true,
       data: {
         editMode: false,
-        fromSceneId: this.editSceneId,
+        fromSceneId: this.sceneId,
         linkedSceneIds: this.sceneLinks.map(link => link.toSceneId)
       }
     });
