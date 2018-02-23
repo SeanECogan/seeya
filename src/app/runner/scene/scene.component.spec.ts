@@ -8,6 +8,7 @@ import { SceneComponent } from './scene.component';
 
 import { SceneModel } from '../../shared/models/scene-model';
 import { LinkModel } from '../../shared/models/link-model';
+import { FlagModel } from '../../shared/models/flag-model';
 
 describe('SceneComponent', () => {
   let component: SceneComponent;
@@ -27,7 +28,7 @@ describe('SceneComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SceneComponent);
     component = fixture.componentInstance;
-    component.scene = new SceneModel(1, 'Header', 'Description', '', new Array<LinkModel>());
+    component.scene = new SceneModel(1, 'Header', 'Description', '', new Array<LinkModel>(), new Array<FlagModel>());
 
     fixture.detectChanges();
 

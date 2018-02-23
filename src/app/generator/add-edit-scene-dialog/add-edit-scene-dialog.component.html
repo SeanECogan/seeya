@@ -3,10 +3,10 @@
   {{editMode ? 'Edit Scene' : 'Add Scene'}}
   </h2>
   <h2 mat-dialog-title style="float: right;">
-    <button 
+    <button
       id="set-as-start-scene-button"
       *ngIf="editMode"
-      mat-raised-button color="accent" 
+      mat-raised-button color="accent"
       (click)="setAsStartScene()" [disabled]="!inputIsValid() || isCurrentStartScene()">Set as Start Scene</button>
   </h2>
   <br style="clear: both;" />
@@ -18,9 +18,9 @@
       matInput placeholder="Header" [(ngModel)]="sceneHeader">
   </mat-form-field>
   <mat-form-field class="full-width">
-    <textarea 
+    <textarea
       id="description-textarea"
-      matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8" 
+      matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8"
       placeholder="Description" [(ngModel)]="sceneDescription"></textarea>
   </mat-form-field>
   <mat-form-field class="full-width">
@@ -28,45 +28,62 @@
       id="image-input"
       matInput placeholder="Image URL" [(ngModel)]="sceneImageUrl">
   </mat-form-field>
-  <div 
+  <div
     class="image-container"
     *ngIf="sceneImageUrl !== '' && sceneImageUrl !== null && sceneImageUrl !== undefined">
-  <img 
+  <img
     id="image-preview" src="{{sceneImageUrl}}" height="100" />
   </div>
-  <div 
+  <div
     *ngIf="otherScenesExist()"
     id="links-section">
     <h3 mat-dialog-title *ngIf="sceneLinks.length > 0">Links</h3>
     <mat-list *ngIf="sceneLinks.length > 0">
       <mat-list-item *ngFor="let link of sceneLinks">
         <seeya-link
-          class="full-width link" [link]="link" 
-          (linkEditedEvent)="editLink($event)" 
+          class="full-width link" [link]="link"
+          (linkEditedEvent)="editLink($event)"
           (linkRemovedEvent)="removeLink($event)"></seeya-link>
       </mat-list-item>
     </mat-list>
     <div class="align-right small-spacing">
-      <button 
+      <button
         id="add-link-button"
-        mat-raised-button color="accent" 
+        mat-raised-button color="accent"
         (click)="addLink()">Add Link</button>
+    </div>
+  </div>
+  <div
+    id="flags-section">
+    <h3 mat-dialog-title *ngIf="sceneFlags.length > 0">Flags</h3>
+    <mat-list *ngIf="sceneFlags.length > 0">
+      <mat-list-item *ngFor="let flag of sceneFlags">
+        <seeya-flag
+          class="full-width flag" [flag]="flag"
+          (flagRemovedEvent)="removeFlag($event)"></seeya-flag>
+      </mat-list-item>
+    </mat-list>
+    <div class="align-right small-spacing">
+      <button
+        id="add-flag-button"
+        mat-raised-button color="accent"
+        (click)="addFlag()">Add Flag</button>
     </div>
   </div>
 </div>
 <div mat-dialog-actions class="align-right">
-  <button 
+  <button
     id="cancel-button"
     mat-raised-button
     (click)="cancel()">Cancel</button>
-  <button 
+  <button
     id="add-scene-button"
     *ngIf="!editMode"
-    mat-raised-button color="accent" 
+    mat-raised-button color="accent"
     (click)="addScene()" [disabled]="!inputIsValid()">Add Scene</button>
-  <button 
+  <button
     id="edit-scene-button"
     *ngIf="editMode"
-    mat-raised-button color="accent" 
+    mat-raised-button color="accent"
     (click)="editScene()" [disabled]="!inputIsValid()">Save</button>
 </div>

@@ -1,0 +1,14 @@
+.align-right {
+  float: right;
+}
+
+.interactive {
+  position: relative;
+  width:24px; height:24px;
+  transition: color 0.25s;
+}
+
+.interactive:hover {
+  cursor: pointer;
+  color: #AAAAAA;
+}

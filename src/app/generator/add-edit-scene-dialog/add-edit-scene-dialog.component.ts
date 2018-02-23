@@ -4,9 +4,11 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SceneService } from '../scene/scene.service';
 
 import { AddEditLinkDialogComponent } from '../add-edit-link-dialog/add-edit-link-dialog.component';
+import { AddFlagDialogComponent } from '../add-flag-dialog/add-flag-dialog.component';
 
 import { SceneModel } from '../../shared/models/scene-model';
 import { LinkModel } from '../../shared/models/link-model';
+import { FlagModel } from '../../shared/models/flag-model';
 
 @Component({
   selector: 'seeya-add-edit-scene-dialog',
@@ -22,6 +24,7 @@ export class AddEditSceneDialogComponent implements OnInit {
   sceneDescription: string;
   sceneImageUrl: string;
   sceneLinks: LinkModel[];
+  sceneFlags: FlagModel[];
 
   constructor(
     public dialogRef: MatDialogRef<AddEditLinkDialogComponent>,
@@ -36,12 +39,14 @@ export class AddEditSceneDialogComponent implements OnInit {
         this.sceneDescription = data.scene.description;
         this.sceneImageUrl = data.scene.imageUrl;
         this.sceneLinks = data.scene.links;
+        this.sceneFlags = data.scene.flags;
       } else {
         this.sceneId = sceneService.getNextSceneId();
         this.sceneHeader = '';
         this.sceneDescription = '';
         this.sceneImageUrl = '';
         this.sceneLinks = new Array<LinkModel>();
+        this.sceneFlags = new Array<FlagModel>();
       }
   }
 
@@ -54,7 +59,8 @@ export class AddEditSceneDialogComponent implements OnInit {
       this.sceneHeader,
       this.sceneDescription,
       this.sceneImageUrl,
-      this.sceneLinks
+      this.sceneLinks,
+      this.sceneFlags
     );
 
     this.dialogRef.close();
@@ -66,7 +72,8 @@ export class AddEditSceneDialogComponent implements OnInit {
       this.sceneHeader,
       this.sceneDescription,
       this.sceneImageUrl,
-      this.sceneLinks
+      this.sceneLinks,
+      this.sceneFlags
     );
 
     this.dialogRef.close();
@@ -120,6 +127,35 @@ export class AddEditSceneDialogComponent implements OnInit {
   removeLink(linkToId: number): void {
     this.sceneLinks = this.sceneLinks.filter(link => {
       return link.toSceneId !== linkToId;
+    });
+  }
+
+  addFlag(): void {
+    let previousMaxId = -1;
+
+    if (this.sceneFlags.length > 0) {
+      previousMaxId = Math.max(...this.sceneFlags.map(flag => flag.id));
+    }
+
+    const dialogRef = this.dialog.open(AddFlagDialogComponent, {
+      width: '440px',
+      disableClose: true,
+      data: {
+        sceneId: this.sceneId,
+        previousMaxId: previousMaxId
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(newFlag => {
+      if (newFlag) {
+        this.sceneFlags.push(newFlag);
+      }
+    });
+  }
+
+  removeFlag(flagId: number): void {
+    this.sceneFlags = this.sceneFlags.filter(flag => {
+      return flag.id !== flagId;
     });
   }
 

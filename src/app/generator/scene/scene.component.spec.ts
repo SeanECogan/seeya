@@ -12,6 +12,8 @@ import { SceneComponent } from './scene.component';
 
 import { SceneModel } from '../../shared/models/scene-model';
 import { LinkModel } from '../../shared/models/link-model';
+import { FlagReferenceModel } from '../../shared/models/flag-reference-model';
+import { FlagModel } from '../../shared/models/flag-model';
 
 describe('SceneComponent', () => {
   let component: SceneComponent;
@@ -52,7 +54,8 @@ describe('SceneComponent', () => {
       'Header',
       'Description',
       '',
-      new Array<LinkModel>()
+      new Array<LinkModel>(),
+      new Array<FlagModel>()
     );
 
     fakeSceneService = TestBed.get(SceneService);
@@ -106,7 +109,8 @@ describe('SceneComponent', () => {
     component.scene.links = [new LinkModel(
       1,
       2,
-      'Test'
+      'Test',
+      new Array<FlagReferenceModel>()
     )];
 
     fixture.detectChanges();

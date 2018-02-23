@@ -11,6 +11,8 @@ import { SceneService } from '../scene/scene.service';
 import { AddEditSceneDialogComponent } from './add-edit-scene-dialog.component';
 
 import { LinkModel } from '../../shared/models/link-model';
+import { FlagReferenceModel } from '../../shared/models/flag-reference-model';
+import { FlagModel } from '../../shared/models/flag-model';
 
 describe('AddEditSceneDialogComponent', () => {
   let component: AddEditSceneDialogComponent;
@@ -28,6 +30,8 @@ describe('AddEditSceneDialogComponent', () => {
   let imagePreview: DebugElement;
   let linksSection: DebugElement;
   let links: DebugElement[];
+  let flagsSection: DebugElement;
+  let flags: DebugElement[];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -71,6 +75,8 @@ describe('AddEditSceneDialogComponent', () => {
     imagePreview = fixture.debugElement.query(By.css('#image-preview'));
     linksSection = fixture.debugElement.query(By.css('#links-section'));
     links = fixture.debugElement.queryAll(By.css('.link'));
+    flagsSection = fixture.debugElement.query(By.css('#flags-section'));
+    flags = fixture.debugElement.queryAll(By.css('.flag'));
   });
 
   it('should create', () => {
@@ -269,8 +275,8 @@ describe('AddEditSceneDialogComponent', () => {
 
     component.sceneId = 1;
     component.sceneLinks = [
-      new LinkModel(1, 2, 'Test'),
-      new LinkModel(1, 3, 'Test2')
+      new LinkModel(1, 2, 'Test', new Array<FlagReferenceModel>()),
+      new LinkModel(1, 3, 'Test2', new Array<FlagReferenceModel>())
     ];
 
     fixture.detectChanges();
@@ -278,6 +284,27 @@ describe('AddEditSceneDialogComponent', () => {
     links = fixture.debugElement.queryAll(By.css('.link'));
 
     expect(links.length).toBe(2);
+  });
+
+  it ('should have a Flags section', () => {
+    fixture.detectChanges();
+
+    flagsSection = fixture.debugElement.query(By.css('#flags-section'));
+
+    expect(flagsSection).toBeTruthy();
+  });
+
+  it ('should display the Flags for the Scene in the Flags section', () => {
+    component.sceneFlags = [
+      new FlagModel(1, 1, 'Test', false),
+      new FlagModel(2, 1, 'Test2', false)
+    ];
+
+    fixture.detectChanges();
+
+    flags = fixture.debugElement.queryAll(By.css('.flag'));
+
+    expect(flags.length).toBe(2);
   });
 
   it ('should have a cancel button', () => {
@@ -351,22 +378,22 @@ describe('AddEditSceneDialogComponent', () => {
 
   it ('should edit an existing link when running the LinkEditedEvent handler', () => {
     component.sceneLinks = [
-      new LinkModel(1, 2, 'Test'),
-      new LinkModel(1, 3, 'Test2')
+      new LinkModel(1, 2, 'Test', new Array<FlagReferenceModel>()),
+      new LinkModel(1, 3, 'Test2', new Array<FlagReferenceModel>())
     ];
 
-    component.editLink(new LinkModel(1, 2, 'Test2'));
+    component.editLink(new LinkModel(1, 2, 'Test2', new Array<FlagReferenceModel>()));
 
     expect(component.sceneLinks[0].displayText).toBe('Test2');
   });
 
   it ('should not edit an existing link when running the LinkEditedEvent handler if the link does not exist', () => {
     component.sceneLinks = [
-      new LinkModel(1, 2, 'Test'),
-      new LinkModel(1, 3, 'Test2')
+      new LinkModel(1, 2, 'Test', new Array<FlagReferenceModel>()),
+      new LinkModel(1, 3, 'Test2', new Array<FlagReferenceModel>())
     ];
 
-    component.editLink(new LinkModel(1, 4, 'Test2'));
+    component.editLink(new LinkModel(1, 4, 'Test2', new Array<FlagReferenceModel>()));
 
     expect(component.sceneLinks[0].displayText).toBe('Test');
     expect(component.sceneLinks[1].displayText).toBe('Test2');
@@ -374,8 +401,8 @@ describe('AddEditSceneDialogComponent', () => {
 
   it ('should delete an existing link when running the LinkRemovedEvent handler', () => {
     component.sceneLinks = [
-      new LinkModel(1, 2, 'Test'),
-      new LinkModel(1, 3, 'Test2')
+      new LinkModel(1, 2, 'Test', new Array<FlagReferenceModel>()),
+      new LinkModel(1, 3, 'Test2', new Array<FlagReferenceModel>())
     ];
 
     component.removeLink(2);
@@ -388,12 +415,50 @@ describe('AddEditSceneDialogComponent', () => {
 
   it ('should not delete an existing link if the supplied link id does not exist', () => {
     component.sceneLinks = [
-      new LinkModel(1, 2, 'Test'),
-      new LinkModel(1, 3, 'Test2')
+      new LinkModel(1, 2, 'Test', new Array<FlagReferenceModel>()),
+      new LinkModel(1, 3, 'Test2', new Array<FlagReferenceModel>())
     ];
 
     component.removeLink(4);
 
     expect(component.sceneLinks.length).toBe(2, 'Number of links');
+  });
+
+  it ('should open the Add Flag dialog after the Add Flag button is clicked', () => {
+    spyOn(fakeMatDialog, 'open').and.returnValue({
+      afterClosed: () => {
+        return new Observable<any>(() => {});
+      }
+    });
+
+    component.addFlag();
+
+    expect(fakeMatDialog.open).toHaveBeenCalled();
+  });
+
+  it ('should delete an existing flag when running the FlagRemovedEvent handler', () => {
+    component.sceneFlags = [
+      new FlagModel(1, 1, 'Test', false),
+      new FlagModel(2, 1, 'Test2', false),
+    ];
+
+    component.removeFlag(2);
+
+    expect(component.sceneFlags.length).toBe(1, 'Number of links');
+    expect(component.sceneFlags[0].id).toBe(1, 'Remaining Flag Id');
+    expect(component.sceneFlags[0].sceneId).toBe(1, 'Remaining Flag Scene Id');
+    expect(component.sceneFlags[0].name).toBe('Test', 'Remaining Flag Name');
+    expect(component.sceneFlags[0].isSet).toBe(false, 'Remaining Flag IsSet');
+  });
+
+  it ('should not delete an existing flag if the supplied flag id does not exist', () => {
+    component.sceneFlags = [
+      new FlagModel(1, 1, 'Test', false),
+      new FlagModel(2, 1, 'Test2', false),
+    ];
+
+    component.removeFlag(4);
+
+    expect(component.sceneFlags.length).toBe(2, 'Number of links');
   });
 });

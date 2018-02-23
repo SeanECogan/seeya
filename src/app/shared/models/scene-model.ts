@@ -1,4 +1,5 @@
 import { LinkModel } from './link-model';
+import { FlagModel } from './flag-model';
 
 export class SceneModel {
   /**
@@ -9,13 +10,15 @@ export class SceneModel {
     header: string,
     description: string,
     imageUrl: string,
-    links: LinkModel[]
+    links: LinkModel[],
+    flags: FlagModel[]
   ) {
     this.id = id;
     this.header = header;
     this.description = description;
     this.imageUrl = imageUrl;
     this.links = links;
+    this.flags = flags;
   }
 
   id: number;
@@ -23,4 +26,5 @@ export class SceneModel {
   description: string;
   imageUrl: string;
   links: LinkModel[];
+  flags: FlagModel[];
 }
