@@ -8,6 +8,7 @@ import { LinkFactory } from '../../shared/factories/link-factory';
 import { GameModel } from '../../shared/models/game-model';
 import { SceneModel } from '../../shared/models/scene-model';
 import { LinkModel } from '../../shared/models/link-model';
+import { FlagModel } from '../../shared/models/flag-model';
 
 @Injectable()
 export class SceneService {
@@ -59,14 +60,16 @@ export class SceneService {
     header: string,
     description: string,
     imageUrl: string,
-    links: LinkModel[]
+    links: LinkModel[],
+    flags: FlagModel[]
   ): void {
     this.addNewScene(
       id,
       header,
       description,
       imageUrl,
-      links);
+      links,
+    flags);
 
     // Initialize the Initial Scene ID if one isn't set yet.
     if (this.initialSceneId < 0) {
@@ -79,7 +82,8 @@ export class SceneService {
     header: string,
     description: string,
     imageUrl: string,
-    links: LinkModel[]
+    links: LinkModel[],
+    flags: FlagModel[]
   ): void {
     const sceneToEdit = this.scenes.filter(scene => scene.id === sceneId)[0];
 
@@ -88,6 +92,7 @@ export class SceneService {
       sceneToEdit.description = description;
       sceneToEdit.imageUrl = imageUrl;
       sceneToEdit.links = links;
+      sceneToEdit.flags = flags;
     }
   }
 
@@ -112,6 +117,24 @@ export class SceneService {
 
       this.scenes.splice(sceneToDeleteIndex, 1);
     }
+  }
+
+  getNextFlagId(): number {
+    let currentMax = 0;
+
+    if (this.scenes.length > 0) {
+      const allFlags = new Array<FlagModel>();
+
+      this.scenes.map(scene => {
+        scene.flags.map(flag => {
+          allFlags.push(flag);
+        });
+      });
+
+      currentMax = Math.max(...allFlags.map(flag => flag.id));
+    }
+
+    return currentMax + 1;
   }
 
   exportGame(): string {
@@ -152,7 +175,8 @@ export class SceneService {
     header: string,
     description: string,
     imageUrl: string,
-    links: LinkModel[]
+    links: LinkModel[],
+    flags: FlagModel[]
   ): void {
     this.scenes.push(
       this.sf.createScene(
@@ -160,7 +184,8 @@ export class SceneService {
         header,
         description,
         imageUrl,
-        links
+        links,
+        flags
       )
     );
   }

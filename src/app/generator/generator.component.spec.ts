@@ -10,6 +10,7 @@ import { GeneratorComponent } from './generator.component';
 
 import { SceneModel } from '../shared/models/scene-model';
 import { LinkModel } from '../shared/models/link-model';
+import { FlagModel } from '../shared/models/flag-model';
 
 describe('GeneratorComponent', () => {
   let component: GeneratorComponent;
@@ -53,7 +54,7 @@ describe('GeneratorComponent', () => {
     // Setup mock SceneService.
     fakeSceneService.getScenes = () => {
       return [
-        new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>())
+        new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>(), new Array<FlagModel>())
       ];
     };
 
@@ -64,5 +65,6 @@ describe('GeneratorComponent', () => {
     expect(scenes[0].header).toBe('Test');
     expect(scenes[0].description).toBe('Test');
     expect(scenes[0].links.length).toBe(0);
+    expect(scenes[0].flags.length).toBe(0);
   });
 });

@@ -3,6 +3,8 @@ import { TestBed, inject } from '@angular/core/testing';
 import { SceneService } from './scene.service';
 import { SceneModel } from '../../shared/models/scene-model';
 import { LinkModel } from '../../shared/models/link-model';
+import { FlagReferenceModel } from '../../shared/models/flag-reference-model';
+import { FlagModel } from '../../shared/models/flag-model';
 
 describe('SceneService', () => {
   beforeEach(() => {
@@ -103,15 +105,17 @@ describe('SceneService', () => {
           'Description',
           '',
           [
-            new LinkModel(5, 6, 'Test')
-          ]
+            new LinkModel(5, 6, 'Test', new Array<FlagReferenceModel>())
+          ],
+          new Array<FlagModel>()
         ),
         new SceneModel(
           6,
           'Header2',
           'Description2',
           '',
-          new Array<LinkModel>()
+          new Array<LinkModel>(),
+          new Array<FlagModel>()
         )
       ];
 
@@ -130,15 +134,17 @@ describe('SceneService', () => {
           'Description',
           '',
           [
-            new LinkModel(5, 6, 'Test')
-          ]
+            new LinkModel(5, 6, 'Test', new Array<FlagReferenceModel>())
+          ],
+          new Array<FlagModel>()
         ),
         new SceneModel(
           6,
           'Header2',
           'Description2',
           '',
-          new Array<LinkModel>()
+          new Array<LinkModel>(),
+          new Array<FlagModel>()
         )
       ];
 

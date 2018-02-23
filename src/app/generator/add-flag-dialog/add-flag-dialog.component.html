@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Add Flag</h2>
+<div mat-dialog-content>
+  <mat-form-field class="full-width">
+    <input matInput [(ngModel)]="name" placeholder="Name">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="align-right">
+  <button
+    id="cancel-button"
+    mat-raised-button
+    (click)="cancel()">Cancel</button>
+  <button
+    id="save-button" color="accent"
+    mat-raised-button [mat-dialog-close]="ff.createFlag(getNextFlagId(), sceneId, name, false)"
+    [disabled]="!inputIsValid()">Add Flag</button>
+</div>

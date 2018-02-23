@@ -10,6 +10,8 @@ import { GameRunnerComponent } from './game-runner.component';
 
 import { SceneModel } from '../../shared/models/scene-model';
 import { LinkModel } from '../../shared/models/link-model';
+import { FlagModel } from '../../shared/models/flag-model';
+import { FlagReferenceModel } from '../../shared/models/flag-reference-model';
 
 describe('GameRunnerComponent', () => {
   let component: GameRunnerComponent;
@@ -76,7 +78,7 @@ describe('GameRunnerComponent', () => {
 
   it('should display the game container if the current scene is not null', () => {
     fakeSceneService.getCurrentScene = () => {
-      return new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>());
+      return new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>(), new Array<FlagModel>());
     };
 
     fixture.detectChanges();
@@ -88,7 +90,7 @@ describe('GameRunnerComponent', () => {
 
   it('should have a current scene if the service returns a current scene', () => {
     fakeSceneService.getCurrentScene = () => {
-      return new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>());
+      return new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>(), new Array<FlagModel>());
     };
 
     fixture.detectChanges();
@@ -98,7 +100,7 @@ describe('GameRunnerComponent', () => {
 
   it('should have a play again button if the scene has no linked scene', () => {
     fakeSceneService.getCurrentScene = () => {
-      return new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>());
+      return new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>(), new Array<FlagModel>());
     };
 
     fixture.detectChanges();
@@ -116,7 +118,8 @@ describe('GameRunnerComponent', () => {
         'Test',
         'Test',
         '',
-        [ new LinkModel(1, 2, 'Display') ]);
+        [ new LinkModel(1, 2, 'Display', new Array<FlagReferenceModel>()) ],
+      new Array<FlagModel>());
     };
 
     fixture.detectChanges();
@@ -144,15 +147,17 @@ describe('GameRunnerComponent', () => {
         'Description',
         '',
         [
-          new LinkModel(5, 6, 'Test')
-        ]
+          new LinkModel(5, 6, 'Test', new Array<FlagReferenceModel>())
+        ],
+        new Array<FlagModel>()
       ),
       new SceneModel(
         6,
         'Header2',
         'Description2',
         '',
-        new Array<LinkModel>()
+        new Array<LinkModel>(),
+        new Array<FlagModel>()
       )
     ];
 
@@ -194,15 +199,17 @@ describe('GameRunnerComponent', () => {
         'Description',
         '',
         [
-          new LinkModel(5, 6, 'Test')
-        ]
+          new LinkModel(5, 6, 'Test', new Array<FlagReferenceModel>())
+        ],
+        new Array<FlagModel>()
       ),
       new SceneModel(
         6,
         'Header2',
         'Description2',
         '',
-        new Array<LinkModel>()
+        new Array<LinkModel>(),
+        new Array<FlagModel>()
       )
     ];
 

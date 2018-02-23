@@ -7,6 +7,8 @@ import { AddEditSceneDialogComponent } from '../add-edit-scene-dialog/add-edit-s
 
 import { SceneModel } from '../../shared/models/scene-model';
 import { LinkModel } from '../../shared/models/link-model';
+import { FlagModel } from '../../shared/models/flag-model';
+import { FlagReferenceModel } from '../../shared/models/flag-reference-model';
 
 @Component({
   selector: 'seeya-scene',
@@ -48,7 +50,21 @@ export class SceneComponent implements OnInit {
             return new LinkModel(
               link.fromSceneId,
               link.toSceneId,
-              link.displayText
+              link.displayText,
+              link.flagReferences.map(flagReference => {
+                return new FlagReferenceModel(
+                  flagReference.id,
+                  flagReference.sceneId
+                );
+              })
+            );
+          }),
+          this.scene.flags.map(flag => {
+            return new FlagModel(
+              flag.id,
+              flag.sceneId,
+              flag.name,
+              flag.isSet
             );
           })
         )

@@ -10,6 +10,8 @@ import { SceneService } from '../scene/scene.service';
 import { AddEditLinkDialogComponent } from './add-edit-link-dialog.component';
 import { SceneModel } from '../../shared/models/scene-model';
 import { LinkModel } from '../../shared/models/link-model';
+import { FlagReferenceModel } from '../../shared/models/flag-reference-model';
+import { FlagModel } from '../../shared/models/flag-model';
 
 describe('AddEditLinkDialogComponent', () => {
   let component: AddEditLinkDialogComponent;
@@ -27,7 +29,7 @@ describe('AddEditLinkDialogComponent', () => {
         { provide: SceneService, useValue: {
           getScenes: () => []
         } },
-        { provide: MatDialogRef, useValue: {} },
+        { provide: MatDialogRef, useValue: { } },
         { provide: MAT_DIALOG_DATA, useValue: { } }
       ]
     })
@@ -138,12 +140,12 @@ describe('AddEditLinkDialogComponent', () => {
     fakeSceneService.getScenes = () => {
       return [
         new SceneModel(1, 'Test1', 'Test1', '', [
-          new LinkModel(1, 2, 'Test'),
-          new LinkModel(1, 3, 'Test')
-        ]),
-        new SceneModel(2, 'Test2', 'Test2', '', new Array<LinkModel>()),
-        new SceneModel(3, 'Test3', 'Test3', '', new Array<LinkModel>()),
-        new SceneModel(4, 'Test4', 'Test4', '', new Array<LinkModel>())
+          new LinkModel(1, 2, 'Test', new Array<FlagReferenceModel>()),
+          new LinkModel(1, 3, 'Test', new Array<FlagReferenceModel>())
+        ], new Array<FlagModel>()),
+        new SceneModel(2, 'Test2', 'Test2', '', new Array<LinkModel>(), new Array<FlagModel>()),
+        new SceneModel(3, 'Test3', 'Test3', '', new Array<LinkModel>(), new Array<FlagModel>()),
+        new SceneModel(4, 'Test4', 'Test4', '', new Array<LinkModel>(), new Array<FlagModel>())
       ];
     };
 

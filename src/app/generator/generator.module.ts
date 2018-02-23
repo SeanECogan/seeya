@@ -17,11 +17,13 @@ import { GeneratorComponent } from './generator.component';
 import { SceneComponent } from './scene/scene.component';
 import { AddSceneComponent } from './add-scene/add-scene.component';
 import { LinkComponent } from './link/link.component';
+import { FlagComponent } from './flag/flag.component';
 import { ImportExportGameComponent } from './import-export-game/import-export-game.component';
 import { ExportGameDialogComponent } from './export-game-dialog/export-game-dialog.component';
 import { ImportGameDialogComponent } from './import-game-dialog/import-game-dialog.component';
 import { AddEditLinkDialogComponent } from './add-edit-link-dialog/add-edit-link-dialog.component';
 import { AddEditSceneDialogComponent } from './add-edit-scene-dialog/add-edit-scene-dialog.component';
+import { AddFlagDialogComponent } from './add-flag-dialog/add-flag-dialog.component';
 
 @NgModule({
   imports: [
@@ -47,13 +49,16 @@ import { AddEditSceneDialogComponent } from './add-edit-scene-dialog/add-edit-sc
     ImportGameDialogComponent,
     AddEditLinkDialogComponent,
     AddEditSceneDialogComponent,
-    LinkComponent
+    LinkComponent,
+    FlagComponent,
+    AddFlagDialogComponent
   ],
   entryComponents: [
     ExportGameDialogComponent,
     ImportGameDialogComponent,
     AddEditSceneDialogComponent,
-    AddEditLinkDialogComponent
+    AddEditLinkDialogComponent,
+    AddFlagDialogComponent
   ],
   providers: [
     SceneService
