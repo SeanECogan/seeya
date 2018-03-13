@@ -39,9 +39,10 @@ export class LinkFactory {
 
       if (flags !== null &&
           flags !== undefined) {
-        const frf = new FlagReferenceFactory();
 
         flags.map(flag => {
+          const frf = new FlagReferenceFactory();
+
           flagReferences.push(frf.createFlagReference(
             flag.id,
             flag.sceneId

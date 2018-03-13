@@ -103,6 +103,8 @@ describe('GameRunnerComponent', () => {
       return new SceneModel(1, 'Test', 'Test', '', new Array<LinkModel>(), new Array<FlagModel>());
     };
 
+    fakeSceneService.allFlagsSetForLink = () => true;
+
     fixture.detectChanges();
 
     // Must re-query for the playAgainButton because it didn't exist by default.
@@ -122,12 +124,34 @@ describe('GameRunnerComponent', () => {
       new Array<FlagModel>());
     };
 
+    fakeSceneService.allFlagsSetForLink = () => true;
+
     fixture.detectChanges();
 
     nextSceneButtons = fixture.debugElement.queryAll(By.css('.next-scene-button'));
 
     expect(nextSceneButtons.length).toBe(1);
     expect(nextSceneButtons[0].nativeElement.innerText).toBe('Display');
+  });
+
+  it('should hide any next scene buttons where the link does not have all flags set', () => {
+    fakeSceneService.getCurrentScene = () => {
+      return new SceneModel(
+        1,
+        'Test',
+        'Test',
+        '',
+        [ new LinkModel(1, 2, 'Display', [ new FlagReferenceModel(1, 1)]) ],
+      new Array<FlagModel>());
+    };
+
+    fakeSceneService.allFlagsSetForLink = () => false;
+
+    fixture.detectChanges();
+
+    nextSceneButtons = fixture.debugElement.queryAll(By.css('.next-scene-button'));
+
+    expect(nextSceneButtons.length).toBe(0);
   });
 
   it('should load the next scene if the next scene button is clicked', () => {
@@ -138,6 +162,8 @@ describe('GameRunnerComponent', () => {
     fakeSceneService.startGame = tempSceneService.startGame;
     fakeSceneService.getCurrentScene = tempSceneService.getCurrentScene;
     fakeSceneService.loadNextScene = tempSceneService.loadNextScene;
+    fakeSceneService.allFlagsSetForLink = tempSceneService.allFlagsSetForLink;
+    fakeSceneService['toggleFlagsForScene'] = tempSceneService['toggleFlagsForScene'];
 
     fakeSceneService['initialSceneId'] = 5;
     fakeSceneService['scenes'] = [
@@ -190,6 +216,8 @@ describe('GameRunnerComponent', () => {
     fakeSceneService.startGame = tempSceneService.startGame;
     fakeSceneService.getCurrentScene = tempSceneService.getCurrentScene;
     fakeSceneService.loadNextScene = tempSceneService.loadNextScene;
+    fakeSceneService.allFlagsSetForLink = tempSceneService.allFlagsSetForLink;
+    fakeSceneService['toggleFlagsForScene'] = tempSceneService['toggleFlagsForScene'];
 
     fakeSceneService['initialSceneId'] = 5;
     fakeSceneService['scenes'] = [

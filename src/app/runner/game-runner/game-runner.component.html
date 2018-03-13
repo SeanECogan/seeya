@@ -5,7 +5,7 @@
     <span
       *ngIf="currentScene.links.length > 0">
       <button
-        *ngFor="let link of currentScene.links"
+        *ngFor="let link of visibleLinks()"
         class="next-scene-button"
         mat-raised-button
         (click)="loadNextScene(link.toSceneId)">
@@ -14,7 +14,7 @@
     </span>
     <button
       id="play-again-button"
-      *ngIf="currentScene.links.length === 0"
+      *ngIf="visibleLinks().length === 0"
       mat-raised-button color="accent"
       (click)="restartGame()">
       Play Again
