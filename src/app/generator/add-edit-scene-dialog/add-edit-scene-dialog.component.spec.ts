@@ -382,9 +382,17 @@ describe('AddEditSceneDialogComponent', () => {
       new LinkModel(1, 3, 'Test2', new Array<FlagReferenceModel>())
     ];
 
-    component.editLink(new LinkModel(1, 2, 'Test2', new Array<FlagReferenceModel>()));
+    component.editLink(new LinkModel(
+      1,
+      2,
+      'Test2',
+      [
+        new FlagReferenceModel(1, 1),
+        new FlagReferenceModel(2, 1)
+      ]));
 
     expect(component.sceneLinks[0].displayText).toBe('Test2');
+    expect(component.sceneLinks[0].flagReferences.length).toBe(2);
   });
 
   it ('should not edit an existing link when running the LinkEditedEvent handler if the link does not exist', () => {

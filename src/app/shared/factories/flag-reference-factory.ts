@@ -4,7 +4,7 @@ export class FlagReferenceFactory {
     /**
      * Creates a new FlagModel object.
      */
-    createFlag(
+    createFlagReference(
         id: number,
         sceneId: number
     ): FlagReferenceModel {

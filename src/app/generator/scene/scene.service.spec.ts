@@ -200,7 +200,7 @@ describe('SceneService', () => {
       expect(service.getScenes()[0].links.length).toBe(1, 'Number of links');
     }));
 
-  it('should return 1 as the next flag id if there are no other flag',
+  it('should return 1 as the next flag id if there are no other flags',
     inject([SceneService], (service: SceneService) => {
 
       service['scenes'] = new Array<SceneModel>();
@@ -225,6 +225,82 @@ describe('SceneService', () => {
       ];
 
       expect(service.getNextFlagId()).toBe(3);
+    }));
+
+  it('should return flags from all scenes',
+    inject([SceneService], (service: SceneService) => {
+
+      service['scenes'] = [
+        new SceneModel(1, 'Test', 'Test', '', [
+          new LinkModel(1, 2, 'Test', new Array<FlagReferenceModel>()),
+          new LinkModel(1, 3, 'Test', new Array<FlagReferenceModel>())
+        ], [
+          new FlagModel(1, 1, 'Test', false)
+        ]),
+        new SceneModel(6, 'Test2', 'Test2', '', new Array<LinkModel>(), [
+          new FlagModel(2, 6, 'Test', false)
+        ]),
+        new SceneModel(3, 'Test3', 'Test3', '', new Array<LinkModel>(), new Array<FlagModel>())
+      ];
+
+      expect(service.getAllFlags().length).toBe(2);
+    }));
+
+  it('should return the flag model if the scene and flag exist',
+    inject([SceneService], (service: SceneService) => {
+
+      service['scenes'] = [
+        new SceneModel(1, 'Test', 'Test', '', [
+          new LinkModel(1, 2, 'Test', new Array<FlagReferenceModel>()),
+          new LinkModel(1, 3, 'Test', new Array<FlagReferenceModel>())
+        ], [
+          new FlagModel(1, 1, 'Test', false)
+        ]),
+        new SceneModel(6, 'Test2', 'Test2', '', new Array<LinkModel>(), [
+          new FlagModel(2, 6, 'Test', false)
+        ]),
+        new SceneModel(3, 'Test3', 'Test3', '', new Array<LinkModel>(), new Array<FlagModel>())
+      ];
+
+      expect(service.getFlag(1, 1)).toBeTruthy();
+    }));
+
+  it('should return falsy value if the scene does not exist',
+    inject([SceneService], (service: SceneService) => {
+
+      service['scenes'] = [
+        new SceneModel(1, 'Test', 'Test', '', [
+          new LinkModel(1, 2, 'Test', new Array<FlagReferenceModel>()),
+          new LinkModel(1, 3, 'Test', new Array<FlagReferenceModel>())
+        ], [
+          new FlagModel(1, 1, 'Test', false)
+        ]),
+        new SceneModel(6, 'Test2', 'Test2', '', new Array<LinkModel>(), [
+          new FlagModel(2, 6, 'Test', false)
+        ]),
+        new SceneModel(3, 'Test3', 'Test3', '', new Array<LinkModel>(), new Array<FlagModel>())
+      ];
+
+      expect(service.getFlag(2, 1)).toBeFalsy();
+    }));
+
+  it('should return falsy value if the flag does not exist on the existing scene',
+    inject([SceneService], (service: SceneService) => {
+
+      service['scenes'] = [
+        new SceneModel(1, 'Test', 'Test', '', [
+          new LinkModel(1, 2, 'Test', new Array<FlagReferenceModel>()),
+          new LinkModel(1, 3, 'Test', new Array<FlagReferenceModel>())
+        ], [
+          new FlagModel(1, 1, 'Test', false)
+        ]),
+        new SceneModel(6, 'Test2', 'Test2', '', new Array<LinkModel>(), [
+          new FlagModel(2, 6, 'Test', false)
+        ]),
+        new SceneModel(3, 'Test3', 'Test3', '', new Array<LinkModel>(), new Array<FlagModel>())
+      ];
+
+      expect(service.getFlag(6, 1)).toBeFalsy();
     }));
 
   it('should export the scenes to a base64-encoded string',

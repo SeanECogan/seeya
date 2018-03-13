@@ -121,6 +121,7 @@ export class AddEditSceneDialogComponent implements OnInit {
 
       if (linkToEdit) {
         linkToEdit.displayText = editedLink.displayText;
+        linkToEdit.flagReferences = editedLink.flagReferences;
       }
   }
 

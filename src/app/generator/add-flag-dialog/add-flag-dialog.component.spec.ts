@@ -60,7 +60,6 @@ describe('AddFlagDialogComponent', () => {
     expect(saveButton.attributes['ng-reflect-disabled']).toBe('true');
   });
 
-
   it('should enable the Save button when there is something in the textbox', () => {
     component.sceneId = 1;
     component.name = 'Test';
@@ -68,5 +67,25 @@ describe('AddFlagDialogComponent', () => {
     fixture.detectChanges();
 
     expect(saveButton.attributes['ng-reflect-disabled']).toBe('false');
+  });
+
+  it('should use the next flag id from the service if no other flags have been added', () => {
+    component.sceneId = 1;
+    component.name = 'Test';
+    component.previousMaxId = -1;
+
+    fakeSceneService.getNextFlagId = () => 1;
+
+    expect(component.getNextFlagId()).toBe(1);
+  });
+
+  it('should use the next previous max flag id if other scenes have been added', () => {
+    component.sceneId = 1;
+    component.name = 'Test';
+    component.previousMaxId = 2;
+
+    fakeSceneService.getNextFlagId = () => 1;
+
+    expect(component.getNextFlagId()).toBe(3);
   });
 });
