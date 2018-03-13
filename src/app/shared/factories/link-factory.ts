@@ -1,5 +1,7 @@
 import { LinkModel } from '../models/link-model';
 import { FlagReferenceModel } from '../models/flag-reference-model';
+import { FlagModel } from '../models/flag-model';
+import { FlagReferenceFactory } from './flag-reference-factory';
 
 export class LinkFactory {
     /**
@@ -13,7 +15,7 @@ export class LinkFactory {
     ): LinkModel {
       if (flagReferences === null ||
           flagReferences === undefined) {
-            flagReferences = new Array<FlagReferenceModel>()
+            flagReferences = new Array<FlagReferenceModel>();
           }
 
         return new LinkModel(
@@ -22,5 +24,36 @@ export class LinkFactory {
           displayText,
           flagReferences
         );
+    }
+
+    /**
+     * Creates a new LinkModel object.
+     */
+    createLinkFromFlags(
+      fromSceneId: number,
+      toSceneId: number,
+      displayText: string,
+      flags: FlagModel[]
+    ): LinkModel {
+      const flagReferences = new Array<FlagReferenceModel>();
+
+      if (flags !== null &&
+          flags !== undefined) {
+        const frf = new FlagReferenceFactory();
+
+        flags.map(flag => {
+          flagReferences.push(frf.createFlagReference(
+            flag.id,
+            flag.sceneId
+          ));
+        });
+      }
+
+      return new LinkModel(
+        fromSceneId,
+        toSceneId,
+        displayText,
+        flagReferences
+      );
     }
 }

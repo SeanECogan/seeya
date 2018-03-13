@@ -12,6 +12,12 @@
   <mat-form-field class="full-width">
     <input matInput [(ngModel)]="displayText" placeholder="Display Text">
   </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-select
+      id="required-flags-select" placeholder="Required Flags" multiple [(ngModel)]="requiredFlags">
+      <mat-option *ngFor="let flag of getAllFlags()" [value]="flag" class="flag-option">{{flag.name}} (Scene #{{flag.sceneId}})</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div mat-dialog-actions class="align-right">
   <button
@@ -20,6 +26,7 @@
     (click)="cancel()">Cancel</button>
   <button
     id="save-button" color="accent"
-    mat-raised-button [mat-dialog-close]="lf.createLink(fromSceneId, toSceneId, displayText)"
+    mat-raised-button 
+    [mat-dialog-close]="lf.createLinkFromFlags(fromSceneId, toSceneId, displayText, requiredFlags)"
     [disabled]="!inputIsValid()">{{editMode ? "Save" : "Add Link"}}</button>
 </div>

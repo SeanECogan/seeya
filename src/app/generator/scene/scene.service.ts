@@ -123,18 +123,44 @@ export class SceneService {
     let currentMax = 0;
 
     if (this.scenes.length > 0) {
-      const allFlags = new Array<FlagModel>();
-
-      this.scenes.map(scene => {
-        scene.flags.map(flag => {
-          allFlags.push(flag);
-        });
-      });
+      const allFlags = this.getAllFlags();
 
       currentMax = Math.max(...allFlags.map(flag => flag.id));
     }
 
     return currentMax + 1;
+  }
+
+  getAllFlags(): FlagModel[] {
+    const allFlags = new Array<FlagModel>();
+
+    this.scenes.map(scene => {
+      scene.flags.map(flag => {
+        allFlags.push(flag);
+      });
+    });
+
+    return allFlags;
+  }
+
+  getFlag(
+    flagId: number,
+    sceneId: number
+  ): FlagModel {
+    let flag = null;
+
+    const flagScene = this.scenes.filter(scene => {
+      return scene.id === sceneId;
+    })[0];
+
+    if (flagScene !== null &&
+        flagScene !== undefined) {
+      flag = flagScene.flags.filter(sceneFlag => {
+        return sceneFlag.id === flagId;
+      })[0];
+    }
+
+    return flag;
   }
 
   exportGame(): string {

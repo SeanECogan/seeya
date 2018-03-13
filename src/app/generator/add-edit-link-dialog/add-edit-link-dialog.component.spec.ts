@@ -20,6 +20,8 @@ describe('AddEditLinkDialogComponent', () => {
   let title: DebugElement;
   let saveButton: DebugElement;
   let sceneSelect: DebugElement;
+  let requiredFlagsSelect: DebugElement;
+  let flagOptions: DebugElement[];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,7 +29,8 @@ describe('AddEditLinkDialogComponent', () => {
       declarations: [ ],
       providers: [
         { provide: SceneService, useValue: {
-          getScenes: () => []
+          getScenes: () => [],
+          getAllFlags: () => []
         } },
         { provide: MatDialogRef, useValue: { } },
         { provide: MAT_DIALOG_DATA, useValue: { } }
@@ -47,6 +50,8 @@ describe('AddEditLinkDialogComponent', () => {
     title = fixture.debugElement.query(By.css('h2'));
     saveButton = fixture.debugElement.query(By.css('#save-button'));
     sceneSelect = fixture.debugElement.query(By.css('#scene-select'));
+    requiredFlagsSelect = fixture.debugElement.query(By.css('#required-flags-select'));
+    flagOptions = fixture.debugElement.queryAll(By.css('.flag-option'));
   });
 
   it('should create', () => {
@@ -87,6 +92,26 @@ describe('AddEditLinkDialogComponent', () => {
     sceneSelect = fixture.debugElement.query(By.css('#scene-select'));
 
     expect(sceneSelect).toBeFalsy();
+  });
+
+  it('should have the Required Flags Select', () => {
+    fixture.detectChanges();
+
+    requiredFlagsSelect = fixture.debugElement.query(By.css('#required-flags-select'));
+
+    expect(requiredFlagsSelect).toBeTruthy();
+  });
+
+  it('should have use all flags that are returned from the service', () => {
+    fakeSceneService.getAllFlags = () => {
+      return [
+        new FlagModel(1, 1, 'Test', false),
+        new FlagModel(2, 1, 'Test', false),
+        new FlagModel(3, 1, 'Test', false)
+      ];
+    };
+
+    expect(component.getAllFlags().length).toBe(3);
   });
 
   it('should disable the Save button when there is nothing in the textbox and no scene is selected', () => {

@@ -7,6 +7,8 @@ import { LinkFactory } from '../../shared/factories/link-factory';
 
 import { SceneModel } from '../../shared/models/scene-model';
 import { LinkModel } from '../../shared/models/link-model';
+import { FlagModel } from '../../shared/models/flag-model';
+import { FlagReferenceModel } from '../../shared/models/flag-reference-model';
 
 @Component({
   selector: 'seeya-add-edit-link-dialog',
@@ -19,6 +21,8 @@ export class AddEditLinkDialogComponent implements OnInit {
   displayText: string;
   toSceneId: number;
   fromSceneId: number;
+  requiredFlags: FlagModel[];
+  requiredFlagReferences: FlagReferenceModel[];
 
   editMode: boolean;
 
@@ -36,11 +40,24 @@ export class AddEditLinkDialogComponent implements OnInit {
         this.toSceneId = data.link.toSceneId;
         this.fromSceneId = data.link.fromSceneId;
         this.displayText = data.link.displayText;
+        this.requiredFlagReferences = data.link.flagReferences;
+
+        this.requiredFlags = new Array<FlagModel>();
+
+        this.requiredFlagReferences.map(rfr => {
+          this.requiredFlags.push(this.sceneService.getFlag(
+            rfr.id,
+            rfr.sceneId
+          ));
+        });
       } else {
         this.displayText = '';
         this.fromSceneId = data.fromSceneId;
 
         this.linkedSceneIds = data.linkedSceneIds;
+
+        this.requiredFlags = new Array<FlagModel>();
+        this.requiredFlagReferences = new Array<FlagReferenceModel>();
       }
     }
 
@@ -54,6 +71,10 @@ export class AddEditLinkDialogComponent implements OnInit {
       return scene.id !== this.fromSceneId &&
         !this.linkedSceneIds.some(id => id === scene.id);
     });
+  }
+
+  getAllFlags(): FlagModel[] {
+    return this.sceneService.getAllFlags();
   }
 
   inputIsValid(): boolean {
