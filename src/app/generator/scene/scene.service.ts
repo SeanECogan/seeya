@@ -9,6 +9,7 @@ import { GameModel } from '../../shared/models/game-model';
 import { SceneModel } from '../../shared/models/scene-model';
 import { LinkModel } from '../../shared/models/link-model';
 import { FlagModel } from '../../shared/models/flag-model';
+import { FlagReferenceModel } from '../../shared/models/flag-reference-model';
 
 @Injectable()
 export class SceneService {
@@ -181,6 +182,22 @@ export class SceneService {
 
     this.initialSceneId = game.initialSceneId;
     this.scenes = game.scenes;
+
+    this.scenes.map(scene => {
+      if (!scene.links) {
+        scene.links = new Array<LinkModel>();
+      } else {
+        scene.links.map(link => {
+          if (!link.flagReferences) {
+            link.flagReferences = new Array<FlagReferenceModel>();
+          }
+        });
+      }
+
+      if (!scene.flags) {
+        scene.flags = new Array<FlagModel>();
+      }
+    });
   }
 
   // https://stackoverflow.com/questions/30106476/using-javascripts-atob-to-decode-base64-doesnt-properly-decode-utf-8-strings/30106551

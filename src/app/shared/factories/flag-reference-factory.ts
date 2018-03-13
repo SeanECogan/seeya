@@ -2,7 +2,7 @@ import { FlagReferenceModel } from '../models/flag-reference-model';
 
 export class FlagReferenceFactory {
     /**
-     * Creates a new FlagModel object.
+     * Creates a new FlagReferenceModel object.
      */
     createFlagReference(
         id: number,

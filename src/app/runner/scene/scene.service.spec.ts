@@ -53,7 +53,7 @@ describe('SceneService', () => {
   it('should return current scene after game is started',
     inject([SceneService], (service: SceneService) => {
       /* tslint:disable:max-line-length */
-      service.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6Nn19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0');
+      service.importGame('eyJpbml0aWFsU2NlbmVJZCI6MSwic2NlbmVzIjpbeyJpZCI6MSwiaGVhZGVyIjoiQSBEYXJrIEhhbGx3YXkiLCJkZXNjcmlwdGlvbiI6IllvdSBzdGFuZCBpbiBhIGRpbWx5LWxpdCBoYWxsd2F5IHdpdGggdGhyZWUgZG9vcnMgaW4gZnJvbnQgb2YgeW91LlxuXG5UaGUgZG9vciBvbiB0aGUgbGVmdCBpcyBncmVlbiwgYW5kIGFwcGVhcnMgdG8gYmUgdW5sb2NrZWQuXG5cblRoZSBkb29yIGluIHRoZSBtaWRkbGUgaXMgYmx1ZSwgYW5kIGFsc28gYXBwZWFycyB0byBiZSB1bmxvY2tlZC5cblxuVGhlIGRvb3Igb24gdGhlIHJpZ2h0IGlzIHJlZCwgYW5kIGhhcyBhIGdyZWVuIHBhZGxvY2sgYW5kIGEgYmx1ZSBwYWRsb2NrIG9uIGl0LiIsImltYWdlVXJsIjoiIiwibGlua3MiOlt7ImZyb21TY2VuZUlkIjoxLCJ0b1NjZW5lSWQiOjIsImRpc3BsYXlUZXh0IjoiT3BlbiB0aGUgR3JlZW4gRG9vciIsImZsYWdSZWZlcmVuY2VzIjpbXX0seyJmcm9tU2NlbmVJZCI6MSwidG9TY2VuZUlkIjozLCJkaXNwbGF5VGV4dCI6Ik9wZW4gdGhlIEJsdWUgRG9vciIsImZsYWdSZWZlcmVuY2VzIjpbXX0seyJmcm9tU2NlbmVJZCI6MSwidG9TY2VuZUlkIjo0LCJkaXNwbGF5VGV4dCI6Ik9wZW4gdGhlIFJlZCBEb29yIiwiZmxhZ1JlZmVyZW5jZXMiOlt7ImlkIjowLCJzY2VuZUlkIjoyfSx7ImlkIjoxLCJzY2VuZUlkIjozfV19XSwiZmxhZ3MiOltdfSx7ImlkIjoyLCJoZWFkZXIiOiJBIEdyZWVuIFJvb20iLCJkZXNjcmlwdGlvbiI6Ik9uIGEgc21hbGwgcGVkZXN0YWwgaW4gdGhlIG1pZGRsZSBvZiB0aGUgcm9vbSBpcyBhIGdyZWVuIGtleS5cblxuWW91IHRha2UgdGhlIGtleS4iLCJpbWFnZVVybCI6IiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6MiwidG9TY2VuZUlkIjoxLCJkaXNwbGF5VGV4dCI6IlJldHVybiB0byB0aGUgSGFsbHdheSIsImZsYWdSZWZlcmVuY2VzIjpbXX1dLCJmbGFncyI6W3siaWQiOjAsInNjZW5lSWQiOjIsIm5hbWUiOiJGbGFnIDEiLCJpc1NldCI6ZmFsc2V9XX0seyJpZCI6MywiaGVhZGVyIjoiQSBCbHVlIFJvb20iLCJkZXNjcmlwdGlvbiI6Ik9uIGEgc21hbGwgcGVkZXN0YWwgaW4gdGhlIG1pZGRsZSBvZiB0aGUgcm9vbSBpcyBhIGJsdWUga2V5LlxuXG5Zb3UgdGFrZSB0aGUga2V5LiIsImltYWdlVXJsIjoiIiwibGlua3MiOlt7ImZyb21TY2VuZUlkIjozLCJ0b1NjZW5lSWQiOjEsImRpc3BsYXlUZXh0IjoiUmV0dXJuIHRvIHRoZSBIYWxsd2F5IiwiZmxhZ1JlZmVyZW5jZXMiOltdfV0sImZsYWdzIjpbeyJpZCI6MSwic2NlbmVJZCI6MywibmFtZSI6IkZsYWcgMiIsImlzU2V0IjpmYWxzZX1dfSx7ImlkIjo0LCJoZWFkZXIiOiJBIFJlZCBSb29tIiwiZGVzY3JpcHRpb24iOiJBIHNpZ24gaW4gdGhlIG1pZGRsZSBvZiB0aGUgcm9vbSBzYXlzIFwiWW91IHdpbiFcIiIsImltYWdlVXJsIjoiIiwibGlua3MiOltdLCJmbGFncyI6W119XX0=');
       /* tslint:enable:max-line-length */
 
       service.startGame();
@@ -65,29 +65,130 @@ describe('SceneService', () => {
     inject([SceneService], (service: SceneService) => {
       // This game string has two scenes.
       /* tslint:disable:max-line-length */
-      service.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6Nn19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0');
+      service.importGame('eyJpbml0aWFsU2NlbmVJZCI6MSwic2NlbmVzIjpbeyJpZCI6MSwiaGVhZGVyIjoiQSBEYXJrIEhhbGx3YXkiLCJkZXNjcmlwdGlvbiI6IllvdSBzdGFuZCBpbiBhIGRpbWx5LWxpdCBoYWxsd2F5IHdpdGggdGhyZWUgZG9vcnMgaW4gZnJvbnQgb2YgeW91LlxuXG5UaGUgZG9vciBvbiB0aGUgbGVmdCBpcyBncmVlbiwgYW5kIGFwcGVhcnMgdG8gYmUgdW5sb2NrZWQuXG5cblRoZSBkb29yIGluIHRoZSBtaWRkbGUgaXMgYmx1ZSwgYW5kIGFsc28gYXBwZWFycyB0byBiZSB1bmxvY2tlZC5cblxuVGhlIGRvb3Igb24gdGhlIHJpZ2h0IGlzIHJlZCwgYW5kIGhhcyBhIGdyZWVuIHBhZGxvY2sgYW5kIGEgYmx1ZSBwYWRsb2NrIG9uIGl0LiIsImltYWdlVXJsIjoiIiwibGlua3MiOlt7ImZyb21TY2VuZUlkIjoxLCJ0b1NjZW5lSWQiOjIsImRpc3BsYXlUZXh0IjoiT3BlbiB0aGUgR3JlZW4gRG9vciIsImZsYWdSZWZlcmVuY2VzIjpbXX0seyJmcm9tU2NlbmVJZCI6MSwidG9TY2VuZUlkIjozLCJkaXNwbGF5VGV4dCI6Ik9wZW4gdGhlIEJsdWUgRG9vciIsImZsYWdSZWZlcmVuY2VzIjpbXX0seyJmcm9tU2NlbmVJZCI6MSwidG9TY2VuZUlkIjo0LCJkaXNwbGF5VGV4dCI6Ik9wZW4gdGhlIFJlZCBEb29yIiwiZmxhZ1JlZmVyZW5jZXMiOlt7ImlkIjowLCJzY2VuZUlkIjoyfSx7ImlkIjoxLCJzY2VuZUlkIjozfV19XSwiZmxhZ3MiOltdfSx7ImlkIjoyLCJoZWFkZXIiOiJBIEdyZWVuIFJvb20iLCJkZXNjcmlwdGlvbiI6Ik9uIGEgc21hbGwgcGVkZXN0YWwgaW4gdGhlIG1pZGRsZSBvZiB0aGUgcm9vbSBpcyBhIGdyZWVuIGtleS5cblxuWW91IHRha2UgdGhlIGtleS4iLCJpbWFnZVVybCI6IiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6MiwidG9TY2VuZUlkIjoxLCJkaXNwbGF5VGV4dCI6IlJldHVybiB0byB0aGUgSGFsbHdheSIsImZsYWdSZWZlcmVuY2VzIjpbXX1dLCJmbGFncyI6W3siaWQiOjAsInNjZW5lSWQiOjIsIm5hbWUiOiJGbGFnIDEiLCJpc1NldCI6ZmFsc2V9XX0seyJpZCI6MywiaGVhZGVyIjoiQSBCbHVlIFJvb20iLCJkZXNjcmlwdGlvbiI6Ik9uIGEgc21hbGwgcGVkZXN0YWwgaW4gdGhlIG1pZGRsZSBvZiB0aGUgcm9vbSBpcyBhIGJsdWUga2V5LlxuXG5Zb3UgdGFrZSB0aGUga2V5LiIsImltYWdlVXJsIjoiIiwibGlua3MiOlt7ImZyb21TY2VuZUlkIjozLCJ0b1NjZW5lSWQiOjEsImRpc3BsYXlUZXh0IjoiUmV0dXJuIHRvIHRoZSBIYWxsd2F5IiwiZmxhZ1JlZmVyZW5jZXMiOltdfV0sImZsYWdzIjpbeyJpZCI6MSwic2NlbmVJZCI6MywibmFtZSI6IkZsYWcgMiIsImlzU2V0IjpmYWxzZX1dfSx7ImlkIjo0LCJoZWFkZXIiOiJBIFJlZCBSb29tIiwiZGVzY3JpcHRpb24iOiJBIHNpZ24gaW4gdGhlIG1pZGRsZSBvZiB0aGUgcm9vbSBzYXlzIFwiWW91IHdpbiFcIiIsImltYWdlVXJsIjoiIiwibGlua3MiOltdLCJmbGFncyI6W119XX0=');
       /* tslint:enable:max-line-length */
 
       service.startGame();
 
-      expect(service.getNumberOfScenes()).toBe(2);
+      expect(service.getNumberOfScenes()).toBe(4);
     }));
 
   it('should return correct scene after load next scene is called',
     inject([SceneService], (service: SceneService) => {
       // This game string has two scenes.
       /* tslint:disable:max-line-length */
-      service.importGame('eyJpbml0aWFsU2NlbmVJZCI6NSwic2NlbmVzIjpbeyJpZCI6NSwiaGVhZGVyIjoiSGVhZGVyIiwiZGVzY3JpcHRpb24iOiJEZXNjcmlwdGlvbiIsImxpbmsiOnsiZnJvbVNjZW5lSWQiOjUsInRvU2NlbmVJZCI6Nn19LHsiaWQiOjYsImhlYWRlciI6IkhlYWRlcjIiLCJkZXNjcmlwdGlvbiI6IkRlc2NyaXB0aW9uMiIsImxpbmsiOm51bGx9XX0');
+      service.importGame('eyJpbml0aWFsU2NlbmVJZCI6MSwic2NlbmVzIjpbeyJpZCI6MSwiaGVhZGVyIjoiQSBEYXJrIEhhbGx3YXkiLCJkZXNjcmlwdGlvbiI6IllvdSBzdGFuZCBpbiBhIGRpbWx5LWxpdCBoYWxsd2F5IHdpdGggdGhyZWUgZG9vcnMgaW4gZnJvbnQgb2YgeW91LlxuXG5UaGUgZG9vciBvbiB0aGUgbGVmdCBpcyBncmVlbiwgYW5kIGFwcGVhcnMgdG8gYmUgdW5sb2NrZWQuXG5cblRoZSBkb29yIGluIHRoZSBtaWRkbGUgaXMgYmx1ZSwgYW5kIGFsc28gYXBwZWFycyB0byBiZSB1bmxvY2tlZC5cblxuVGhlIGRvb3Igb24gdGhlIHJpZ2h0IGlzIHJlZCwgYW5kIGhhcyBhIGdyZWVuIHBhZGxvY2sgYW5kIGEgYmx1ZSBwYWRsb2NrIG9uIGl0LiIsImltYWdlVXJsIjoiIiwibGlua3MiOlt7ImZyb21TY2VuZUlkIjoxLCJ0b1NjZW5lSWQiOjIsImRpc3BsYXlUZXh0IjoiT3BlbiB0aGUgR3JlZW4gRG9vciIsImZsYWdSZWZlcmVuY2VzIjpbXX0seyJmcm9tU2NlbmVJZCI6MSwidG9TY2VuZUlkIjozLCJkaXNwbGF5VGV4dCI6Ik9wZW4gdGhlIEJsdWUgRG9vciIsImZsYWdSZWZlcmVuY2VzIjpbXX0seyJmcm9tU2NlbmVJZCI6MSwidG9TY2VuZUlkIjo0LCJkaXNwbGF5VGV4dCI6Ik9wZW4gdGhlIFJlZCBEb29yIiwiZmxhZ1JlZmVyZW5jZXMiOlt7ImlkIjowLCJzY2VuZUlkIjoyfSx7ImlkIjoxLCJzY2VuZUlkIjozfV19XSwiZmxhZ3MiOltdfSx7ImlkIjoyLCJoZWFkZXIiOiJBIEdyZWVuIFJvb20iLCJkZXNjcmlwdGlvbiI6Ik9uIGEgc21hbGwgcGVkZXN0YWwgaW4gdGhlIG1pZGRsZSBvZiB0aGUgcm9vbSBpcyBhIGdyZWVuIGtleS5cblxuWW91IHRha2UgdGhlIGtleS4iLCJpbWFnZVVybCI6IiIsImxpbmtzIjpbeyJmcm9tU2NlbmVJZCI6MiwidG9TY2VuZUlkIjoxLCJkaXNwbGF5VGV4dCI6IlJldHVybiB0byB0aGUgSGFsbHdheSIsImZsYWdSZWZlcmVuY2VzIjpbXX1dLCJmbGFncyI6W3siaWQiOjAsInNjZW5lSWQiOjIsIm5hbWUiOiJGbGFnIDEiLCJpc1NldCI6ZmFsc2V9XX0seyJpZCI6MywiaGVhZGVyIjoiQSBCbHVlIFJvb20iLCJkZXNjcmlwdGlvbiI6Ik9uIGEgc21hbGwgcGVkZXN0YWwgaW4gdGhlIG1pZGRsZSBvZiB0aGUgcm9vbSBpcyBhIGJsdWUga2V5LlxuXG5Zb3UgdGFrZSB0aGUga2V5LiIsImltYWdlVXJsIjoiIiwibGlua3MiOlt7ImZyb21TY2VuZUlkIjozLCJ0b1NjZW5lSWQiOjEsImRpc3BsYXlUZXh0IjoiUmV0dXJuIHRvIHRoZSBIYWxsd2F5IiwiZmxhZ1JlZmVyZW5jZXMiOltdfV0sImZsYWdzIjpbeyJpZCI6MSwic2NlbmVJZCI6MywibmFtZSI6IkZsYWcgMiIsImlzU2V0IjpmYWxzZX1dfSx7ImlkIjo0LCJoZWFkZXIiOiJBIFJlZCBSb29tIiwiZGVzY3JpcHRpb24iOiJBIHNpZ24gaW4gdGhlIG1pZGRsZSBvZiB0aGUgcm9vbSBzYXlzIFwiWW91IHdpbiFcIiIsImltYWdlVXJsIjoiIiwibGlua3MiOltdLCJmbGFncyI6W119XX0=');
       /* tslint:enable:max-line-length */
 
       service.startGame();
 
-      service.loadNextScene(6);
+      service.loadNextScene(2);
 
       const nextScene = service.getCurrentScene();
 
       expect(nextScene).toBeTruthy();
-      expect(nextScene.id).toBe(6);
+      expect(nextScene.id).toBe(2);
+    }));
+
+  it('should set all flags on the specified scene',
+    inject([SceneService], (service: SceneService) => {
+      service['scenes'] = [
+        new SceneModel(
+          1,
+          'Test',
+          'Test',
+          null,
+          new Array<LinkModel>(),
+          [
+            new FlagModel(1, 1, 'Test', false),
+            new FlagModel(2, 1, 'Test', false)
+          ]
+        )
+      ];
+
+      service.setFlagsForScene(1);
+
+      service['scenes'][0].flags.map(flag => {
+        expect(flag.isSet).toBeTruthy();
+      });
+    }));
+
+  it('should return true when all flags for a link are set',
+    inject([SceneService], (service: SceneService) => {
+      service['scenes'] = [
+        new SceneModel(
+          1,
+          'Test',
+          'Test',
+          null,
+          new Array<LinkModel>(),
+          [
+            new FlagModel(1, 1, 'Test', true),
+            new FlagModel(2, 1, 'Test', true)
+          ]
+        ),
+        new SceneModel(
+          2,
+          'Test',
+          'Test',
+          null,
+          [
+            new LinkModel(2, 1, 'Test', [
+              new FlagReferenceModel(1, 1),
+              new FlagReferenceModel(2, 1)
+            ])
+          ],
+          [
+            new FlagModel(1, 1, 'Test', false),
+            new FlagModel(2, 1, 'Test', false)
+          ]
+        )
+      ];
+
+      expect(service.allFlagsSetForLink(
+        new LinkModel(2, 1, 'Test', [
+          new FlagReferenceModel(1, 1),
+          new FlagReferenceModel(2, 1)
+        ]))).toBeTruthy();
+    }));
+
+  it('should return false if any flags for the link are not set',
+    inject([SceneService], (service: SceneService) => {
+      service['scenes'] = [
+        new SceneModel(
+          1,
+          'Test',
+          'Test',
+          null,
+          new Array<LinkModel>(),
+          [
+            new FlagModel(1, 1, 'Test', true),
+            new FlagModel(2, 1, 'Test', false)
+          ]
+        ),
+        new SceneModel(
+          2,
+          'Test',
+          'Test',
+          null,
+          [
+            new LinkModel(2, 1, 'Test', [
+              new FlagReferenceModel(1, 1),
+              new FlagReferenceModel(2, 1)
+            ])
+          ],
+          [
+            new FlagModel(1, 1, 'Test', false),
+            new FlagModel(2, 1, 'Test', false)
+          ]
+        )
+      ];
+
+      expect(service.allFlagsSetForLink(
+        new LinkModel(2, 1, 'Test', [
+          new FlagReferenceModel(1, 1),
+          new FlagReferenceModel(2, 1)
+        ]))).toBeFalsy();
     }));
 
   it('should not have the game finished if there is no current scene',
